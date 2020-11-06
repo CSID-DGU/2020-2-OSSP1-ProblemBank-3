@@ -1,39 +1,10 @@
 const { spawn } = require('child_process');
 const path = require('path');
 const rs = require('randomstring');
-const fs = require('fs-extra'); // TODO REFECTOR THIS
+const fs = require('fs-extra');
 
 const ROOT = process.env.ROOT_PATH;
 const PROBLEM_PATH = process.env.PROBLEM_TEMP_PATH;
-
-
-const run = (projectPath, category) => {
-    const sourcePath = path.resolve(ROOT, projectPath);
-    let docker = null;
-    switch(category.toLowerCase()) {
-        case "java":
-            docker = spawn("docker", ["run", "--rm", "-i", "-v", `${sourcePath}:/src`, "java-compile-run:1.0"]);
-            break;
-        case "c": case "cpp":
-            docker = spawn("docker", ["run", "--rm", "-i", "-v", `${sourcePath}:/src`, "c-compile-run:1.0"]);
-            break;
-        case "python":
-            docker = spawn("docker", ["run", "--rm", "-i", "-v", `${sourcePath}:/src`, "python-compile-run:1.0"]);
-            break;
-            
-        case "r":
-            docker = spawn("docker", ["run", "--rm", "-i", "-v", `${sourcePath}:/src`, "r-compile-run:1.0"]);
-            break;
-    }
-
-    return docker;
-};
-
-const cpplint = (projectPath, category) => {
-    if(category.toLowerCase() !== "cpp") return null;
-    const sourcePath = path.resolve(ROOT, projectPath);
-    return spawn("docker", ["run", "--rm", "-i", "-v", `${sourcePath}:/src`, "cpp-lint:1.0"]);
-}
 
 const getProblemDocker = (source, category) => {
     const hash = rs.generate(10);
@@ -47,7 +18,7 @@ const getProblemDocker = (source, category) => {
         case "cpp": 
             filename = "main.cpp"; break;
         case "c": default:
-            filename = "main.c"; break;
+            filename = "main.c"; break; //TODO: fix python code run, simplify docker containers
         /*case "python": default:
             filename = "main.py"; break;*/
     }
@@ -75,4 +46,4 @@ const getProblemDocker = (source, category) => {
     return docker; 
 }
 
-module.exports = { run, cpplint, getProblemDocker };
+module.exports = { getProblemDocker };

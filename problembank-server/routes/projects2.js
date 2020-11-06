@@ -22,7 +22,6 @@ router.post('/compile', async function(req, res){
                 })
     
                 docker.stdout.on("data", (data) => {
-                    console.log(data.toString('utf-8'));
                     if(!isStarted) return;
                     const line = data.toString('utf-8');
                     if(line.includes(testcase.output)) correctCount++;

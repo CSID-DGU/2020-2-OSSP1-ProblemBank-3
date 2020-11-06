@@ -15,12 +15,14 @@ const getProblemDocker = (source, category) => {
     switch(category) {
         case "java":
             filename = "Main.java"; break;
+        case "python":
+            filename = "main.py"; break;
+        case "r":
+            filename = "main.R"; break;
         case "cpp": 
             filename = "main.cpp"; break;
-        case "c":
-            filename = "main.c"; break; //TODO: fix python code run, simplify docker containers
-        case "python": default:
-            filename = "main.py"; break;
+        case "c": default:
+            filename = "main.c"; break;
     }
 
 
@@ -35,14 +37,17 @@ const getProblemDocker = (source, category) => {
         case "java":
             docker = spawn("docker", ["run", "--rm", "-i", "-v", `${tempPath}:/src`, "java-problem-run:1.0"]);;
             break;
+        case "r":
+            docker = spawn("docker", ["run", "--rm", "-i", "-v", `${tempPath}:/src`, "r-problem-run:1.0"]);;
+            break;
+        case "python":
+            docker = spawn("docker", ["run", "--rm", "-i", "-v", `${tempPath}:/src`, "python-problem-run:1.0"]);;
+            break;
         case "cpp":
             docker = spawn("docker", ["run", "--rm", "-i", "-v", `${tempPath}:/src`, "cpp-problem-run:1.0"]);;
             break;
-        case "c":
+        case "c": default:
             docker = spawn("docker", ["run", "--rm", "-i", "-v", `${tempPath}:/src`, "c-problem-run:1.0"]);;
-            break;
-        case "python": default:
-            docker = spawn("docker", ["run", "--rm", "-i", "-v", `${tempPath}:/src`, "python-problem-run:1.0"]);;
             break;
     }
 

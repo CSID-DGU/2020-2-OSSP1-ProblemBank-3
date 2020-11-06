@@ -1,6 +1,6 @@
 var db = require('../modules/db-connection');
 var sql = require('../sql');
-var compiler = require('../modules/compile-run');
+var compiler = require('../modules/compile-run'); // not using this, using project2.js
 
 var { PROBLEM_START_DELEMETER: startDelem, PROBLEM_END_DELEMETER: endDelem } = process.env;
 

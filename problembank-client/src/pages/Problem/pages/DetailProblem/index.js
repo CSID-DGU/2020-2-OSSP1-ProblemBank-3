@@ -73,14 +73,14 @@ function DetailProblem(props) {
             const { data } = response;
             
             var timeOutSubmit = function(){
-                alert(`체점 결과 ${data.correctCount} / ${data.count}`);
+                alert(`채점 결과 ${data.correctCount} / ${data.count}`);
                 setSubmit(false);
             };
             setTimeout(timeOutSubmit, 1000);
             
         } catch (error) {
             setSubmit(false);
-            alert("서버오류입니다. 잠시 후 다시 시도해주세요.");
+            alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
             console.log(error)
         }
 
@@ -94,7 +94,7 @@ function DetailProblem(props) {
             let problemTemp = {...problem, like : !problem.like};
             setProblem(problemTemp)
         } catch (error) {
-            alert("서버 연결 실패합니다. 다시 시도해주세요.")
+            alert("서버 연결에 실패했습니다. 다시 시도해주세요.")
             console.log(error);
         }
     }
@@ -107,7 +107,7 @@ function DetailProblem(props) {
         dummy.select();
         document.execCommand('copy');
         document.body.removeChild(dummy);
-        alert("링크를 복사 되었습니다")
+        alert("링크가 복사 되었습니다")
     }
 
     if(loading){

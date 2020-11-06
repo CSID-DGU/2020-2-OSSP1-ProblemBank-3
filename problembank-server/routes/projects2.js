@@ -39,14 +39,14 @@ router.post('/compile', async function(req, res){
                 });
             });
         })
+    
+        for(let i = 0 ; i < promises.length; i++) { await promises[i] }
         
         res.status(200).send({
             result: true,
             data:  { correctCount, count: testCases.length },
             message: 'compile success'
         })
-    
-        for(let i = 0 ; i < promises.length; i++) { await promises[i] } // TODO: recfectoring this
     } catch (error) {
         console.log(error)
         res.status(404).send({

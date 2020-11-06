@@ -14,6 +14,7 @@ docker build -t java-problem-run:1.0 ./java/problem
 
 # python
 docker build -t python-compile-run:1.0 ./python/build_run
+docker build -t python-problem-run:1.0 ./python/problem
 
 # R
 docker build -t r-compile-run:1.0 ./r/build_run

@@ -17,10 +17,10 @@ const getProblemDocker = (source, category) => {
             filename = "Main.java"; break;
         case "cpp": 
             filename = "main.cpp"; break;
-        case "c": default:
+        case "c":
             filename = "main.c"; break; //TODO: fix python code run, simplify docker containers
-        /*case "python": default:
-            filename = "main.py"; break;*/
+        case "python": default:
+            filename = "main.py"; break;
     }
 
 
@@ -38,8 +38,11 @@ const getProblemDocker = (source, category) => {
         case "cpp":
             docker = spawn("docker", ["run", "--rm", "-i", "-v", `${tempPath}:/src`, "cpp-problem-run:1.0"]);;
             break;
-        case "c": default:
+        case "c":
             docker = spawn("docker", ["run", "--rm", "-i", "-v", `${tempPath}:/src`, "c-problem-run:1.0"]);;
+            break;
+        case "python": default:
+            docker = spawn("docker", ["run", "--rm", "-i", "-v", `${tempPath}:/src`, "python-problem-run:1.0"]);;
             break;
     }
 

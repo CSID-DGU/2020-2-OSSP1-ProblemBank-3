@@ -1,21 +1,17 @@
 #!/bin/bash
 
 # C
-#docker build -t c-compile-run:1.0 ./c/build_run
-docker build -t c-problem-run:1.0 ./c/problem
+docker build -t c-problem-run:1.0 ./c
 
 # C++
-docker build -t cpp-problem-run:1.0 ./cpp/problem
+docker build -t cpp-problem-run:1.0 ./cpp
 #docker build -t cpp-lint:1.0 ./lint
 
 # Java
-#docker build -t java-compile-run:1.0 ./java/build_run
-docker build -t java-problem-run:1.0 ./java/problem
+docker build -t java-problem-run:1.0 ./java
 
 # python
-#docker build -t python-compile-run:1.0 ./python/build_run
-docker build -t python-problem-run:1.0 ./python/problem
+docker build -t python-problem-run:1.0 ./python
 
 # R
-#docker build -t r-compile-run:1.0 ./r/build_run
-docker build -t r-problem-run:1.0 ./r/problem
+docker build -t r-problem-run:1.0 ./r

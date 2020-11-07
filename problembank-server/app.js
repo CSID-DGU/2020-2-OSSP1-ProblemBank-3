@@ -43,7 +43,7 @@ app.use(createSession());
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var problemsRouter = require('./routes/problems');
-var projectsRouter = require('./routes/projects2');
+var projectsRouter = require('./routes/projects');
 
 
 app.use('/', indexRouter);

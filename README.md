@@ -17,7 +17,7 @@ problembank-server로 경로를 이동한 다음 **npm을 이용한 세팅**을 
 
 #### MySQl Dump import
 terminal을 실행하여 Dump20201107.sql 파일이 있는 경로로 이동해주세요.<br>mysql을 실행시켜 `CREATE DATABASE problems`를 입력해 problems database를 만들어주세요.
-<br>`mysql -u [userID] -p [password] problems < dump20201107.sql`을 입력하여 import 해주세요.
+<br>`mysql -u [userID] -p [password] problems < Dump20201107.sql`을 입력하여 import 해주세요.
 
 #### Docker 설치
 [Docker](https://www.docker.com/get-started) 홈페이지에서 안내에 따라 Docker를 다운받아주세요.

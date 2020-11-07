@@ -19,6 +19,7 @@ problembank-server로 경로를 이동한 다음 **npm을 이용한 세팅**을 
 [Docker](https://www.docker.com/get-started) 홈페이지에서 안내에 따라 Docker를 다운받아주세요.
 Docker를 한번 실행시켜 초기 설정을 해주세요.
 terminal을 실행하여 problem-server/docker 폴더로 이동한 후, `bash build.sh`을 입력하여 Docker에 이미지를 올려주세요.
+이미지는 git pull해올 때마다 삭제하고 새로 빌드해주세요. 수정된 부분이 있을수도 있습니다.
 
 #### 끝!
 `http://localhost:5112`로 접속하여 작업하시면 됩니다.

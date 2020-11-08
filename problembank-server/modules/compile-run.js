@@ -9,7 +9,7 @@ const PROBLEM_PATH = process.env.PROBLEM_TEMP_PATH;
 const getProblemDocker = (source, category) => {
     const hash = rs.generate(10);
     const tempPath = path.resolve(PROBLEM_PATH, hash);
-    fs.mkdirSync(tempPath);
+    fs.mkdirSync(tempPath, {recursive: true});
 
     let filename;
     switch(category) {

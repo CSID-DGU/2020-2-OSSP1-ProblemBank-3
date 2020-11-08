@@ -10,6 +10,7 @@ import problemsBank from '../../../../apis/problemsBank';
 import WrapperLoading from '../../../../components/WrapperLoading';
 import Loading from '../../../../components/Loading/Loading';
 import DetailProblemLayout from '../../../../layouts/DetailProblemLayout';
+import Notification from '../../../../components/Notification/Notification';
 var moment = require('moment');
 
 function DetailProblem(props) {

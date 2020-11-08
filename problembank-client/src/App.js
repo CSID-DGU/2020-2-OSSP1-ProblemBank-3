@@ -21,6 +21,7 @@ function App() {
   return (
       <Suspense fallback = {<Loading type={'bars'} color={'black'} />}>
         <BrowserRouter>
+           <Header/>
             <Switch>
                 {/* <Route exact path = "/"  component = {Auth(MainPage, true)}/>
                 <Route path = "/problemsbank"  component = {Auth(ProblemsByCategories, true)}/>

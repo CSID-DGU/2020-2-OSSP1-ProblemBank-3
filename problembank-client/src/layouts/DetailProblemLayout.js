@@ -6,7 +6,6 @@ function DetailProblemLayout(props) {
     const { children } = props;
     return (
         <div className="row">
-            <Header/>
             <div className="body-container">
                 { children }
             </div>

@@ -6,7 +6,6 @@ function ListProjectByCategoryLayout(props) {
     const { children } = props;
     return (
         <div className="row">
-            <Header style={{}}/>
             <div className="body-container">
                 { children }
             </div>

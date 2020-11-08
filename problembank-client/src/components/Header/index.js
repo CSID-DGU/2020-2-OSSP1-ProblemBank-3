@@ -72,6 +72,7 @@ const Wrapper = styled.div`
         max-width: 1920px;
         height: 100%;
         margin: auto;
+        padding-right: 20px;
         border-bottom: 1px solid #ddd;
         .header__logo{
             flex: 1;

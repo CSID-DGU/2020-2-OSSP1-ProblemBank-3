@@ -18,11 +18,12 @@ function TotalProblemsPage(props) {
     const [keyword, setKeyword] = useState("");
     const [resultProblem, setResultProblem] = useState([]);
 
-    const [countDisplayProblem, setCountDisplayProblem] = useState(15);
+    const [countDisplayProblem, setCountDisplayProblem] = useState(15); // defualt problem number
     const dispatch = useDispatch();
     
     const [loading, setLoading] = useState(false)
 
+    // 전제 문제를 가져오는 것 보다 서버에 페이지 기능을 만드는 것이 좋을 수 있다.
     React.useEffect(() => {
         dispatch(getProblemData()).then(response => {
             const { data } = response.payload;

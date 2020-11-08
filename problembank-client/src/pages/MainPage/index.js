@@ -5,6 +5,7 @@ import Index from './pages/MainPage';
 
 function MainPage(props) {
     const match = useRouteMatch();
+    console.log(match.url);
     return (
         <Switch>
             <Route exact path={`${match.url}`} component= {Index}/>

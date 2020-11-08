@@ -1,6 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom';
 import { GiCancel } from "react-icons/gi";
+
 function Alert({title, btns}) {
     const modal =  (
         <div className = "alert" tabIndex="-1">
@@ -37,5 +38,6 @@ function Alert({title, btns}) {
     }
     render(modal, element);
 }
+
 export default Alert
 

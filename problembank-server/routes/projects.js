@@ -12,10 +12,9 @@ router.post('/compile', async function(req, res){
     const [testCases] = await db.query(sql.problems.selectTestCaseByProblemId, [problemId]);
     let correctCount = 0;
     try {
+        const docker = compiler.getProblemDocker(sourceCode, language);
         const promises = testCases.map(testcase => {
             return new Promise((resolve) => {
-                const docker = compiler.getProblemDocker(sourceCode, language);
-
                 let isStarted = false;
                 docker.stderr.on("data", (data) => {
                     console.log(data.toString('utf-8'));

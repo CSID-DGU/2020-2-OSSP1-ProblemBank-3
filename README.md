@@ -25,5 +25,15 @@ terminal을 실행하여 Dump20201107.sql 파일이 있는 경로로 이동해�
 <br>terminal을 실행하여 problem-server/docker 폴더로 이동한 후, `bash build.sh`을 입력하여 Docker에 이미지를 올려주세요.
 <br>이미지는 git pull해올 때마다 삭제하고 새로 빌드해주세요. 수정된 부분이 있을수도 있습니다.
 
+### 주의사항
+현재 윈도우또는 리눅스 사용자가 섞여 개발하고 있는 중이기에 os로 발생하는 코드 차이가 있을 수 있다.
+- problembank-client의 package.json의 경우 scripts의 start에 리눅스의 경우 exprot를 윈도우의 경우 set을 사용한다.
+- file을 작성할 때 특정 문자들의 표시 차이의 경우 .gitattributes로 해결되었다.
+
+problembank-server의 .env에 있는 mysql 설정들을 자신의 mysql의 설정에 맞춰 변경하여야 한다.
+- 표준의 port는 3306이지만 어떤 사용자는 3307로 설정하여 사용할 수 있기에 맞지 않으면 오류가 발생할 것이다.
+- password 또한 사용자가 설정한 password에 맞춰 변경하여야 한다.
+
+
 #### 끝!
 `http://localhost:5112`로 접속하여 작업하시면 됩니다.

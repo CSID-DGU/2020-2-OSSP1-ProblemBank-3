@@ -10,8 +10,6 @@ import problemsBank from '../../../../apis/problemsBank';
 import WrapperLoading from '../../../../components/WrapperLoading';
 import Loading from '../../../../components/Loading/Loading';
 import DetailProblemLayout from '../../../../layouts/DetailProblemLayout';
-import Notification from '../../../../components/Notification/Notification';
-
 var moment = require('moment');
 
 function DetailProblem(props) {
@@ -19,16 +17,11 @@ function DetailProblem(props) {
     const [problem, setProblem] = useState({})
     const {problemsAllData} = useSelector(state => state.problem);
 
-    const [language, setLanguage] = useState("c") // default language 'c'
-    const [contentEditor, setContentEditor] = useState(SampleCode["c"])  // default sample code 'c'
-    const [submit, setSubmit] = useState(false) // submit state
-    const [theme, setTheme] = useState("white") // editor color
-    const [score, setScore] = useState(0);
-
-    const [showNote, setShowNote] = useState(false);
-    const [warning, setWarning] = useState(false);
-    const [message, setMessage] = useState('');
-
+    const [language, setLanguage] = useState("c")
+    const [contentEditor, setContentEditor] = useState(SampleCode["c"])
+    const [submit, setSubmit] = useState(false)
+    const [theme, setTheme] = useState("white")
+    
     const dispatch = useDispatch();
     
     const [loading, setLoading] = useState(true)
@@ -36,13 +29,13 @@ function DetailProblem(props) {
     const { id } = queryString.parse(props.location.search);
 
     useEffect(() => {
-        if(problemsAllData){ // 이미 있는 전체 문제에서 데이터 선정
-            const { data }  = problemsAllData; // request의 data 부분 추출
+        if(problemsAllData){
+            const { data }  = problemsAllData;
             const [ problem ] = data.filter(element =>Number(element.id) === Number(id))
             setProblems(data)
             setLoading(false)
             setProblem(problem)
-        }else{ // 전체 문제 가져오기
+        }else{
             dispatch(getProblemData()).then(response => {
                 const { data } = response.payload
                 const [ problem ] = data.filter(element =>Number(element.id) === Number(id))
@@ -78,37 +71,20 @@ function DetailProblem(props) {
             const response = await projectsAPI.compile(params); 
             
             const { data } = response;
-            /*
-                setShowNote
-                setWarning
-                setMessage
-            */
+            
             var timeOutSubmit = function(){
-                setScore(data.correctCount);
-                // setMessage("채점 결과가 나왔습니다.");
-                // setShowNote(true);
-                //alert(`채점 결과 ${data.correctCount} / ${data.count}`);
+                alert(`채점 결과 ${data.correctCount} / ${data.count}`);
                 setSubmit(false);
-                // setTimeout(()=>{
-                //     setShowNote(false);
-                // }, 1000);
             };
             setTimeout(timeOutSubmit, 1000);
             
         } catch (error) {
             setSubmit(false);
-            // setMessage("서버 오류입니다. 잠시 후 다시 시도해주세요.");
-            // setShowNote(true);
-            // setWarning(true);
-            // setTimeout(()=>{
-            //     setShowNote(false);
-            //     setWarning(false);
-            // }, 1000);
+            alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
             console.log(error)
         }
 
     }
-    // Add to mylist
     const handleProblemToList = async (id) => {
         try {
             const params = {
@@ -122,7 +98,6 @@ function DetailProblem(props) {
             console.log(error);
         }
     }
-    // share
     const handleCopyURL = () => {
         var dummy = document.createElement('input'),
         text = window.location.href;
@@ -153,7 +128,7 @@ function DetailProblem(props) {
                         </ul>
                     </div>
                     <div className="wrapper__content">
-                        <h3>{problem.id}. {problem.name}</h3>  
+                        <h3>{problem.id}. {problem.name}</h3>
                         <ul className="tab__header--task">
                             <li style={{cursor: 'pointer'}} onClick={() => handleProblemToList(problem.id)}><i className="fa fa-list-alt"></i> { problem.like ? "Remove list" : "Add to list"}</li> 
                             <li style={{cursor: 'pointer'}} onClick={() => handleCopyURL()}><i className="fa fa-share-square-o"></i> Share</li>
@@ -223,9 +198,6 @@ function DetailProblem(props) {
                                 </select>
                             </li>
                             <li>
-                                <span>점수: {score}/{problem.testcases.length}</span> 
-                            </li>
-                            <li>
                                 <span>Editor Theme </span>
                                 <select name="" id="" className="language" value={theme} onChange={(e) => setTheme(e.target.value)}>
                                     <option value="white">White</option>
@@ -259,6 +231,7 @@ function DetailProblem(props) {
         </DetailProblemLayout>
     )
 }
+
 
 export default DetailProblem
 

@@ -6,14 +6,10 @@ const fs = require('fs-extra');
 const ROOT = process.env.ROOT_PATH;
 const PROBLEM_PATH = process.env.PROBLEM_TEMP_PATH;
 
-const makeHashPath = () => {
+const getProblemDocker = (source, category) => {
     const hash = rs.generate(10);
     const tempPath = path.resolve(PROBLEM_PATH, hash);
     fs.mkdirSync(tempPath, {recursive: true});
-
-    return tempPath;
-}
-const getProblemDocker = (source, category, tempPath) => {
 
     let filename;
     switch(category) {
@@ -58,4 +54,4 @@ const getProblemDocker = (source, category, tempPath) => {
     return docker; 
 }
 
-module.exports = { getProblemDocker, makeHashPath };
+module.exports = { getProblemDocker };

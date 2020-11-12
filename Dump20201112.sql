@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 8.0.22, for osx10.14 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
 --
 -- Host: localhost    Database: problems
 -- ------------------------------------------------------
@@ -7,7 +7,7 @@
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -16,12 +16,195 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Current Database: `problems`
+-- Table structure for table `pb_subject_users`
 --
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `problems` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+DROP TABLE IF EXISTS `pb_subject_users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `pb_subject_users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `subject_id` int DEFAULT NULL,
+  `user_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-USE `problems`;
+--
+-- Dumping data for table `pb_subject_users`
+--
+
+LOCK TABLES `pb_subject_users` WRITE;
+/*!40000 ALTER TABLE `pb_subject_users` DISABLE KEYS */;
+INSERT INTO `pb_subject_users` VALUES (1,1,2),(2,1,3);
+/*!40000 ALTER TABLE `pb_subject_users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pb_subjects`
+--
+
+DROP TABLE IF EXISTS `pb_subjects`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `pb_subjects` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` text,
+  `admin_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pb_subjects`
+--
+
+LOCK TABLES `pb_subjects` WRITE;
+/*!40000 ALTER TABLE `pb_subjects` DISABLE KEYS */;
+INSERT INTO `pb_subjects` VALUES (1,'기초프로그래밍',1);
+/*!40000 ALTER TABLE `pb_subjects` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pb_test_feedback`
+--
+
+DROP TABLE IF EXISTS `pb_test_feedback`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `pb_test_feedback` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `test_id` int DEFAULT NULL,
+  `content` text,
+  `author_id` int DEFAULT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pb_test_feedback`
+--
+
+LOCK TABLES `pb_test_feedback` WRITE;
+/*!40000 ALTER TABLE `pb_test_feedback` DISABLE KEYS */;
+INSERT INTO `pb_test_feedback` VALUES (1,1,'1번 문제 테스트케이스에 오류가 있는 것 같은데 확인 부탁드립니다.',2,'2020-11-12 07:20:46');
+/*!40000 ALTER TABLE `pb_test_feedback` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pb_test_problems`
+--
+
+DROP TABLE IF EXISTS `pb_test_problems`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `pb_test_problems` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `test_id` int DEFAULT NULL,
+  `problem_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pb_test_problems`
+--
+
+LOCK TABLES `pb_test_problems` WRITE;
+/*!40000 ALTER TABLE `pb_test_problems` DISABLE KEYS */;
+INSERT INTO `pb_test_problems` VALUES (1,1,1),(2,1,22),(3,1,23),(4,1,24),(5,1,13),(6,1,14),(7,1,12),(8,1,7),(9,1,5),(10,1,12),(11,2,1),(12,2,2),(13,2,3),(14,2,4),(15,2,5),(16,2,6),(17,2,7),(18,2,8);
+/*!40000 ALTER TABLE `pb_test_problems` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pb_test_users`
+--
+
+DROP TABLE IF EXISTS `pb_test_users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `pb_test_users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int DEFAULT NULL,
+  `test_id` int DEFAULT NULL,
+  `score` int DEFAULT '0',
+  `correct` int DEFAULT '0',
+  `wrong` int DEFAULT '0',
+  `applied` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pb_test_users`
+--
+
+LOCK TABLES `pb_test_users` WRITE;
+/*!40000 ALTER TABLE `pb_test_users` DISABLE KEYS */;
+INSERT INTO `pb_test_users` VALUES (1,2,1,80,8,2,1),(2,3,1,0,0,0,0),(4,2,2,50,4,4,1),(5,3,2,0,0,0,0);
+/*!40000 ALTER TABLE `pb_test_users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pb_tests`
+--
+
+DROP TABLE IF EXISTS `pb_tests`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `pb_tests` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` text,
+  `content` longtext,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `is_exam` int DEFAULT NULL,
+  `start` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `end` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `admin_id` int DEFAULT NULL,
+  `subject_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pb_tests`
+--
+
+LOCK TABLES `pb_tests` WRITE;
+/*!40000 ALTER TABLE `pb_tests` DISABLE KEYS */;
+INSERT INTO `pb_tests` VALUES (1,'2020 동국대학교 프로그래밍 경진대회','청춘! 이는 듣기만 하여도 가슴이 설레는 말이다.\n\n청춘! 너의 두 손을 대고 물방아 같은 심장의 고동을 들어 보라.\n\n청춘의 피는 끓는다.\n\n끓는 피에 뛰노는 심장은 거선(巨船)의 기관같이 힘 있다.\n\n이것이다.\n\n인류의 역사를 꾸며 내려온 동력은 꼭 이것이다.\n\n이성은 투명하되 얼음과 같으며,\n\n지혜는 날카로우나 갑 속에 든 칼이다.\n\n청춘의 끓는 피가 아니더면 인간이 얼마나 쓸쓸하랴?\n\n얼음에 싸인 만물은 죽음이 있을 뿐이다.','2020-11-12 07:07:03',0,'2020-11-12 05:00:00','2020-11-12 07:00:00',1,NULL),(2,'중간고사','단풍잎처럼 곱게 물들었구나\n\n연두빛 새잎보다\n\n진한 초록잎보다\n\n더욱 보기 좋아\n\n잠시 찬바람도 곁에 머물게 해주렴','2020-11-12 07:07:03',1,'2020-11-12 09:00:00','2020-11-12 11:00:00',1,1);
+/*!40000 ALTER TABLE `pb_tests` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pb_users`
+--
+
+DROP TABLE IF EXISTS `pb_users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `pb_users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(20) NOT NULL,
+  `pw` varchar(20) NOT NULL,
+  `user_name` text,
+  `is_admin` int NOT NULL DEFAULT '0',
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username_UNIQUE` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pb_users`
+--
+
+LOCK TABLES `pb_users` WRITE;
+/*!40000 ALTER TABLE `pb_users` DISABLE KEYS */;
+INSERT INTO `pb_users` VALUES (1,'admin','pass','홍길동',1,'2020-11-12 06:55:19'),(2,'user1','pass','옥동자',0,'2020-11-12 06:55:19'),(3,'user2','pass','전우치',0,'2020-11-12 06:58:40');
+/*!40000 ALTER TABLE `pb_users` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `plass_mylist_problem`
@@ -192,4 +375,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-11-07 16:18:28
+-- Dump completed on 2020-11-12 16:58:25

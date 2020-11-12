@@ -16,8 +16,8 @@ npm install 명령어로 node modules를 모두 설치해주세요.
 problembank-server로 경로를 이동한 다음 **npm을 이용한 세팅**을 한번 더 반복해주세요.
 
 #### MySQL Dump import
-terminal을 실행하여 Dump20201107.sql 파일이 있는 경로로 이동해주세요.<br>mysql을 실행시켜 `CREATE DATABASE problems`를 입력해 problems database를 만들어주세요.
-<br>`mysql -u [userID] -p [password] problems < Dump20201107.sql`을 입력하여 import 해주세요.
+terminal을 실행하여 Dump20201112.sql 파일이 있는 경로로 이동해주세요.<br>mysql을 실행시켜 `CREATE DATABASE problems`를 입력해 problems database를 만들어주세요.
+<br>`mysql -u [userID] -p [password] problems < Dump20201112.sql`을 입력하여 import 해주세요.
 
 #### Docker 설치
 [Docker](https://www.docker.com/get-started) 홈페이지에서 안내에 따라 Docker를 다운받아주세요.

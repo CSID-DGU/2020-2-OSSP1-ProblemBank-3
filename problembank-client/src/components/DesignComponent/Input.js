@@ -1,0 +1,130 @@
+import React, { PureComponent } from 'react';
+import Theme from './Theme';
+import PropTypes from 'prop-types';
+
+class Input extends PureComponent {
+  constructor(props) {
+    this.setRef = this.setRef.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(e) {
+    const { name, onChange } = this.props;
+    if (onChange) {
+      onChange(name, e.target.value)
+    }
+  }
+  componentDidMount() {
+    if (this.props.autoFocus) {
+      this.ref.focus();
+    }
+  }
+  setRef(ref) {
+    this.ref = ref;
+  }
+  render() {
+    const {
+      errorMessage,
+      label,
+      value,
+      name,
+      type,
+      styles,
+      large,
+      xlarge,
+      small,
+      xsmall,
+    } = this.props;
+    const { unit, color, size, lineHeight } = Theme;
+    const styles = {
+        wrapper: {
+          border: 0,
+          padding: 0,
+          position: 'relative',
+        },
+        label: {
+          display: 'block',
+          fontSize: size.xs,
+          top: 2,
+          left: unit * 2,
+          cursor: 'pointer',
+        },
+        input: {
+          marginTop: 2,
+          fontSize: size.md,
+          lineHeight: lineHeight.md,
+          padding: unit * 1.5,
+          border: 1,
+          borderColor: color.primary,
+          borderStyle: 'solid',
+          borderRadius: 4,
+          outline: 0,
+          ':focus': {
+            boxShadow: '0 0 0px 2px rgba(0, 0, 0, 0.3)',
+          },
+        },
+        xlarge: {
+          fontSize: size.xg,
+        },
+        large: {
+          fontSize: size.lg,
+        },
+        small: {
+          fontSize: size.sm,
+          padding: unit,
+        },
+        errorLabel: {
+          color: color.error,
+        },
+        error: {
+          borderColor: color.error,
+        },
+      };
+      const computedLabelStyle = {
+        ...styles.label,
+        ...(errorMessage && styles.errorLabel),
+      }
+      const computedInputStyle = {
+          ...styles.input,
+          ...(errorMessage && styles.error),
+          ...(xsmall && styles.xsmall),
+          ...(small && styles.small),
+          ...(large && styles.large),
+          ...(xlarge && styles.xlarge),
+      }
+    return (
+      <fieldset style={styles.wrapper}>
+        <label
+          htmlFor={`input_${name}`}
+          style={computedLabelStyle}
+        >
+          {errorMessage || label}
+        </label>
+        <input
+          style={computedInputStyle}
+          id={`input_${name}`}
+          ref={this.setRef}
+          type={type}
+          onChange={this.handleChange}
+          value={value}
+        />
+      </fieldset>
+    );
+  }
+}
+
+Input.propTypes = {
+  type: PropTypes.oneOf(['text', 'number', 'price']),
+  name: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  errorMessage: PropTypes.string,
+  label: PropTypes.string,
+  onChange: PropTypes.func,
+  autoFocus: PropTypes.bool,
+};
+
+Input.defaultProps = {
+  onChange: () => {},
+  autoFocus: false,
+};
+
+export default Input;

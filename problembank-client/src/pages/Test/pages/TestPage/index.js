@@ -96,7 +96,6 @@ function TestPage(props) {
         </Spacing>
         
       </div>
-      <Text>hello</Text>
     </TestLayout>
   );
 }

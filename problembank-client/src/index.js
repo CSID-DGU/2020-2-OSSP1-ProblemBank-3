@@ -11,6 +11,8 @@ import { createStore, applyMiddleware} from 'redux';
 import promiseMiddleware from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
 
+import ModalProviderWithKey from './components/Modal/ModalProviderWithKey';
+
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore);
 
 ReactDOM.render(
@@ -21,7 +23,9 @@ ReactDOM.render(
           window.__REDUX_DEVTOOLS_EXTENSION__()
         )}
       >
-      <App />
+      <ModalProviderWithKey>
+        <App />
+      </ModalProviderWithKey>
     </Provider>,
   document.getElementById('root')
 );

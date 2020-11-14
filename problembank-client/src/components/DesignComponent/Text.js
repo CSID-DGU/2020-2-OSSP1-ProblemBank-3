@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import Theme from './Theme';
 import PropTypes from 'prop-types';
+import { FaDeviantart } from 'react-icons/fa';
 
 class Text extends PureComponent {
    
@@ -16,6 +17,7 @@ class Text extends PureComponent {
       primary,
       secondary,
       inverse,
+      fade,
     } = this.props;
     const {color, size, lineHeight, fontWeight } = Theme;
     const styles = {
@@ -56,6 +58,9 @@ class Text extends PureComponent {
         inverse: {
           color: color.white,
         },
+        fade: {
+          color: color.fadeBlack,
+        }
       };
       const computedStyle ={
         ...styles.default,
@@ -68,6 +73,7 @@ class Text extends PureComponent {
         ...(bold && styles.bold),
         ...(light && styles.light),
         ...(inverse && styles.inverse),
+        ...(fade && styles.fade),
       };
     return (
       <span

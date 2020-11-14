@@ -31,6 +31,9 @@ function Header(props) {
                             <NavLink to="/problemsbank" activeClassName='active_class'>카테고리별 문제</NavLink>
                         </li>
                         <li>
+                            <NavLink to="/test" activeClassName='active_class'>시험/대회</NavLink>
+                        </li>
+                        <li>
                             {/*auth 상태에 따라 다르게 표시*/}
                             {props.auth ? (
                                 <Link onClick={handleLogout}>로그아웃</Link>

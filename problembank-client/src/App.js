@@ -16,6 +16,7 @@ const MainPage = React.lazy(() => import('./pages/MainPage'))
 const ProblemsByCategories = React.lazy(() => import('./pages/ProblemsByCategories'));
 const TotalProblems = React.lazy(() => import('./pages/TotalProblems'))
 const Problem = React.lazy(() => import('./pages/Problem'))
+const Test = React.lazy(() => import('./pages/Test'))
 
 
 function App() {
@@ -41,10 +42,15 @@ function App() {
                     // 임시로 TotalProblems에 Auth경로 설정
                     render={props => <TotalProblems role={user.role} />}
                 />
-
+                {/* <Authorized
+                    auth={auth}
+                    path="/test"
+                    render={() => <Test role={user.role} />}
+                /> */}
                 <Route exact path = "/"  component = {MainPage}/>
                 <Route path = "/problemsbank"  component = {ProblemsByCategories}/>
                 <Route path = "/problem"  component = {Problem}/>
+                <Route exact path = "/test"  component = {Test}/>
                 <Route component = {NotFound} />
             </Switch>
           </BrowserRouter>

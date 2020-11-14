@@ -21,6 +21,7 @@ export const unit = 4;
 export default {
   // 색상
   color: {
+    fadeBlack: '#ccc',
     primary: '#2196F3', // 주 색상
     primaryDark: '#1976D2',
     secondary: '#009688', // 부 색상
@@ -32,6 +33,8 @@ export default {
     border: 'rgba(0, 0, 0, .15)',
     default: '#333333', // 기본 문자 색상
     error: '#e51c23', // 오류 색상
+    test: '#ff9900',
+    contest: '#00b386',
   },
   // 폰트 사이즈
   size: {

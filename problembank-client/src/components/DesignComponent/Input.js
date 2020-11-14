@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 class Input extends PureComponent {
   constructor(props) {
+    super(props);
     this.setRef = this.setRef.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
@@ -28,11 +29,13 @@ class Input extends PureComponent {
       value,
       name,
       type,
-      styles,
       large,
       xlarge,
       small,
       xsmall,
+      height,
+      width,
+      placeholder,
     } = this.props;
     const { unit, color, size, lineHeight } = Theme;
     const styles = {
@@ -54,13 +57,19 @@ class Input extends PureComponent {
           lineHeight: lineHeight.md,
           padding: unit * 1.5,
           border: 1,
-          borderColor: color.primary,
+          borderColor: color.fadeBlack,
           borderStyle: 'solid',
           borderRadius: 4,
           outline: 0,
           ':focus': {
             boxShadow: '0 0 0px 2px rgba(0, 0, 0, 0.3)',
           },
+        },
+        width: {
+          width: width* unit,
+        },
+        height: {
+          heigth: height * unit,
         },
         xlarge: {
           fontSize: size.xg,
@@ -85,6 +94,8 @@ class Input extends PureComponent {
       }
       const computedInputStyle = {
           ...styles.input,
+          ...(width && styles.width),
+          ...(height && styles.height),
           ...(errorMessage && styles.error),
           ...(xsmall && styles.xsmall),
           ...(small && styles.small),
@@ -106,6 +117,7 @@ class Input extends PureComponent {
           type={type}
           onChange={this.handleChange}
           value={value}
+          placeholder={placeholder}
         />
       </fieldset>
     );
@@ -120,11 +132,13 @@ Input.propTypes = {
   label: PropTypes.string,
   onChange: PropTypes.func,
   autoFocus: PropTypes.bool,
+  placeholder: PropTypes.string,
 };
 
 Input.defaultProps = {
   onChange: () => {},
   autoFocus: false,
+  placeholder: "",
 };
 
 export default Input;

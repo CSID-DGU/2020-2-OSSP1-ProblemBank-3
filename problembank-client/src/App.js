@@ -17,7 +17,8 @@ const ProblemsByCategories = React.lazy(() => import('./pages/ProblemsByCategori
 const TotalProblems = React.lazy(() => import('./pages/TotalProblems'))
 const Problem = React.lazy(() => import('./pages/Problem'))
 const Test = React.lazy(() => import('./pages/Test'))
-
+const ManageTest = React.lazy(() => import('./pages/ManageTest'))
+const CreateTest = React.lazy(() => import('./pages/CreateTest'))
 
 function App() {
     const [user, setUser] = useState(null);
@@ -51,6 +52,8 @@ function App() {
                 <Route path = "/problemsbank"  component = {ProblemsByCategories}/>
                 <Route path = "/problem"  component = {Problem}/>
                 <Route exact path = "/test"  component = {Test}/>
+	        <Route exact path = "/managetest" component = {ManageTest}/>
+	        <Route exact path = "/createtest" component = {CreateTest}/>
                 <Route component = {NotFound} />
             </Switch>
           </BrowserRouter>

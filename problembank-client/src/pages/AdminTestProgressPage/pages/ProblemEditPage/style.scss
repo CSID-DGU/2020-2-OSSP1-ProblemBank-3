@@ -1,6 +1,60 @@
 .progress__container{
-    .select_problem {
-        width: 100px;
+    margin-top : 20px;
+    margin-left : 200px;
+    #select-area{
+	float : left;
+        height : 100%;
+        .select_problem {
+	    height : 26px;
+            width : 150px;
+        }
     }
-
+    #input-area{
+	float : left;
+	margin-left : 80px;
+        display : inline-block;
+	height : 100%;
+	width : 400px;
+	#problem-name{
+	    padding-left : 10px;
+	    height : 26px;
+	    width : 400px;
+	    margin-bottom : 20px
+	}
+	#problem-define{
+	    padding-left : 10px;
+	    height : 26px;
+	    width : 400px;
+	    margin-bottom : 20px;
+	}
+	#problem-input{
+	    padding-left : 10px;
+	    height : 26px;
+	    width : 400px;
+	    margin-bottom : 20px;
+	}
+	#problem-output{
+	    padding-left : 10px;
+	    height : 26px;
+	    width : 400px;
+	    margin-bottom : 20px;
+        }
+        #example-data{
+	    width : 400px;
+	    input{
+	        height : 26px;
+		width : 190px;
+		margin-bottom : 6px;
+                margin-top : 6px;
+		padding-left : 4px;
+		border-style : none;
+		background-color : #DDDDDD;
+	    }
+	    #input-data{
+		float : left;
+		width : 210px;
+	    }
+	}
+    }
+    
 }

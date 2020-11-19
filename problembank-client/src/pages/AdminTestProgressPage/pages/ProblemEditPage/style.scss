@@ -14,36 +14,39 @@
 	margin-left : 80px;
         display : inline-block;
 	height : 100%;
-	width : 400px;
+	width : 450px;
+	input{
+	    font-size : 13px;
+	}
 	#problem-name{
 	    padding-left : 10px;
 	    height : 26px;
-	    width : 400px;
+	    width : 450px;
 	    margin-bottom : 20px
 	}
 	#problem-define{
 	    padding-left : 10px;
 	    height : 26px;
-	    width : 400px;
+	    width : 450px;
 	    margin-bottom : 20px;
 	}
 	#problem-input{
 	    padding-left : 10px;
 	    height : 26px;
-	    width : 400px;
+	    width : 450px;
 	    margin-bottom : 20px;
 	}
 	#problem-output{
 	    padding-left : 10px;
 	    height : 26px;
-	    width : 400px;
+	    width : 450px;
 	    margin-bottom : 20px;
         }
         #example-data{
-	    width : 400px;
+	    width : 450px;
 	    input{
 	        height : 26px;
-		width : 190px;
+		width : 210px;
 		margin-bottom : 6px;
                 margin-top : 6px;
 		padding-left : 4px;
@@ -52,8 +55,23 @@
 	    }
 	    #input-data{
 		float : left;
-		width : 210px;
+		width : 225px;
 	    }
+	    #output-data{
+		padding-left : 15px;
+		width : 225px;
+	        float : right;
+	    }
+	}
+	button{
+	    float : right;
+	    border : 1px none rgb(51, 51, 51);
+	    border-radius : 4px;
+	    color : #FFFFFF;
+	    padding : 4px 10px;
+	    font-weight : bold;
+	    background-color : rgb(255, 153, 0);
+	    margin-top : 10px;
 	}
     }
     

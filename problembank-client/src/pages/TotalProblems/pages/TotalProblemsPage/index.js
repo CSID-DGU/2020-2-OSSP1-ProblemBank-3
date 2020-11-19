@@ -44,7 +44,6 @@ function TotalProblemsPage(props) {
         setInterval(function(){ 
             setLoading(false)
         }, 500);
-        
     }
 
     const handleChangeDisplayPro = (e) => {

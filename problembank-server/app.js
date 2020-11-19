@@ -40,14 +40,16 @@ app.use(session({
 app.use(createSession());
 
 
-var indexRouter = require('./routes/index');
-var problemsRouter = require('./routes/problems');
-var projectsRouter = require('./routes/projects');
+const indexRouter = require('./routes/index');
+const problemsRouter = require('./routes/problems');
+const projectsRouter = require('./routes/projects');
+const testsRouter = require('./routes/tests');
 
 
 app.use('/', indexRouter);
 app.use('/problems', problemsRouter)
 app.use('/projects', projectsRouter)
+app.use('/tests', testsRouter);
 
 
 // projectsRouter(app.io)

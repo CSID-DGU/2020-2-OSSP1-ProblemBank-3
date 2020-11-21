@@ -65,9 +65,9 @@ router.get('/testproblemdata', async function(req, res){
 
 // 피드백 목록 출력
 router.get('/testfeedback', async function(req, res){
-    const { problem_id } = req.query
+    const { test_id } = req.query
     try {
-        let [rows] = await db.query(sql.tests.selectFeedBackByProblemId, [problem_id])
+        let [rows] = await db.query(sql.tests.selectFeedBackByTestId, [test_id])
         res.status(200).send({
             result : true,
             data: rows,

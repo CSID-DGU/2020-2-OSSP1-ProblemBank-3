@@ -1,5 +1,10 @@
+import React from "react";
+import FeedbackTable from "../../components/FeedbackTable";
+
 function FeedbackPage() {
-    // return()
+    return(<div>
+        <FeedbackTable></FeedbackTable>
+    </div>)
 }
 
 export default FeedbackPage

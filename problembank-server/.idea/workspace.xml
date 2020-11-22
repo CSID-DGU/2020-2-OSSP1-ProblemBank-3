@@ -20,6 +20,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a2f59a0d-f558-407b-bbba-4b4bb6fb3971" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../problembank-client/src/_actions/userAction.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../problembank-client/src/apis/users.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/users.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sql/users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/_actions/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/_actions/types.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/components/Authentication/Auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/components/Authentication/Auth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sql/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/sql/index.js" afterDir="false" />
@@ -41,6 +48,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/sql" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -49,6 +57,12 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/sql" />
+      <recent name="$PROJECT_DIR$/routes" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="start" type="js.build_tools.npm" nameIsGenerated="true">
@@ -69,6 +83,7 @@
       <updated>1605150012137</updated>
       <workItem from="1605150013377" duration="5099000" />
       <workItem from="1605172052276" duration="153000" />
+      <workItem from="1606043913060" duration="2157000" />
     </task>
     <servers />
   </component>
@@ -88,29 +103,29 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="304" y="187" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605150102771">
+    <state x="304" y="187" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606045254040">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="304" y="187" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1605150102771" />
+    <state x="304" y="187" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1606045254040" />
     <state x="578" y="279" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1605156491503">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="578" y="279" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1605156491503" />
-    <state width="1659" height="295" key="GridCell.Tab.0.bottom" timestamp="1605172190786">
+    <state width="1659" height="295" key="GridCell.Tab.0.bottom" timestamp="1606044867860">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1659" height="295" key="GridCell.Tab.0.bottom/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1605172190786" />
-    <state width="1659" height="295" key="GridCell.Tab.0.center" timestamp="1605172190785">
+    <state width="1659" height="295" key="GridCell.Tab.0.bottom/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1606044867860" />
+    <state width="1659" height="295" key="GridCell.Tab.0.center" timestamp="1606044867859">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1659" height="295" key="GridCell.Tab.0.center/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1605172190785" />
-    <state width="1659" height="295" key="GridCell.Tab.0.left" timestamp="1605172190783">
+    <state width="1659" height="295" key="GridCell.Tab.0.center/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1606044867859" />
+    <state width="1659" height="295" key="GridCell.Tab.0.left" timestamp="1606044867858">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1659" height="295" key="GridCell.Tab.0.left/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1605172190783" />
-    <state width="1659" height="295" key="GridCell.Tab.0.right" timestamp="1605172190785">
+    <state width="1659" height="295" key="GridCell.Tab.0.left/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1606044867858" />
+    <state width="1659" height="295" key="GridCell.Tab.0.right" timestamp="1606044867860">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1659" height="295" key="GridCell.Tab.0.right/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1605172190785" />
+    <state width="1659" height="295" key="GridCell.Tab.0.right/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1606044867860" />
   </component>
 </project>

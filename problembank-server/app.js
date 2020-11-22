@@ -44,12 +44,14 @@ const indexRouter = require('./routes/index');
 const problemsRouter = require('./routes/problems');
 const projectsRouter = require('./routes/projects');
 const testsRouter = require('./routes/tests');
+const usersRouter = require('./routes/users');
 
 
 app.use('/', indexRouter);
 app.use('/problems', problemsRouter)
 app.use('/projects', projectsRouter)
 app.use('/tests', testsRouter);
+app.use('/users', usersRouter);
 
 
 // projectsRouter(app.io)

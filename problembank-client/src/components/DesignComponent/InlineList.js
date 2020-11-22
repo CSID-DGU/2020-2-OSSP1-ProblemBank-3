@@ -15,7 +15,6 @@ class InlineList extends PureComponent {
           flexWrap: 'wrap',
           justifyContent: 'flex-start',
           alignItems: 'center',
-          marginBottom: 15*unit,
         },
         childDefault:{
           marginRight: spacingBetween * unit ,
@@ -34,6 +33,7 @@ class InlineList extends PureComponent {
         },
         distribution: {
           width:`${(1/children.length)*100-children.length}%`,
+          marginBottom: 15*unit,
         },
       };
     const computedDivStyle = {

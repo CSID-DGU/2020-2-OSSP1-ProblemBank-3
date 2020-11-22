@@ -51,7 +51,7 @@ function App() {
                 <Route exact path = "/"  component = {MainPage}/>
                 <Route path = "/problemsbank"  component = {ProblemsByCategories}/>
                 <Route path = "/problem"  component = {Problem}/>
-                <Route exact path = "/test"  component = {Test}/>
+                <Route path = "/test"  component = {Test}/>
 	        <Route exact path = "/managetest" component = {ManageTest}/>
 	        <Route exact path = "/createtest" component = {CreateTest}/>
                 <Route exact path="/admintestprogress" component={AdminTestProgress} />

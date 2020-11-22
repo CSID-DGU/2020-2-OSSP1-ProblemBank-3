@@ -2,6 +2,7 @@ import React from 'react'
 import {Route, Switch, useRouteMatch} from 'react-router-dom';
 import TotalProblemsPage from '../TotalProblems/pages/TotalProblemsPage';
 import TestPage from './pages/TestPage';
+import DoTest from './pages/DoTest';
 import NotFound from '../../components/404NotFound';
 
 function Test({role}) {
@@ -12,6 +13,7 @@ function Test({role}) {
         <Switch>
             {/* {role ==="STUDENT" && 
             <Route exact path = {`${match.url}`} component = {TestPage} />} */}
+            <Route exact path = {`${match.url}/view`} component = {DoTest} />
             <Route exact path = {`${match.url}`} component = {TestPage} />
             <Route exact path = {`${match.url}`} component = {NotFound} />
         </Switch>

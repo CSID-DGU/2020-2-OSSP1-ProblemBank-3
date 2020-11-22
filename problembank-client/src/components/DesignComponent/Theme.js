@@ -29,7 +29,7 @@ export default {
     white: '#FFFFFF',
     gray: '#9e9e9e',
     grayLight: '#eeeeee',
-    grayDark: '#616161',
+    grayDark: '#404040',
     border: 'rgba(0, 0, 0, .15)',
     default: '#333333', // 기본 문자 색상
     error: '#e51c23', // 오류 색상

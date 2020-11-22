@@ -17,24 +17,28 @@ class Button extends PureComponent {
       onPress,
       test,
       contest,
+      distance,
     } = this.props;
     const { color, size, unit, depth, fontWeight } = Theme;
     const styles = {
       default: {
+        height: "40px",
+        width: "100px",
         border: 1,
         borderStyle: "none",
-        borderColor: color.default,
         borderRadius: unit,
-        color: color.default,
+        backgroundColor: color.grayDark,
+        color: color.white,
         fontSize: size.md,
         fontWeight: fontWeight.bold,
         padding: unit * 2,
         paddingLeft: unit * 4,
         paddingRight: unit * 4,
         outline: 0,
+        transition:"all 0.18s ease-in-out 0s",
         cursor: "pointer",
         ":hover": {
-          backgroundColor: color.grayLight,
+          backgroundColor: color.Dark,
         },
         ":focus": {
           boxShadow: "0 0 0px 2px rgba(0, 0, 0, 0.3)",
@@ -64,9 +68,16 @@ class Button extends PureComponent {
           backgroundColor: color.primaryDark,
         },
       },
+      content: {
+        height: 0,
+        width: 0,
+      },
       secondary: {
         borderColor: color.secondary,
         color: color.secondary,
+      },
+      distance: {
+        marginRight: unit,
       },
       test: {
         backgroundColor: color.test,
@@ -77,8 +88,7 @@ class Button extends PureComponent {
         color: color.white,
       },
       disabled: {
-        borderColor: color.grayDark,
-        color: color.grayLight,
+        color: color.white,
         cursor: "default",
         opacity: 0.5,
         backgroundColor: color.gray,
@@ -92,11 +102,13 @@ class Button extends PureComponent {
       ...(xsmall && styles.xsmall),
       ...(small && styles.small),
       ...(xlarge && styles.xlarge),
+      ...(large && styles.large),
       ...(secondary && styles.secondary),
       ...(primary && styles.primary),
       ...(disabled && styles.disabled),
       ...(test && styles.test),
       ...(contest && styles.contest),
+      ...(distance && styles.distance),
     };
     return (
       <button
@@ -120,6 +132,9 @@ Button.propTypes = {
   xlarge: PropTypes.bool,
   secondary: PropTypes.bool,
   primary: PropTypes.bool,
+  test: PropTypes.bool,
+  contest: PropTypes.bool,
+  distance: PropTypes.bool,
   type: PropTypes.string,
   onPress: PropTypes.func,
 };

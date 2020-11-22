@@ -9,6 +9,10 @@ import Select, { Option } from "../../../../components/DesignComponent/Select";
 import Heading from "../../../../components/DesignComponent/Heading";
 import Button from "../../../../components/DesignComponent/Button";
 
+import {Consumer as ModalConsumer} from '../../../../components/Modal/createModalProvider';
+import {NOTICE_MODAL} from '../../../../components/Modal/ModalProviderWithKey';
+
+
 function TestPage(props) {
   const [loading, setLoading] = useState(false);
   const [type, setType] = useState(false);
@@ -31,23 +35,29 @@ function TestPage(props) {
         <Text>입장/신청 가능만 보기</Text>
       </InlineList>
       <Spacing vertical={10} />
-      <div className="test-body">
+      <div className="test-body"> 
         <Spacing horizontal={50}>
-        <InlineList align="right" distribution>
+          <ModalConsumer>
+          {({openModal})=>(
+            <div>
+          <InlineList align="right" distribution>
           <div>
-            <Heading level={3}>[기초프로그래밍] 중간고사</Heading>
+               <Heading level={4} onPress={()=>
+                openModal(NOTICE_MODAL, {title:'[기초프로그래밍] 중간고사' ,auth:'김가영 교수님 - 시험'})}>
+                  [기초프로그래밍] 중간고사</Heading>
+            
             <Text fade >김가영 교수님 - 시험</Text> <br />
             <Text fade >2020-11-11 12:00 ~ 2020-11-11 18:00</Text> <br />
-            <Button test>입장</Button>
+              <Button test onPress={() => props.history.push('/test/view?id=1')}> 입장</Button>
           </div>
           <div>
-            <Heading level={3}>[심화프로그래밍] 중간고사</Heading>
+            <Heading level={4}>[심화프로그래밍] 중간고사</Heading>
             <Text fade >김준태 교수님 - 시험</Text> <br />
             <Text fade >2020-11-11 12:00 ~ 2020-11-11 18:00</Text> <br />
             <Button test>입장</Button>
           </div>
           <div>
-            <Heading level={3}>2020 동국대학교 프로그래밍 경진대회</Heading>
+            <Heading level={4}>2020 동국대학교 프로그래밍 경진대회</Heading>
             <Text fade >손윤식 교수님 - 대회</Text> <br />
             <Text fade >2020-11-11 12:00 ~ 2020-11-11 18:00</Text> <br />
             <Button disabled>불가</Button>
@@ -55,44 +65,48 @@ function TestPage(props) {
         </InlineList>
         <InlineList align="right" distribution>
           <div>
-            <Heading level={3}>[기초프로그래밍] 중간고사</Heading>
+            <Heading level={4}>[기초프로그래밍] 중간고사</Heading>
             <Text fade >김가영 교수님 - 시험</Text> <br />
             <Text fade >2020-11-11 12:00 ~ 2020-11-11 18:00</Text> <br />
             <Button disabled>불가</Button>
           </div>
           <div>
-            <Heading level={3}>[심화프로그래밍] 중간고사</Heading>
+            <Heading level={4}>[심화프로그래밍] 중간고사</Heading>
             <Text fade >김준태 교수님 - 시험</Text> <br />
             <Text fade >2020-11-11 12:00 ~ 2020-11-11 18:00</Text> <br />
             <Button test>입장</Button>
           </div>
           <div>
-            <Heading level={3}>2020 동국대학교 프로그래밍 경진대회</Heading>
-            <Text fade >손윤식 교수님 - 대회</Text> <br />
-            <Text fade >2020-11-11 12:00 ~ 2020-11-11 18:00</Text> <br />
-            <Button contest>입장</Button>
-          </div>
-        </InlineList>
-        <InlineList align="right" distribution>
-          <div>
-            <Heading level={3}>[기초프로그래밍] 중간고사</Heading>
-            <Text fade >김가영 교수님 - 시험</Text> <br />
-            <Text fade >2020-11-11 12:00 ~ 2020-11-11 18:00</Text> <br />
-            <Button test>입장</Button>
-          </div>
-          <div>
-            <Heading level={3}>[심화프로그래밍] 중간고사</Heading>
-            <Text fade >김준태 교수님 - 시험</Text> <br />
-            <Text fade >2020-11-11 12:00 ~ 2020-11-11 18:00</Text> <br />
-            <Button disabled>불가</Button>
-          </div>
-          <div>
-            <Heading level={3}>2020 동국대학교 프로그래밍 경진대회</Heading>
+            <Heading level={4}>2020 동국대학교 프로그래밍 경진대회</Heading>
             <Text fade >손윤식 교수님 - 대회</Text> <br />
             <Text fade >2020-11-11 12:00 ~ 2020-11-11 18:00</Text> <br />
             <Button contest>입장</Button>
           </div>
         </InlineList>
+        <InlineList align="right" distribution>
+          <div>
+            <Heading level={4}>[기초프로그래밍] 중간고사</Heading>
+            <Text fade >김가영 교수님 - 시험</Text> <br />
+            <Text fade >2020-11-11 12:00 ~ 2020-11-11 18:00</Text> <br />
+            <Button test>입장</Button>
+          </div>
+          <div>
+            <Heading level={4}>[심화프로그래밍] 중간고사</Heading>
+            <Text fade >김준태 교수님 - 시험</Text> <br />
+            <Text fade >2020-11-11 12:00 ~ 2020-11-11 18:00</Text> <br />
+            <Button disabled>불가</Button>
+          </div>
+          <div>
+            <Heading level={4}>2020 동국대학교 프로그래밍 경진대회</Heading>
+            <Text fade >손윤식 교수님 - 대회</Text> <br />
+            <Text fade >2020-11-11 12:00 ~ 2020-11-11 18:00</Text> <br />
+            <Button contest>입장</Button>
+          </div>
+        </InlineList>
+        </div>
+        )}
+        </ModalConsumer>
+        
         </Spacing>
         
       </div>

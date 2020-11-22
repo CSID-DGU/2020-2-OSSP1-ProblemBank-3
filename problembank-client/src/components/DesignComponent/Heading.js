@@ -10,6 +10,7 @@ class Heading extends PureComponent {
       children,
       inverse,
       level,
+      onPress
     } = this.props;
 
     const HeadingTag = headingTags[level - 1];
@@ -19,6 +20,9 @@ class Heading extends PureComponent {
         default: {
             lineHeight: lineHeight.lg,
             fontWeight: fontWeight.bold,
+            ...(onPress && 
+              {cursor: 'pointer'}
+            )
           },
           inverse: {
             color: color.white,
@@ -59,10 +63,12 @@ class Heading extends PureComponent {
       ...styles.default,
       ...styles[`level${level}`],
       ...(inverse && styles.inverse),
+      ...(onPress && {cursor: 'pointer'}),
     }
     return (
       <HeadingTag
-      style={styles}
+      style={computedStyle}
+      onClick = {onPress}
       >
         {children}
       </HeadingTag>

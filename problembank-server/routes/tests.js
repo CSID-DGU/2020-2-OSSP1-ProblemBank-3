@@ -44,7 +44,7 @@ router.get('/testproblemdata', async function(req, res) {
     const { problem_id } = req.query
     try {
         let [rows] = await db.query(sql.tests.selectTestProblemContentsByProblemId, [problem_id])
-        let [testcases] = await db.query(sql.tests.selectTestCaseByProblemId, [problem_id])
+        let [testcases] = await db.query(sql.tests.selectTwoTestCaseByProblemId, [problem_id])
         let filterTestCase = testcases.map(testcase => ({
             input_exp: testcase.input_example, 
             output_exp: testcase.output_example
@@ -123,25 +123,138 @@ router.get('/userresult', async function(req, res) {
     }
 })
 
-// TODO:
-// 새 문제 생성 및 추가
-router.post('/createproblem', async function(req, res){
-    const {
-        name, content, input_cases, output_cases
-    } = req.body
-})
-
-// 기존 문제 추가
-router.post('/addproblem', async function(req, res) {
-    const { problem_ids } = req.body
-})
+// 이하 개발중
 
 // 테스트 생성
-router.post('/createtest', async function(req, res){
+router.post('/createtest', async function(req, res) {
     const {
-        name, content, is_exam, start, end, admin_id, subject_id,
-        problem_ids
+        testName, testContent, is_exam, start, end, admin_id, subject_id,
+        problems
     } = req.body
+
+    db.query(sql.tests.insertTest, [testName, testContent, is_exam, start, end, admin_id, subject_id])
+    const {test_id} = db.query(sql.tests.selectInsertedId)
+
+    for(let i = 0; i < problems.length; i++) {
+        const {problem_id} = problems[i]
+        if(problem_id) {
+            db.query(sql.tests.insertProblemFromProblemBank, [problem_id])
+            db.query(sql.tests.insertProblemIntoTest, [test_id[0].test_id, problem_id])
+        }
+        else {
+            const {problemName, problemContent, input, output} = problems[i]
+            const {testcases} = problems[i]
+
+            db.query(sql.tests.insertProblem, [problemName, problemContent, input, output])
+
+            for(let j = 0; j < testcases; j++) {
+                const {input_ex, output_ex} = testcases[i]
+
+                db.query(sql.tests.insertTestCases, [input_ex, output_ex, problem_id])
+            }
+        }
+    }
+})
+
+//시험 중 테스트, testcase와 결과를 같이 표시하도록 리빌드 필요
+router.post('/testrun', async function(req, res) {
+    const { sourceCode, problem_id, language } = req.body;
+    const [testCases] = await db.query(sql.tests.selectTwoTestCaseByProblemId, [problem_id]);
+    let correctCount = 0;
+    try {
+        const promises = testCases.map(testcase => {
+            return new Promise((resolve) => {
+                const docker = compiler.getProblemDocker(sourceCode, language);
+                let isStarted = false;
+                docker.stderr.on("data", (data) => {
+                    //console.log(data.toString('utf-8'));
+                    errormsg = data.toString;
+                })
+    
+                docker.stdout.on("data", (data) => {
+                    if(!isStarted) return;
+                    const line = data.toString('utf-8');
+                    output = data.toString;
+                })
+    
+                docker.stdout.on("data", (data) => {
+                    const line = data.toString('utf-8');
+                    if(line.includes(startDelem)) {
+                        isStarted = true;
+                        docker.stdin.write(Buffer.from(testcase.input + "\n"));
+                    } else if(line.includes(endDelem)) {
+                        isStarted = false;
+                        resolve();
+                    }
+                });
+            });
+        })
+    
+        for(let i = 0 ; i < promises.length; i++) { await promises[i] }
+        
+        res.status(200).send({
+            result: true,
+            data:  { errormsg, output },
+            message: 'testrun success'
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(404).send({
+            result: false,
+            data: [],
+            message: error
+        })
+    }
+})
+
+// 채점, 문제별 점수 반영 필요
+router.post('/submit', async function(req, res){
+    const { sourceCode, problemId, language } = req.body;
+    const [testCases] = await db.query(sql.tests.selectTestCaseByProblemId, [problemId]);
+    let correctCount = 0;
+    try {
+        const promises = testCases.map(testcase => {
+            return new Promise((resolve) => {
+                const docker = compiler.getProblemDocker(sourceCode, language);
+                let isStarted = false;
+                docker.stderr.on("data", (data) => {
+                    console.log(data.toString('utf-8'));
+                })
+    
+                docker.stdout.on("data", (data) => {
+                    if(!isStarted) return;
+                    const line = data.toString('utf-8');
+                    if(line.includes(testcase.output)) correctCount++;
+                })
+    
+                docker.stdout.on("data", (data) => {
+                    const line = data.toString('utf-8');
+                    if(line.includes(startDelem)) {
+                        isStarted = true;
+                        docker.stdin.write(Buffer.from(testcase.input + "\n"));
+                    } else if(line.includes(endDelem)) {
+                        isStarted = false;
+                        resolve();
+                    }
+                });
+            });
+        })
+    
+        for(let i = 0 ; i < promises.length; i++) { await promises[i] }
+        
+        res.status(200).send({
+            result: true,
+            data:  { correctCount, count: testCases.length },
+            message: 'compile success'
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(404).send({
+            result: false,
+            data: [],
+            message: error
+        })
+    }
 })
 
 module.exports = router;

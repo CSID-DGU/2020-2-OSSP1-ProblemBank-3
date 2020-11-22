@@ -30,6 +30,21 @@ const testAPI = {
         const url = '/tests/userresult';
         return axiosClient.get(url, {params});
     },
+// 이하 개발중, 테스트안됨
+    createTest: (params) => {
+        const url = '/tests/createtest';
+        return axiosClient.get(url, params);
+    },
+
+    testRun: (params) => {
+        const url = '/tests/testrun';
+        return axiosClient.post(url, params);
+    },
+
+    submit: (params) => {
+        const url = '/tests/submit';
+        return axiosClient.post(url, params);
+    },
 }
 
 export default testAPI;

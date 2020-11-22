@@ -15,18 +15,16 @@ class FeedbackTable extends Component{
         }
     }
 
-    async componentDidMount() {
-        const params = {
-            test_id: 1
-        }
-
-        const response = await testAPI.getTestFeedback(params);
-        this.setState = ({
+    getFeedbacks = async()  => {
+        const response = await testAPI.getTestFeedback({test_id: 1});
+        this.setState({
             code: response.result,
             feedbacks: response.data
-        });
-        console.log(response)
-        console.log(this.state)
+        })
+    }
+
+    componentDidMount() {
+        this.getFeedbacks()
     }
 
     render() {

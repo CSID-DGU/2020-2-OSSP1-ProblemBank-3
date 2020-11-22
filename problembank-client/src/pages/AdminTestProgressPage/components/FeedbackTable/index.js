@@ -44,7 +44,7 @@ class FeedbackTable extends Component{
                             return (
 
                                 <tr key = {index}>
-                                    <td style={{textAlign: "center"}}>{item.id}</td>
+                                    <td style={{textAlign: "center"}}>{index+1}</td>
                                     <td>{item.content}</td>
                                     <td style={{textAlign: "center"}}>{item.author_name}</td>
                                     <td>{moment(item.created).format("YYYY-MM-DD")}</td>

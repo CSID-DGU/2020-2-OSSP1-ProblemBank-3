@@ -125,6 +125,26 @@ router.get('/userresult', async function(req, res) {
 
 // 이하 개발중
 
+// 학생 시험 조회
+router.post('/usertests', async function(req, res) {
+    const { user_id } = req.query
+    try {
+        let [tests] = await db.query(sql.tests.selectTestsByUserId, [user_id])
+        for(let i = 0; i < tests.length; i++) {
+            const { test_id } = problems[i]
+            const [testname] = await db.query(sql.tests.selectTestNameByTestId, [test_id])
+            rows[i] = testname[0].name;
+        }
+        res.status(200).send({
+            result: true,
+            data: rows,
+            message: '사용자 결과'
+        })
+    } catch (error) {
+        console.log("User Test Data " + error)
+    }
+})
+
 // 테스트 생성
 router.post('/createtest', async function(req, res) {
     const {

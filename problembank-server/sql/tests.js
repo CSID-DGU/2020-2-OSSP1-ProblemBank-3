@@ -13,6 +13,7 @@ module.exports = {
     selectSubjectUsersBySubjectId: "SELECT * FROM problems.pb_subject_users WHERE subject_id = ?",
     selectTestUsersByTestId: "SELECT * FROM problems.pb_test_users WHERE test_id = ?",
     selectTestUsersByUserId: "SELECT * FROM problems.pb_test_users WHERE user_id = ?",
+    selectTestsByUserId: "SELECT test_id FROM problems.pb_test_users WHERE user_id = ?",
     selectUserNameById: "SELECT user_name FROM problems.pb_users WHERE id = ?",
     selectInsertedId: "SELECT @@IDENTITY",
     

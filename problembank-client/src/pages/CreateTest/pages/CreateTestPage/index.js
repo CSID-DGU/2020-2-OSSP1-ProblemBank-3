@@ -1,20 +1,18 @@
 import React, { useState } from "react";
 import "./style.scss";
-import TestLayout from "../../../../layouts/CreateTestLayout";
+import CreateTestLayout from "../../../../layouts/CreateTestLayout";
 import InlineList from "../../../../components/DesignComponent/InlineList";
 import Input from "../../../../components/DesignComponent/Input";
 import Text from "../../../../components/DesignComponent/Text";
 import Spacing from "../../../../components/DesignComponent/Spacing";
-
-import Heading from "../../../../components/DesignComponent/Heading";
-import Button from "../../../../components/DesignComponent/Button";
 
 function CreateTestPage(props) {
     const [loading, setLoading] = useState(false);
     const [type, setType] = useState(false);
 
     return (
-        <div class="ManageTestPage">
+	<CreateTestLayout>
+	<div id="CreateTestLayoutBody">
 	    <div class="testDate">
 	        <Text id="data-label">시험 일자</Text>
 	        <input type='datetime-local' class="data-calander"></input>  
@@ -56,7 +54,8 @@ function CreateTestPage(props) {
 	    <div class="save">
 	        <button class="button">저장</button>
 	    </div>
-        </div>
+	</div>
+	</CreateTestLayout>
     );
 }
 

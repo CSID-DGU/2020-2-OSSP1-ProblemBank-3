@@ -1,11 +1,11 @@
-import React from 'react'
-import Spacing from "../components/DesignComponent/Spacing";
+import React from 'react';
+import Sidebar from '../components/Sidebar/mypage';
 
-function TestLayout(props) {
+function CreateTestLayout(props) {
     const { children } = props;
     return (
-        <div className="row">
-            <Spacing horizontal={50}/>
+        <div className="page">
+	    <Sidebar></Sidebar>
             <div className="body-container">
                 { children }
             </div>
@@ -13,5 +13,4 @@ function TestLayout(props) {
     );
 }
 
-
-export default TestLayout;
+export default CreateTestLayout;

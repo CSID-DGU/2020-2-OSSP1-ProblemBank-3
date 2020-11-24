@@ -2,12 +2,12 @@ module.exports = {
 
     // SELECT
     selectTests: "SELECT * FROM problems.pb_tests",
-    selectTestNameByTestId: "SELECT name FROM problems.pb_tests WHERE id = ?",
+    selectTestNameByTestId: "SELECT name, start FROM problems.pb_tests WHERE id = ?",
     selectTestProblemsByTestId: "SELECT problem_id FROM problems.pb_test_problems WHERE test_id = ?",
     selectTestProblemContentsByProblemId: "SELECT * FROM problems.pb_test_problem_contents WHERE id = ?",
     selectTestProblemNameByProblemId: "SELECT name FROM problems.pb_test_problem_contents WHERE id = ?",
     selectTestCaseByProblemId: "SELECT * FROM problems.pb_test_testcases WHERE problem_id = ?",
-    selectTwoTestCaseByProblemId: "SELECT * FROM problems.pb_test_testcases WHERE problem_id = ? ORDER BY id DESC LIMIT 2",
+    selectTwoTestCaseByProblemId: "SELECT * FROM problems.pb_test_testcases WHERE problem_id = ? ORDER BY id LIMIT 2",
     selectFeedBackByTestId: "SELECT * FROM problems.pb_test_feedback WHERE test_id = ?",
     selectSubjectsByAdminId: "SELECT * FROM problems.pb_subjects WHERE admin_id = ?",
     selectSubjectUsersBySubjectId: "SELECT * FROM problems.pb_subject_users WHERE subject_id = ?",
@@ -23,6 +23,8 @@ module.exports = {
     insertProblem: "INSERT INTO problems.pb_test_problem_contents (name, content, input, output) VALUES (?, ?, ?, ?)",
     insertTestCases: "INSERT INTO problems.pb_test_testcases (input_example, output_example, problem_id) VALUES (?, ?, ?)",
     insertProblemFromProblemBank: "INSERT INTO problems.pb_test_contents (name, content, input, output) SELECT name, content, input, output FROM problems.plass_problems WHERE id = ?",
+    insertTestUser: "INSERT INTO pb_test_users (user_id, test_id) VALUES (?, ?)",
+    insertTestUsers: "INSERT INTO pb_test_users (user_id, test_id) SELECT user_id FROM problems.pb_subject_users WHERE subject_id = ? VALUES (?)",
 
     // UPDATE
     updateTestUserScoreByTestUserId: "UPDATE problems.pb_test_users SET score = ?, correct = ?, wrong = ?, applied = 1 WHERE test_id = ? AND user_id = ?",

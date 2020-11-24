@@ -5,15 +5,15 @@
     display : block;
     margin-right : 15px;
     .accordion{
-        background-color : #FFFFFF;
-	cursor : pointer;
-	padding : 18px;
-	width : 100%;
-	border : none;
-	text-align : left;
-	outline : none;
-	font-size : 15px;
-	transition : 0.4s;
+      background-color : #FFFFFF;
+      cursor : pointer;
+      padding : 18px;
+      width : 100%;
+      border : none;
+      text-align : left;
+      outline : none;
+      font-size : 15px;
+      transition : 0.4s;
     }
 
     .active, .accordion:hover {

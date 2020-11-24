@@ -54,7 +54,7 @@ function App() {
                 <Route path = "/test"  component = {Test}/>
 	        <Route exact path = "/managetest" component = {ManageTest}/>
 	        <Route exact path = "/createtest" component = {CreateTest}/>
-                <Route exact path="/admintestprogress" component={AdminTestProgress} />
+                <Route path="/admintestprogress" component={AdminTestProgress} />
                 <Route component = {NotFound} />
             </Switch>
           </BrowserRouter>

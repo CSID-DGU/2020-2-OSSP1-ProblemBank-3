@@ -3,7 +3,7 @@ import FeedbackTable from "../../components/FeedbackTable";
 
 function FeedbackPage() {
     return(<div>
-        <FeedbackTable></FeedbackTable>
+        <FeedbackTable />
     </div>)
 }
 

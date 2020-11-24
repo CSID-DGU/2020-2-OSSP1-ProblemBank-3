@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import "./style.scss";
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 function ProgressSidebar(props) {
 
 	const history = useHistory();
+	const location = useLocation()
+
     function handleFeedbackClick() {
 		history.push("/admintestprogress")
 	}
@@ -13,17 +15,18 @@ function ProgressSidebar(props) {
     	history.push("/admintestprogress/problemedit")
 	}
 
+	console.log(location)
     return (
 	<div className="Sidebar">
 	    <ul className="Sidebar-list">
 	        <li>
 	            <div id="Sidebar1">
-	                <button class="accordion" onClick={handleFeedbackClick}>피드백 목록</button>
+	                <button className={`accordion ${location.pathname === '/admintestprogress' && 'active'}`} onClick={handleFeedbackClick}>피드백 목록</button>
 	            </div>
 	        </li>
 	        <li>
 	            <div id="Sidebar2">
-	                <button class="accordion" onClick={handleProblemEditClick}>문제 수정</button>
+	                <button className={`accordion ${location.pathname === '/admintestprogress/problemedit' && 'active'}`} onClick={handleProblemEditClick}>문제 수정</button>
 	            </div>
 	        </li>
 	    </ul>

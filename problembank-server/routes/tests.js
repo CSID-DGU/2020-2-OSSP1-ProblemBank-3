@@ -249,52 +249,60 @@ router.post('/testrun', async function(req, res) {
     }
 })
 
-// 채점 : 리빌드 필요
-router.post('/submit', async function(req, res){
-    const { sourceCode, test_id, user_id, problem_id, language } = req.body;
-    const [testCases] = await db.query(sql.tests.selectTestCaseByProblemId, [problem_id]);
-    let correctCount = 0, totalScore = 0;
-    try {
-        const promises = testCases.map(testcase => {
-            return new Promise((resolve) => {
-                const docker = compiler.getProblemDocker(sourceCode, language);
-                let isStarted = false;
-                docker.stderr.on("data", (data) => {
-                    console.log(data.toString('utf-8'));
-                })
-    
-                docker.stdout.on("data", (data) => {
-                    if(!isStarted) return;
-                    const line = data.toString('utf-8');
-                    if(line.includes(testcase.output)) {
-                        // const {score} = await db.query(sql.tests.selectProblemScoreByIds, [test_id, problem_id])
-                        totalSocre += score;
-                        correctCount++;
-                    }
-                })
-    
-                docker.stdout.on("data", (data) => {
-                    const line = data.toString('utf-8');
-                    if(line.includes(startDelem)) {
-                        isStarted = true;
-                        docker.stdin.write(Buffer.from(testcase.input + "\n"));
-                    } else if(line.includes(endDelem)) {
-                        isStarted = false;
-                        resolve();
-                    }
-                });
-            });
-        })
-        for(let i = 0 ; i < promises.length; i++) { await promises[i] }
+// 채점 : 테스트 필요
+router.post('/submit', async function (req, res) {
+    const [problems] = req.query
+    let correctCount = 0, totalScore = 0, correct = 0, wrong;
+    for (let i = 0; i < problems.length; i++) {
+        const { sourceCode, test_id, user_id, problem_id, language } = problems[i];
+        const [testCases] = await db.query(sql.tests.selectTestCaseByProblemId, [problem_id]);
+        try {
+            const promises = testCases.map(testcase => {
+                return new Promise((resolve) => {
+                    const docker = compiler.getProblemDocker(sourceCode, language);
+                    let isStarted = false;
+                    docker.stderr.on("data", (data) => {
+                        console.log(data.toString('utf-8'));
+                    })
 
-        let wrong = testCases.length - correctCount
-        await db.query(sql.tests.updateTestUserScoreByTestUserId, [totalScore, correctCount, wrong, test_id, user_id])
+                    docker.stdout.on("data", (data) => {
+                        if (!isStarted) return;
+                        const line = data.toString('utf-8');
+                        if (line.includes(testcase.output)) correctCount++;
+                    })
+
+                    docker.stdout.on("data", (data) => {
+                        const line = data.toString('utf-8');
+                        if (line.includes(startDelem)) {
+                            isStarted = true;
+                            docker.stdin.write(Buffer.from(testcase.input + "\n"));
+                        } else if (line.includes(endDelem)) {
+                            isStarted = false;
+                            resolve();
+                        }
+                    });
+                });
+            })
+            for (let i = 0; i < promises.length; i++) { await promises[i] }
+        } catch (error) {
+            console.log(error)
+        }
+        if(correctCount == testCases.length) {
+            correct++
+            totalScore += await db.query(sql.tests.selectProblemScoreByIds, [test_id, problem_id])
+        }
         await db.query(sql.tests.insertUserAnswers, [test_id, problem_id, user_id, sourceCode])
-        
+    }
+
+    wrong = problems.length - correctCount
+
+    try {
+        await db.query(sql.tests.updateTestUserScoreByTestUserId, [totalScore, correct, wrong, test_id, user_id])
+
         res.status(200).send({
             result: true,
-            data:  { correctCount, count: testCases.length, totalScore },
-            message: 'compile success'
+            data: { correctCount, count: testCases.length, totalScore },
+            message: 'submit success'
         })
     } catch (error) {
         console.log(error)

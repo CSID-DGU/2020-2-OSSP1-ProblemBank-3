@@ -249,7 +249,7 @@ router.post('/testrun', async function(req, res) {
     }
 })
 
-// 채점 : 답안 저장 필요, 테스트 필요
+// 채점 : 리빌드 필요
 router.post('/submit', async function(req, res){
     const { sourceCode, test_id, user_id, problem_id, language } = req.body;
     const [testCases] = await db.query(sql.tests.selectTestCaseByProblemId, [problem_id]);
@@ -267,7 +267,7 @@ router.post('/submit', async function(req, res){
                     if(!isStarted) return;
                     const line = data.toString('utf-8');
                     if(line.includes(testcase.output)) {
-                        const {score} = await db.query(sql.tests.selectProblemScoreByIds, [test_id, problem_id])
+                        // const {score} = await db.query(sql.tests.selectProblemScoreByIds, [test_id, problem_id])
                         totalSocre += score;
                         correctCount++;
                     }

@@ -289,6 +289,7 @@ router.post('/submit', async function(req, res){
 
         let wrong = testCases.length - correctCount
         await db.query(sql.tests.updateTestUserScoreByTestUserId, [totalScore, correctCount, wrong, test_id, user_id])
+        await db.query(sql.tests.insertUserAnswers, [test_id, problem_id, user_id, sourceCode])
         
         res.status(200).send({
             result: true,

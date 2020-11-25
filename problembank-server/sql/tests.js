@@ -15,6 +15,7 @@ module.exports = {
     selectTestUsersByUserId: "SELECT * FROM problems.pb_test_users WHERE user_id = ?",
     selectTestsByUserId: "SELECT test_id FROM problems.pb_test_users WHERE user_id = ?",
     selectUserNameById: "SELECT user_name FROM problems.pb_users WHERE id = ?",
+    selectUserAnswerByIds: "SELECT content FROM problems.pb_test_answers WHERE test_id = ? AND problem_id = ? AND user_id = ?",
     selectProblemScoreByIds: "SELECT score FROM problems.pb_test_problems WHERE test_id = ? AND problem_id = ?",
     selectInsertedId: "SELECT @@IDENTITY",
     
@@ -26,7 +27,7 @@ module.exports = {
     insertProblemFromProblemBank: "INSERT INTO problems.pb_test_contents (name, content, input, output) SELECT name, content, input, output FROM problems.plass_problems WHERE id = ?",
     insertTestUser: "INSERT INTO pb_test_users (user_id, test_id) VALUES (?, ?)",
     insertTestUsers: "INSERT INTO pb_test_users (user_id, test_id) SELECT user_id FROM problems.pb_subject_users WHERE subject_id = ? VALUES (?)",
-    insertUserAnswers: "INSERT INTO pb_test_answers (test_id, problem_id, user_id) VALUES (?, ?, ?)",
+    insertUserAnswers: "INSERT INTO pb_test_answers (test_id, problem_id, user_id, content) VALUES (?, ?, ?, ?)",
 
     // UPDATE
     updateProblemScore: "UPDATE problems.pb_test_problems SET score = ? WHERE test_id = ? and problem_id = ?",

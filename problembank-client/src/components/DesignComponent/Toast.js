@@ -48,7 +48,6 @@ class Toast extends PureComponent {
 }
 
 Toast.propTypes = {
-  ...withStylesPropTypes,
   warning: PropTypes.bool,
   message: PropTypes.string,
 };

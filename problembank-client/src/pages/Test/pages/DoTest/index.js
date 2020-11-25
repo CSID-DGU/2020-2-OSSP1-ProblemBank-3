@@ -14,6 +14,7 @@ import DetailProblemLayout from '../../../../layouts/DetailProblemLayout';
 import Timer from '../../../../assets/images/timer.png';
 import Button from '../../../../components/DesignComponent/Button';
 import Dropup from '../../../../components/DesignComponent/Dropup';
+import Toast from '../../../../components/DesignComponent/Toast';
 
 var moment = require('moment'); //?
 
@@ -28,6 +29,8 @@ function DoTest(props) {
     const [theme, setTheme] = useState("white")
     const [timer, setTimer] = useState();
     const [time, setTime] = useState("");
+    const [showToast, setShowToast] = useState(false);
+    const [message, setMessage] = useState("");
     
     const dispatch = useDispatch();
     
@@ -100,14 +103,22 @@ function DoTest(props) {
     }
     
     const CheckTime= () => {
-        const m = 0.1;
-        const countDownDate = new Date().getTime() + (m*60*1000);
+        const m = 0.3;
+        const minC = 60*1000;
+        const hourC = 1000*60*60;
+        const countDownDate = new Date().getTime() + (m*minC);
         var x = setInterval(function() {
             var now = new Date().getTime();
             var distance = countDownDate - now;
-            var minutes = Math.floor((distance%(1000*60*60))/(1000*60));
-            var seconds = Math.floor((distance%(1000*60))/1000);
+            var minutes = Math.floor((distance%(hourC))/(minC));
+            var seconds = Math.floor((distance%(minC))/1000);
             setTime(minutes+' : '+seconds);
+            if(distance <= 10 * 1000){
+                setMessage("시간이 10초 남았습니다.")
+                setShowToast(true);
+                setTimeout(()=>setShowToast(false), 4000);
+                console.log("hello");
+            }
             if(distance<0) {
                 clearInterval(x);
                 setTime("EXPIRED");
@@ -121,8 +132,8 @@ function DoTest(props) {
     }
     return (
         <DetailProblemLayout>
-            <div className="problem__detail">
-                <div className="problem__detail--content">
+            <div className="problem__detail__test">
+                <div className="problem__detail__test--content">
                     <div className="tab__header">
                         <ul className="tab__header--content">
                             <li>
@@ -165,7 +176,7 @@ function DoTest(props) {
                             </div>
                         </div>
                     </div>
-                    <div className="tab__footer">
+                    <div className="tab__footer__dropup">
                         <div className="review__listproblem">
                             <Dropup icon="fa fa-list">
                                 <button onClick={() => props.history.push("/test/view?id=1")}>test1</button>
@@ -188,7 +199,7 @@ function DoTest(props) {
                     </div>
                     
                 </div>
-                <div className="problem__detail--vseditor">
+                <div className="problem__detail__test--vseditor">
                     <div className="tab__header--editor">
                         <ul>
                             <li>
@@ -235,6 +246,8 @@ function DoTest(props) {
                     </div>
                 </div>
             </div>
+            {showToast && 
+            <Toast message={message} warning/>}
         </DetailProblemLayout>
     )
 }

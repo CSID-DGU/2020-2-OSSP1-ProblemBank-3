@@ -3,6 +3,7 @@ var router = express.Router();
 var db = require('../modules/db-connection');
 var sql = require('../sql');
 var compiler = require('../modules/compile-run');
+const { updateTestUserScoreByTestUserId } = require('../sql/tests');
 var { PROBLEM_START_DELEMETER: startDelem, PROBLEM_END_DELEMETER: endDelem } = process.env;
 
 // 전체 시험 출력
@@ -167,16 +168,19 @@ router.post('/createtest', async function(req, res) {
     }
 
     for(let i = 0; i < problems.length; i++) {
-        const {problem_id} = problems[i]
+        const {problem_id, score} = problems[i]
         if(problem_id) {
             await db.query(sql.tests.insertProblemFromProblemBank, [problem_id])
-            await db.query(sql.tests.insertProblemIntoTest, [test_id[0].test_id, problem_id])
+            const inserted = await db.query(sql.tests.selectInsertedId)
+            await db.query(sql.tests.insertProblemIntoTest, [test_id[0].test_id, inserted, score])
         }
         else {
             const {problemName, problemContent, input, output} = problems[i]
             const {testcases} = problems[i]
 
             await db.query(sql.tests.insertProblem, [problemName, problemContent, input, output])
+            const inserted = await db.query(sql.tests.selectInsertedId)
+            await db.query(sql.tests.insertProblemIntoTest, [test_id[0].test_id, inserted, score])
 
             for(let j = 0; j < testcases; j++) {
                 const {input_ex, output_ex} = testcases[i]
@@ -245,11 +249,11 @@ router.post('/testrun', async function(req, res) {
     }
 })
 
-// 채점 : 문제별 점수 반영 필요
+// 채점 : 답안 저장 필요, 테스트 필요
 router.post('/submit', async function(req, res){
-    const { sourceCode, problem_id, language } = req.body;
+    const { sourceCode, test_id, user_id, problem_id, language } = req.body;
     const [testCases] = await db.query(sql.tests.selectTestCaseByProblemId, [problem_id]);
-    let correctCount = 0;
+    let correctCount = 0, totalScore = 0;
     try {
         const promises = testCases.map(testcase => {
             return new Promise((resolve) => {
@@ -262,7 +266,11 @@ router.post('/submit', async function(req, res){
                 docker.stdout.on("data", (data) => {
                     if(!isStarted) return;
                     const line = data.toString('utf-8');
-                    if(line.includes(testcase.output)) correctCount++;
+                    if(line.includes(testcase.output)) {
+                        const {score} = await db.query(sql.tests.selectProblemScoreByIds, [test_id, problem_id])
+                        totalSocre += score;
+                        correctCount++;
+                    }
                 })
     
                 docker.stdout.on("data", (data) => {
@@ -277,12 +285,14 @@ router.post('/submit', async function(req, res){
                 });
             });
         })
-    
         for(let i = 0 ; i < promises.length; i++) { await promises[i] }
+
+        let wrong = testCases.length - correctCount
+        await db.query(sql.tests.updateTestUserScoreByTestUserId, [totalScore, correctCount, wrong, test_id, user_id])
         
         res.status(200).send({
             result: true,
-            data:  { correctCount, count: testCases.length },
+            data:  { correctCount, count: testCases.length, totalScore },
             message: 'compile success'
         })
     } catch (error) {

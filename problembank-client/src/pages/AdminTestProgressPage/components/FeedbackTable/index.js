@@ -20,11 +20,11 @@ class FeedbackTable extends Component{
         this.setState({
             code: response.result,
             feedbacks: response.data
-        })
+        });
     }
 
     componentDidMount() {
-        this.getFeedbacks()
+        this.getFeedbacks();
     }
 
     render() {

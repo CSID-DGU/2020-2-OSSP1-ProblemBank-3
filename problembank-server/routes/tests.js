@@ -114,7 +114,7 @@ router.get('/userresult', async function(req, res) {
         for(let i = 0; i < rows.length; i++) {
             // console.log(rows)
             const { test_id } = rows[i]
-            const [testname] = await db.query(sql.tests.selectTestNameByTestId, [test_id])
+            const [testname] = await db.query(sql.tests.selectTestByTestId, [test_id])
             rows[i]["test_name"] = testname[0].name;
         }
         res.status(200).send({
@@ -135,12 +135,13 @@ router.get('/usertests', async function(req, res) {
         for(let i = 0; i < tests.length; i++) {
              const { test_id } = tests[i]
             // console.log(tests)
-            const [test] = await db.query(sql.tests.selectTestNameByTestId, [test_id])
+            const [test] = await db.query(sql.tests.selectTestByTestId, [test_id])
             const { admin_id } = test[0];
             const [admin_name] = await db.query(sql.tests.selectUserNameById, [admin_id])
             tests[i]["test_name"] = test[0].name
             tests[i]["timestamp"] = test[0].start
             tests[i]["admin_name"] = admin_name[0].user_name
+            tests[i]["content"] = test[0].content
         }
         res.status(200).send({
             result: true,

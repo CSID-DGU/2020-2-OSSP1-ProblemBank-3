@@ -6,7 +6,7 @@ import { propTypes as spacingPropTypes } from "./Spacing";
 
 class InlineList extends PureComponent {
   render() {
-    const { align, children, spacingBetween, verticalAlign, distribution } = this.props;
+    const { align, children, spacingBetween, verticalAlign, distribution, contentDistribution } = this.props;
     const { unit } = Theme;
     const styles = {
         wrapper: {
@@ -31,6 +31,9 @@ class InlineList extends PureComponent {
         verticalAlignBottom: {
           alignItems: 'flex-end',
         },
+        contentDistribution: {
+          justifyContent: 'space-around',
+        },
         distribution: {
           width:`${(1/children.length)*100-children.length}%`,
           marginBottom: 15*unit,
@@ -42,6 +45,7 @@ class InlineList extends PureComponent {
         ...(align === 'right' && styles.alignRight),
         ...(verticalAlign === 'top' && styles.verticalAlignTop),
         ...(verticalAlign === 'bottom' && styles.verticalAlignBottom),
+        ...(contentDistribution && styles.contentDistribution),
     };
     const computedChildStyle = {
       ...styles.childDefault,

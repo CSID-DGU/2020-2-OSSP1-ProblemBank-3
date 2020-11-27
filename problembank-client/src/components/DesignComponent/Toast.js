@@ -11,7 +11,7 @@ class Toast extends PureComponent {
     const styles = {
         overlay: {
           position: 'fixed',
-          bottom: 0,
+          bottom: 7*unit,
           right: 0,
           margin: unit * 4,
         },

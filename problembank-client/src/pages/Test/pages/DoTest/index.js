@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import queryString from 'query-string'
 import { getProblemData } from '../../../../_actions/problemAction';
 import projectsAPI from '../../../../apis/projects';
+import testsAPI from '../../../../apis/tests';
 import problemsBank from '../../../../apis/problemsBank';
 import WrapperLoading from '../../../../components/WrapperLoading';
 import Loading from '../../../../components/Loading/Loading';
@@ -19,9 +20,9 @@ import Toast from '../../../../components/DesignComponent/Toast';
 var moment = require('moment'); //?
 
 function DoTest(props) {
-    const [problems, setProblems] = useState([])
-    const [problem, setProblem] = useState({})
-    const {problemsAllData} = useSelector(state => state.problem);
+    const [problems, setProblems] = useState();
+    const [problem, setProblem] = useState({testcases:[]});
+    // const [index, setIndex] = useState(0);
 
     const [language, setLanguage] = useState("c")
     const [contentEditor, setContentEditor] = useState(SampleCode["c"])
@@ -36,30 +37,20 @@ function DoTest(props) {
     
     const [loading, setLoading] = useState(true)
     
-    const { id } = queryString.parse(props.location.search);
+    const { test_id, index } = queryString.parse(props.location.search);
 
     useEffect(() => {
-        if(problemsAllData){
-            const { data }  = problemsAllData;
-            const [ problem ] = data.filter(element =>Number(element.id) === Number(id))
-            setProblems(data)
-            setLoading(false)
-            setProblem(problem)
-        }else{
-            dispatch(getProblemData()).then(response => {
-                const { data } = response.payload
-                const [ problem ] = data.filter(element =>Number(element.id) === Number(id))
-                
-                console.log(problem)
-                setProblem(problem)
-                setProblems(data)
-                setLoading(false)
-            })
+        if(!problems){
+            setTestList();
+        } else{
+            setTestProblem(problems[index].problem_id)
+            setLoading(false);
         }
+        console.log("updated");
         if(!timer){
             CheckTime();
         }
-    }, [id])
+    },[index, problems])
 
     const handleEditorChange = (env, value) => {
         setContentEditor(value)
@@ -74,7 +65,7 @@ function DoTest(props) {
     
             setSubmit(true);
                         
-            const problemId = queryString.parse(window.location.search).id;
+            const problemId = problems[index];
     
             // const IO_URL = process.env.REACT_APP_SERVER_API + "/projects";
     
@@ -113,11 +104,10 @@ function DoTest(props) {
             var minutes = Math.floor((distance%(hourC))/(minC));
             var seconds = Math.floor((distance%(minC))/1000);
             setTime(minutes+' : '+seconds);
-            if(distance <= 10 * 1000){
+            if(distance <= 10 * 1000 && distance >9 * 1000){
                 setMessage("시간이 10초 남았습니다.")
                 setShowToast(true);
                 setTimeout(()=>setShowToast(false), 4000);
-                console.log("hello");
             }
             if(distance<0) {
                 clearInterval(x);
@@ -125,6 +115,48 @@ function DoTest(props) {
             }
         },1000);
         setTimer(x);
+    }
+
+    const TestButton = async () => {
+        try{
+            console.log(index);
+        } catch (error) {
+            alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
+            console.log(error)
+        }
+        
+    }
+
+    const setTestList = async () => {
+        try{
+            const params = {
+                test_id: test_id,
+            };
+            const response = await testsAPI.getTestProblems(params);
+            const result = response.data.map((data)=>{
+                return {problem_id: data.problem_id, name: data.name };
+            });
+            result.sort(function(a,b){return Number(a.problem_id)-Number(b.problem_id)})
+            setProblems(result); // 배열 형태
+        } catch (error) {
+            alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
+            console.log(error)
+        }
+        
+    }
+
+    const setTestProblem = async (id) => {
+        try{
+            const params = {
+                problem_id: id,
+            };
+            const response = await testsAPI.getTestProblemData(params);
+            setProblem(response.data[0]); // 객체 형태
+        } catch (error) {
+            alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
+            console.log(error)
+        }
+        
     }
 
     if(loading){
@@ -155,7 +187,7 @@ function DoTest(props) {
                                 <span>{problem.input}</span>
                             </div>
                             <div className="problem__infor--output">
-                                <p>츨력</p>
+                                <p>출력</p>
                                 <span>{problem.output}</span>
                             </div>
                             <div className="problem__infor--example">
@@ -179,18 +211,20 @@ function DoTest(props) {
                     <div className="tab__footer__dropup">
                         <div className="review__listproblem">
                             <Dropup icon="fa fa-list">
-                                <button onClick={() => props.history.push("/test/view?id=1")}>test1</button>
-                                <button onClick={() => props.history.push("/test/view?id=2")}>test2</button>
-                                <button onClick={() => props.history.push("/test/view?id=3")}>test3</button>
+                                {
+                                    problems.length !==0 &&
+                                    problems.map((value, index)=>
+                                <button onClick={() => props.history.push(`/test/view?index=${Number(index)}&test_id=${test_id}`)}>{problems[index].name}</button>)
+                                }
                             </Dropup>
                         </div>
                         <div className="pre-next-problem">
                             {
                                 problems.length !== 0 ?
                                     <>
-                                    <Button onPress={() => props.history.push(`/test/view?id=${problem.id - 1}`)} disabled={problem.id === problems[0].id} >이전</Button>&nbsp;
-                                        <span>{problem.id}/{problems.length}</span>&nbsp;
-                                    <Button onPress={() => props.history.push(`/test/view?id=${problem.id + 1}`)} disabled={problem.id === problems[problems.length-1].id}>다음</Button>
+                                    <Button onPress={() => props.history.push(`/test/view?index=${Number(index)- 1}&test_id=${test_id}`)} disabled={index==0} >이전</Button>&nbsp;
+                                        <span>{Number(index)+1}/{problems.length}</span>&nbsp;
+                                    <Button onPress={() => props.history.push(`/test/view?index=${Number(index)+ 1}&test_id=${test_id}`)} disabled={index == (problems.length-1)}>다음</Button>
                                     </>
                                 : ""
                                 
@@ -242,7 +276,8 @@ function DoTest(props) {
                         <Button distance>오류 보고</Button>
                         <Button distance onPress={()=>resetEditor()}>초기화</Button>
                         <Button distance onPress={() => onSubmit()}>실행</Button>
-                        <Button test >제출</Button>
+                        <Button distance test >제출</Button>
+                        <Button test onPress={()=>TestButton()}>실험용</Button>
                     </div>
                 </div>
             </div>

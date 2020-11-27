@@ -26,9 +26,8 @@ class ProblemEditPage extends Component {
 		this.setState({
 			code: response.result,
 			datas: response.data,
-			selected_problem_data: response.data[0]
 		});
-		console.log(response.data[0])
+		console.log(response.data)
 	}
 
 	getTestProblemData = async(id) => {
@@ -36,11 +35,20 @@ class ProblemEditPage extends Component {
 		this.setState({
 			selected_problem_data: response.data[0]
 		});
+		console.log(response.data[0])
+	}
+
+	getTestProblemsInit = async() => { // 페이지 처음 열렸을 때 실행할 통신 함수
+		const response = await testAPI.getTestProblems({test_id: 1});
+		this.setState({
+			code: response.result,
+			datas: response.data,
+		});
+		this.getTestProblemData(response.data[0].problem_id)
 	}
 
 	componentDidMount() {
-		this.getTestProblems();
-		console.log(this.state.datas)
+		this.getTestProblemsInit();
 	}
 
 	handleChangeSelect(event) {
@@ -101,60 +109,33 @@ class ProblemEditPage extends Component {
 					<div id="example-data">
 						<div id="input-data">
 							<p>입력 예제</p>
-							<input
-								name="input_case1"
-								type="text"
-								placeholder="입력 테스트케이스"
-							/>
-							<input
-								name="input_case2"
-								type="text"
-								placeholder="입력 테스트케이스"
-							/>
-							<input
-								name="input_case3"
-								type="text"
-								placeholder="입력 테스트케이스"
-							/>
-							<input
-								name="input_case4"
-								type="text"
-								placeholder="입력 테스트케이스"
-								width={100}
-							/>
-							<input
-								name="input_case5"
-								type="text"
-								placeholder="입력 테스트케이스"
-							/>
+							{
+								this.state.selected_problem_data.testcases.map((item,index) => {
+									return (
+										<input
+											name={"input_case"+(index+1)}
+											type="text"
+											placeholder="입력 테스트케이스"
+											value={item.input_exp}
+										/>
+									)
+								})
+							}
 						</div>
 						<div id="output-data">
 							<p>출력 예제</p>
-							<input
-								name="output_case1"
-								type="text"
-								placeholder="출력 테스트케이스"
-							/>
-							<input
-								name="output_case2"
-								type="text"
-								placeholder="출력 테스트케이스"
-							/>
-							<input
-								name="output_case3"
-								type="text"
-								placeholder="출력 테스트케이스"
-							/>
-							<input
-								name="output_case4"
-								type="text"
-								placeholder="출력 테스트케이스"
-							/>
-							<input
-								name="output_case5"
-								type="text"
-								placeholder="출력 테스트케이스"
-							/>
+							{
+								this.state.selected_problem_data.testcases.map((item,index) => {
+									return (
+										<input
+											name={"output_case"+(index+1)}
+											type="text"
+											placeholder="출력 테스트케이스"
+											value={item.output_exp}
+										/>
+									)
+								})
+							}
 						</div>
 					</div>
 					<button>수정</button>

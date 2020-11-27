@@ -139,8 +139,17 @@ router.get('/usertests', async function(req, res) {
             const { admin_id } = test[0];
             const [admin_name] = await db.query(sql.tests.selectUserNameById, [admin_id])
             tests[i]["test_name"] = test[0].name
-            tests[i]["timestamp"] = test[0].start
+            tests[i]["start"] = test[0].start
+            tests[i]["end"] = test[0].end
             tests[i]["admin_name"] = admin_name[0].user_name
+            tests[i]["is_exam"] = test[0].is_exam
+
+            if(test[0].is_exam == '1'){
+                const {subject_id} = test[0]
+                const [subject] = await db.query(sql.tests.selectSubjectNameById, [subject_id])
+                tests[i]["subject_name"] = subject[0].name
+            }
+
             tests[i]["content"] = test[0].content
         }
         res.status(200).send({

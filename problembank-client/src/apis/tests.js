@@ -12,7 +12,7 @@ const testAPI = {
     },
 
     getTestTimes: (params) => {
-        const url = '/tests/testproblems';
+        const url = '/tests/testtimes';
         return axiosClient.get(url, {params});
     },
 

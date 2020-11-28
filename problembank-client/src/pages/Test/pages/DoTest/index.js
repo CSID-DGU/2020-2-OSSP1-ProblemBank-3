@@ -16,9 +16,10 @@ import Timer from '../../../../assets/images/timer.png';
 import Button from '../../../../components/DesignComponent/Button';
 import Dropup from '../../../../components/DesignComponent/Dropup';
 import Toast from '../../../../components/DesignComponent/Toast';
+import {debounce} from '../../components/Debounce'
 
 var moment = require('moment'); //?
-
+const debounceRunner = debounce(action=> action(), 4000);
 function DoTest(props) {
     const [problems, setProblems] = useState();
     const [problem, setProblem] = useState({testcases:[]});
@@ -28,12 +29,13 @@ function DoTest(props) {
     const [contentEditor, setContentEditor] = useState(SampleCode["c"])
     const [submit, setSubmit] = useState(false)
     const [theme, setTheme] = useState("white")
-    const [timer, setTimer] = useState();
-    const [time, setTime] = useState("");
+    const [timer, setTimer] = useState(); // 시험 시칸 체크용
+    const [startTimer, setStartTimer] = useState(); // 시험 시작 시간 체크용
+    const [timeData, setTimeData] = useState({end:"", start:""});
+
+    const [time, setTime] = useState("before test"); // 시간 텍스트용
     const [showToast, setShowToast] = useState(false);
     const [message, setMessage] = useState("");
-    
-    const dispatch = useDispatch();
     
     const [loading, setLoading] = useState(true)
     
@@ -47,10 +49,10 @@ function DoTest(props) {
             setLoading(false);
         }
         console.log("updated");
-        if(!timer){
-            CheckTime();
+        if((!timer && !startTimer )&& timeData.end){
+            CheckStartTime();
         }
-    },[index, problems])
+    },[index, problems,timeData])
 
     const handleEditorChange = (env, value) => {
         setContentEditor(value)
@@ -92,22 +94,39 @@ function DoTest(props) {
         }
 
     }
-    
+    const CheckStartTime = () => {
+        // const startTime = timeData.start; // 시작 시간이 됬을 때 시작하기
+        const startTime = new Date().getTime() + 10*1000; // 테스트 용으로 들어온 시간의 10초 후 타이머 시작
+        var x =setInterval(function() {
+            var now = new Date().getTime();
+            console.log("hello");
+            if(startTime <= now){
+                CheckTime();
+                clearInterval(x);
+            }
+        },1000);
+        setStartTimer(x);
+    }
+
     const CheckTime= () => {
-        const m = 0.3;
+        const limitTime = 9;
         const minC = 60*1000;
         const hourC = 1000*60*60;
-        const countDownDate = new Date().getTime() + (m*minC);
+        // const timeDiff = new Date(timeData.end).getTime() - new Date().getTime(); // 끝나는 시간과의 차로 제한시간 설정 (삭제 될 수도 있음)
+        const timeDiff = 10*60*1000;
+        const countDownDate = new Date().getTime() + timeDiff;
         var x = setInterval(function() {
             var now = new Date().getTime();
             var distance = countDownDate - now;
+            // var distance = new Date(timeData.end).getTime() - now; // 끝나는 시간 - 현재 시간
             var minutes = Math.floor((distance%(hourC))/(minC));
             var seconds = Math.floor((distance%(minC))/1000);
             setTime(minutes+' : '+seconds);
-            if(distance <= 10 * 1000 && distance >9 * 1000){
-                setMessage("시간이 10초 남았습니다.")
+            console.log(minutes+' : '+seconds);
+            if((minutes === limitTime) && (seconds>=0 && seconds <=1)){
+                setMessage("시간이 " +limitTime+"분 남았습니다.")
                 setShowToast(true);
-                setTimeout(()=>setShowToast(false), 4000);
+                debounceRunner(()=>setShowToast(false)) // 만약 초가 2번 반복되는 상황이 발생할 때를 위한 코드
             }
             if(distance<0) {
                 clearInterval(x);
@@ -119,20 +138,26 @@ function DoTest(props) {
 
     const TestButton = async () => {
         try{
-            console.log(index);
+            const params = {
+                test_id: test_id,
+            };
+            const timeData = await testsAPI.getTestTimes(params);
+            console.log(timeData.data[0]);
         } catch (error) {
             alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
             console.log(error)
         }
-        
     }
 
+    // 추가적으로 시간 데이터까지 가져오기
     const setTestList = async () => {
         try{
             const params = {
                 test_id: test_id,
             };
             const response = await testsAPI.getTestProblems(params);
+            const timeData = await testsAPI.getTestTimes(params);
+            setTimeData(timeData.data[0]);
             const result = response.data.map((data)=>{
                 return {problem_id: data.problem_id, name: data.name };
             });
@@ -141,8 +166,7 @@ function DoTest(props) {
         } catch (error) {
             alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
             console.log(error)
-        }
-        
+        }  
     }
 
     const setTestProblem = async (id) => {

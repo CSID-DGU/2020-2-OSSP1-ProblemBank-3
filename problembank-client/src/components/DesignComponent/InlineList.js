@@ -32,7 +32,7 @@ class InlineList extends PureComponent {
           alignItems: 'flex-end',
         },
         contentDistribution: {
-          justifyContent: 'space-around',
+          justifyContent: 'space-between',
         },
         distribution: {
           width:`${(1/children.length)*100-children.length}%`,

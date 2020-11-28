@@ -7,8 +7,9 @@
     .accordion{
         background-color : #FFFFFF;
 	cursor : pointer;
-	padding : 18px;
+	padding-left : 13px;
 	width : 100%;
+	height : 40px;
 	border : none;
 	text-align : left;
 	outline : none;
@@ -16,15 +17,23 @@
 	transition : 0.4s;
     }
 
-    .active, .accordion:hover {
-        background-color : #FF9900;
-        color : #FFFFFF;
-    }
-
     .panel{
-        padding-left : 18px;
+        padding-left : 15px;
 	display : none;
 	background-color : white;
 	font-size : 12px;
+	.navLink{
+	    color : #000000;
+            background-color : #FFFFFF;
+            display : block;
+	    margin : 10px;
+	    transition : 0.4s;
+	    cursor : pointer;
+	}
+    }
+
+    .active, .accordion:hover {
+        background-color : #FF9900;
+	color : #FFFFFF;
     }
 }

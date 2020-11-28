@@ -5,8 +5,13 @@ function ManageTestLayout(props) {
     const { children } = props;
     return (
         <div className="page">
-	    <Sidebar></Sidebar>
-            <div className="body-container">
+	    <Sidebar style={{
+	        display : 'block'
+	    }}></Sidebar>
+            <div className="body-container" style={{
+	        position : 'relative',
+	        left : '5px'
+	    }}>
                 { children }
             </div>
         </div>

@@ -3,6 +3,7 @@ module.exports = {
     // SELECT
     selectTests: "SELECT * FROM problems.pb_tests",
     selectTestByTestId: "SELECT * FROM problems.pb_tests WHERE id = ?",
+    selectTestTimeByTestId: "SELECT start, end FROM problems.pb_tests WHERE id = ?",
     selectTestProblemsByTestId: "SELECT problem_id FROM problems.pb_test_problems WHERE test_id = ?",
     selectTestProblemContentsByProblemId: "SELECT * FROM problems.pb_test_problem_contents WHERE id = ?",
     selectTestProblemNameByProblemId: "SELECT name FROM problems.pb_test_problem_contents WHERE id = ?",

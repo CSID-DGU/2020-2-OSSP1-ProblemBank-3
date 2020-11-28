@@ -11,6 +11,11 @@ const testAPI = {
         return axiosClient.get(url, {params});
     },
 
+    getTestTimes: (params) => {
+        const url = '/tests/testproblems';
+        return axiosClient.get(url, {params});
+    },
+
     getTestProblemData: (params) => {
         const url = '/tests/testproblemdata';
         return axiosClient.get(url, {params});

@@ -42,6 +42,21 @@ router.get('/testproblems', async function(req, res) {
     }
 })
 
+//시험 진행시간
+router.get('/testtimes', async function(req, res) {
+    const { test_id } = req.query
+    try {
+        let [rows] = await db.query(sql.tests.selectTestTimeByTestId, [test_id])
+        res.status(200).send({
+            result: true,
+            data: rows,
+            message: '시험 진행 시간'
+        })
+    } catch (error) {
+        console.log("test time" + error);
+    }
+})
+
 // 시험 문제 세부 정보
 router.get('/testproblemdata', async function(req, res) {
     const { problem_id } = req.query

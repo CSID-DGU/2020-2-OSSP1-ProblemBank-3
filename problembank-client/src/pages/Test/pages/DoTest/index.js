@@ -40,12 +40,14 @@ function DoTest(props) {
     const [loading, setLoading] = useState(true)
     
     const { test_id, index } = queryString.parse(props.location.search);
+    const [prevIndex, setPrevIndex] = useState();
 
     useEffect(() => {
         if(!problems){
             setTestList();
-        } else{
+        } else if(!problem.id || prevIndex !=index){ // 문제 설정이 되어있지 않거나 문제의 인덱스가 변했을 때만
             setTestProblem(problems[index].problem_id)
+            setPrevIndex(index);
             setLoading(false);
         }
         console.log("updated");
@@ -61,28 +63,30 @@ function DoTest(props) {
         setContentEditor(SampleCode[language]);
     }
     
-    //submit content editor & problem
-    const onSubmit = async () => {
+    //test content editor & problem
+    const onTest = async () => {
         try {
     
             setSubmit(true);
                         
-            const problemId = problems[index];
+            const problem_id = problems[index];
     
             // const IO_URL = process.env.REACT_APP_SERVER_API + "/projects";
     
             const params = {
                 sourceCode: contentEditor,
                 language,
-                problemId: Number(problemId)
+                problem_id: Number(problem_id)
             }
     
-            const response = await projectsAPI.compile(params); 
+            const response = await testsAPI.testRun(params); 
             
             const { data } = response;
+            console.log(response);
             
             var timeOutSubmit = function(){
-                alert(`채점 결과 ${data.correctCount} / ${data.count}`);
+                // alert(`채점 결과 ${data.correctCount} / ${data.count}`);
+                alert(response.message);
                 setSubmit(false);
             };
             setTimeout(timeOutSubmit, 1000);
@@ -122,7 +126,6 @@ function DoTest(props) {
             var minutes = Math.floor((distance%(hourC))/(minC));
             var seconds = Math.floor((distance%(minC))/1000);
             setTime(minutes+' : '+seconds);
-            console.log(minutes+' : '+seconds);
             if((minutes === limitTime) && (seconds>=0 && seconds <=1)){
                 setMessage("시간이 " +limitTime+"분 남았습니다.")
                 setShowToast(true);
@@ -299,7 +302,7 @@ function DoTest(props) {
                     <div className="tab__footer">
                         <Button distance>오류 보고</Button>
                         <Button distance onPress={()=>resetEditor()}>초기화</Button>
-                        <Button distance onPress={() => onSubmit()}>실행</Button>
+                        <Button distance onPress={() => onTest()}>실행</Button>
                         <Button distance test >제출</Button>
                         <Button test onPress={()=>TestButton()}>실험용</Button>
                     </div>

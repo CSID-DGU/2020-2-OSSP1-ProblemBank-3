@@ -19,7 +19,8 @@ const Problem = React.lazy(() => import('./pages/Problem'))
 const Test = React.lazy(() => import('./pages/Test'))
 const ManageTest = React.lazy(() => import('./pages/ManageTest'))
 const CreateTest = React.lazy(() => import('./pages/CreateTest'))
-const AdminTestProgress =React.lazy(() => import('./pages/AdminTestProgressPage'))
+const AdminTestProgress = React.lazy(() => import('./pages/AdminTestProgressPage'))
+const AdminTestResult = React.lazy(() => import('./pages/AdminTestResult'))
 
 function App() {
     const [user, setUser] = useState(null);
@@ -55,6 +56,7 @@ function App() {
 	        <Route exact path = "/managetest" component = {ManageTest}/>
 	        <Route exact path = "/createtest" component = {CreateTest}/>
                 <Route path="/admintestprogress" component={AdminTestProgress} />
+	        <Route path="/admintestresult" component={AdminTestResult} />
                 <Route component = {NotFound} />
             </Switch>
           </BrowserRouter>

@@ -237,13 +237,17 @@ router.post('/testrun', async function(req, res) {
     
                 docker.stdout.on("data", (data) => {
                     if(!isStarted) return;
-                    const line = (data.toString('utf-8')).split('\n')
-                    output = line[0]
-                    for(let i = 1; i < line.length - 2; i++) {
-                        output = [output, line[i]].join('\n')
+                    const line = (data.toString('utf-8'))
+                    console.log(line)
+                    let output = line.replace("\n" + endDelem + "\n", "")
+                    output = output.replace(endDelem + "\n")
+                    output = output.replace(/\"/gi,"")
+                    output = output.replace(/\[[0-9]\]/, "")
+                    output = output.replace(" ", "")
+                    if (output != "" && output != "\n" && output != "undefined") {
+                        result[count] = {input_example: testcase.input_example, output}
+                        count++;
                     }
-                    result[count] = {input_example: testcase.input_example, output}
-                    count++;
                 })
 
                 docker.stdout.on("data", (data) => {

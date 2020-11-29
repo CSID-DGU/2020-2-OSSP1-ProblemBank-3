@@ -1,5 +1,5 @@
 import userApi from "../../apis/users";
-import { getUserInfo } from '../../_actions/userAction';
+import {useState} from "react";
 
 // 임시 디비 대용 사용자 정보
 const users = [
@@ -8,16 +8,22 @@ const users = [
 ]
 
 export function signin({ id, password }) {
+    const params = {
+        user_id: id,
+        user_pass: password,
+    };
 
-    const user = users.find(
-        (user) => user.id === id && user.password === password
-    )
+    // userInfo 가져오기
+    const response = userApi.getUserInfo(params);
+    console.log(response.data)
 
-    // let user2
-    // getUserInfo(id, password).then(response => {
-    //     const { data } = response.payload
-    //     setUser(data)
-    // })
-    if (user === undefined) throw new Error()
+    const user = response.data
+    // const user = users.find(
+    //     (user) => user.id === id && user.password === password
+    // )
+    // if (user === undefined) throw new Error()
+
+    if (user === undefined) throw new Error();
+
     return user
 }

@@ -237,13 +237,12 @@ router.post('/testrun', async function(req, res) {
     
                 docker.stdout.on("data", (data) => {
                     if(!isStarted) return;
-                    const line = (data.toString('utf-8')).split('\n')
-                    output = line[0]
-                    for(let i = 1; i < line.length - 2; i++) {
-                        output = [output, line[i]].join('\n')
+                    const line = (data.toString('utf-8'))
+                    let output = line.replace("\n" + endDelem + "\n", "")
+                    if (output != "" && output != "\n") {
+                        result[count] = {input_example: testcase.input_example, output}
+                        count++;
                     }
-                    result[count] = {input_example: testcase.input_example, output}
-                    count++;
                 })
 
                 docker.stdout.on("data", (data) => {

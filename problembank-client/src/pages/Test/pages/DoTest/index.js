@@ -69,7 +69,7 @@ function DoTest(props) {
     
             setSubmit(true);
                         
-            const problem_id = problems[index];
+            const problem_id = problems[index].problem_id;
     
             // const IO_URL = process.env.REACT_APP_SERVER_API + "/projects";
     
@@ -145,7 +145,7 @@ function DoTest(props) {
                 test_id: test_id,
             };
             const timeData = await testsAPI.getTestTimes(params);
-            console.log(timeData.data[0]);
+            console.log(problems[index]);
         } catch (error) {
             alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
             console.log(error)

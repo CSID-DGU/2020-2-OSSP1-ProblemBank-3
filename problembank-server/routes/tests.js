@@ -189,39 +189,78 @@ router.post('/createtest', async function (req, res) {
         testName, testContent, is_exam, start, end, admin_id, subject_id,
         problems
     } = req.body
-
-    await db.query(sql.tests.insertTest, [testName, testContent, is_exam, start, end, admin_id, subject_id])
-    const { test_id } = await db.query(sql.tests.selectInsertedId)
-    if (is_exam) {
-        const [subjectUsers] = await db.query(sql.tests.selectSubjectUsersBySubjectId, [subject_id])
-        for (let i = 0; i < subjectUsers.length; i++) {
-            const { user_id } = subjectUsers[i]
-            db.query(sql.tests.insertTestUser, [user_id, test_id])
+    try {
+        await db.query(sql.tests.insertTest, [testName, testContent, is_exam, start, end, admin_id, subject_id])
+        const { test_id } = await db.query(sql.tests.selectInsertedId)
+        if (is_exam) {
+            db.query(sql.tests.insertTestUsers, [subject_id, test_id])
+            // const [subjectUsers] = await db.query(sql.tests.selectSubjectUsersBySubjectId, [subject_id])
+            // for (let i = 0; i < subjectUsers.length; i++) {
+            //     const { user_id } = subjectUsers[i]
+            //     db.query(sql.tests.insertTestUser, [user_id, test_id])
+            // }
         }
-        // db.query(sql.tests.insertSubjectUsers, [subject_id])
-    }
 
-    for (let i = 0; i < problems.length; i++) {
-        const { problem_id, score } = problems[i]
-        if (problem_id) {
-            await db.query(sql.tests.insertProblemFromProblemBank, [problem_id])
-            const inserted = await db.query(sql.tests.selectInsertedId)
-            await db.query(sql.tests.insertProblemIntoTest, [test_id[0].test_id, inserted, score])
-        }
-        else {
-            const { problemName, problemContent, input, output } = problems[i]
-            const { testcases } = problems[i]
+        for (let i = 0; i < problems.length; i++) {
+            const { problem_id } = problems[i]
+            if (problem_id) { // 문제은행 db에 존재하는 문제
+                await db.query(sql.tests.insertProblemFromProblemBank, [problem_id])
+                let inserted = await db.query(sql.tests.selectInsertedId)
+                await db.query(sql.tests.insertProblemIntoTest, [test_id[0].test_id, inserted])
+                await db.query(sql.tests.insertTestCasesFromProblemBank, [problem_id])
+                inserted = await db.query(sql.tests.selectInsertedId)
+                await db.query(sql.tests.insertTestIdForTestCases, [inserted])
+            }
+            else { // 존재하지 않는 문제
+                const { problemName, problemContent, input, output } = problems[i]
+                const { testcases } = problems[i]
 
-            await db.query(sql.tests.insertProblem, [problemName, problemContent, input, output])
-            const inserted = await db.query(sql.tests.selectInsertedId)
-            await db.query(sql.tests.insertProblemIntoTest, [test_id[0].test_id, inserted, score])
+                await db.query(sql.tests.insertProblem, [problemName, problemContent, input, output])
+                const inserted = await db.query(sql.tests.selectInsertedId)
+                await db.query(sql.tests.insertProblemIntoTest, [test_id[0].test_id, inserted])
 
-            for (let j = 0; j < testcases; j++) {
-                const { input_ex, output_ex } = testcases[i]
+                for (let j = 0; j < testcases; j++) {
+                    const { input_ex, output_ex } = testcases[i]
 
-                await db.query(sql.tests.insertTestCases, [input_ex, output_ex, problem_id])
+                    await db.query(sql.tests.insertTestCases, [input_ex, output_ex, problem_id])
+                }
             }
         }
+        res.status(200).send({
+            result: true,
+            data: [],
+            message: 'add test success'
+        })
+    } catch (e) {
+        console.log(e);
+        res.status(500).send({
+            result: false,
+            data: [],
+            message: e
+        })
+    }
+})
+
+// 테스트 수정: 구현 예정
+// 문제 수정: 구현 예정
+
+// 시험 신청
+router.post('/regtest', async function (req, res) {
+    const { user_id, test_id } = req.body;
+    try {
+        await db.query(sql.tests.inserttestuser, [user_id, test_id])
+        req.status(200).send({
+            result: true,
+            data: [],
+            message: 'registered'
+        })
+    } catch (error) {
+        console.log(e)
+        res.status(500).send({
+            result: false,
+            data: [],
+            message: e
+        })
     }
 })
 
@@ -277,7 +316,7 @@ router.post('/testrun', async function (req, res) {
         })
     } catch (error) {
         console.log(error)
-        res.status(404).send({
+        res.status(500).send({
             result: false,
             data: [],
             message: error
@@ -285,7 +324,7 @@ router.post('/testrun', async function (req, res) {
     }
 })
 
-// 채점 : 테스트 필요
+// 채점
 router.post('/submit', async function (req, res) {
     const { test_id, user_id, problems } = req.body;
     let correct = 0, wrong;
@@ -338,7 +377,27 @@ router.post('/submit', async function (req, res) {
         })
     } catch (error) {
         console.log(error)
-        res.status(404).send({
+        res.status(500).send({
+            result: false,
+            data: [],
+            message: error
+        })
+    }
+})
+
+// 오류 보고
+router.post('reporterror', async function (req, res) {
+    const {test_id, user_id, content} = req.body;
+    try {
+        await db.query(sql.tests.insertfeedback, [test_id, user_id, content])
+        req.status(200).send({
+            result: true,
+            data: [],
+            message: 'report success'
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({
             result: false,
             data: [],
             message: error

@@ -35,15 +35,15 @@ const testAPI = {
         const url = '/tests/userresult';
         return axiosClient.get(url, {params});
     },
-// 이하 개발중, 테스트안됨
+
     getUserTests: (params) => {
         const url = '/tests/usertests';
         return axiosClient.get(url, {params});
     },
 
-    createTest: (params) => {
+    createTest: (params) => { // 개발중
         const url = '/tests/createtest';
-        return axiosClient.get(url, params);
+        return axiosClient.post(url, params);
     },
 
     testRun: (params) => {

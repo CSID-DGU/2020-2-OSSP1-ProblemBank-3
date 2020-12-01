@@ -33,7 +33,7 @@ module.exports = {
 
     // UPDATE
     updateProblemScore: "UPDATE problems.pb_test_problems SET score = ? WHERE test_id = ? and problem_id = ?",
-    updateTestUserScoreByTestUserId: "UPDATE problems.pb_test_users SET score = ?, correct = ?, wrong = ?, applied = 1 WHERE test_id = ? AND user_id = ?",
+    updateTestUserScoreByTestUserId: "UPDATE problems.pb_test_users SET correct = ?, wrong = ?, applied = 1 WHERE test_id = ? AND user_id = ?",
 
     // DELETE
 }

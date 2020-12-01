@@ -61,9 +61,9 @@ function DoTest(props) {
         setContentEditor(value)
     }
 
-    const handelSourceCodeChange = (nextIndex) => {
+    const handelSourceCodeChange = (nextIndex, currentIndex=false) => {
         // {problem_id: data.problem_id, language: "c", sourceCode: SampleCode["c"] }
-        if(nextIndex != Number(index)){ // 이동하려는 문제가 현재 문제이면 작동 X
+        if(nextIndex != Number(index)||currentIndex){ // 이동하려는 문제가 현재 문제이면 작동 X (예외로 currentIndex가 true이면 작동)
             const changeCodes = sourceCodes.map((value, cIndex)=>{
                 if(cIndex==Number(index)) { // 현제 문제에 대하여
                     return {
@@ -212,6 +212,7 @@ function DoTest(props) {
 
     const onSubmit = async () => {
         try{
+            handelSourceCodeChange(index, true);
             const params = {
                 test_id: test_id,
                 user_id: 2, // 임의로 설정

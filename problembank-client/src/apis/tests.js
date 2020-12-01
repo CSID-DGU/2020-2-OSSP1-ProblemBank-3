@@ -46,6 +46,11 @@ const testAPI = {
         return axiosClient.post(url, params);
     },
 
+    regTest: (params) => {
+        const url = '/tests/regtest';
+        return axiosClient.post(url, params);
+    },
+
     testRun: (params) => {
         const url = '/tests/testrun';
         return axiosClient.post(url, params);
@@ -55,6 +60,11 @@ const testAPI = {
         const url = '/tests/submit';
         return axiosClient.post(url, params);
     },
+
+    reportError: (params) => {
+        const url = '/tests/reporterror';
+        return axiosClient.post(url, params);
+    }
 }
 
 export default testAPI;

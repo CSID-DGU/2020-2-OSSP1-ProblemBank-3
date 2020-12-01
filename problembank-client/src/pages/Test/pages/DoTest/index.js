@@ -25,8 +25,9 @@ function DoTest(props) {
     const [problem, setProblem] = useState({testcases:[]});
     // const [index, setIndex] = useState(0);
 
-    const [language, setLanguage] = useState("c")
-    const [contentEditor, setContentEditor] = useState(SampleCode["c"])
+    const [language, setLanguage] = useState("c");
+    const [contentEditor, setContentEditor] = useState(SampleCode["c"]);
+    const [sourceCodes, setSourceCodes] = useState(); // 소스 코드 담기용 (problems: [{sourceCode, problem_id, language},...]) 형태
     const [submit, setSubmit] = useState(false)
     const [theme, setTheme] = useState("white")
     const [timer, setTimer] = useState(); // 시험 시칸 체크용
@@ -39,7 +40,7 @@ function DoTest(props) {
     
     const [loading, setLoading] = useState(true)
     
-    const { test_id, index } = queryString.parse(props.location.search);
+    const { test_id, index } = queryString.parse(props.location.search); // index는 0부터 문제 개수-1 까지
     const [prevIndex, setPrevIndex] = useState();
 
     useEffect(() => {
@@ -58,6 +59,28 @@ function DoTest(props) {
 
     const handleEditorChange = (env, value) => {
         setContentEditor(value)
+    }
+
+    const handelSourceCodeChange = (nextIndex) => {
+        // {problem_id: data.problem_id, language: "c", sourceCode: SampleCode["c"] }
+        if(nextIndex != Number(index)){ // 이동하려는 문제가 현재 문제이면 작동 X
+            const changeCodes = sourceCodes.map((value, cIndex)=>{
+                if(cIndex==Number(index)) { // 현제 문제에 대하여
+                    return {
+                        problem_id: value.problem_id,
+                        language: language,
+                        sourceCode: contentEditor,
+                    };
+                } else if(cIndex==nextIndex){ // 이동하려는 문제에 대하여
+                    setLanguage(value.language)
+                    setContentEditor(value.sourceCode);
+                    return value;
+                } else return value; // 그 이외의 문제에 대하여
+            });
+            setSourceCodes(changeCodes);
+        } else{
+            console.log("not changed");
+        }
     }
     const resetEditor = () => {
         setContentEditor(SampleCode[language]);
@@ -141,11 +164,7 @@ function DoTest(props) {
 
     const TestButton = async () => {
         try{
-            const params = {
-                test_id: test_id,
-            };
-            const timeData = await testsAPI.getTestTimes(params);
-            console.log(problems[index]);
+            console.log(sourceCodes);
         } catch (error) {
             alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
             console.log(error)
@@ -166,6 +185,11 @@ function DoTest(props) {
             });
             result.sort(function(a,b){return Number(a.problem_id)-Number(b.problem_id)})
             setProblems(result); // 배열 형태
+            const codes = response.data.map((data)=>{
+                return {problem_id: data.problem_id, language: "c", sourceCode: SampleCode["c"] };
+            });
+            codes.sort(function(a,b){return Number(a.problem_id)-Number(b.problem_id)}) // 문제 아이디 별로 정렬
+            setSourceCodes(codes);
         } catch (error) {
             alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
             console.log(error)
@@ -184,6 +208,21 @@ function DoTest(props) {
             console.log(error)
         }
         
+    }
+
+    const onSubmit = async () => {
+        try{
+            const params = {
+                test_id: test_id,
+                user_id: 2, // 임의로 설정
+                problems: sourceCodes,
+            };
+            const response = await testsAPI.submit(params);
+            console.log(response);
+        } catch (error) {
+            alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
+            console.log(error)
+        }
     }
 
     if(loading){
@@ -241,7 +280,8 @@ function DoTest(props) {
                                 {
                                     problems.length !==0 &&
                                     problems.map((value, index)=>
-                                <button onClick={() => props.history.push(`/test/view?index=${Number(index)}&test_id=${test_id}`)}>{problems[index].name}</button>)
+                                <button onClick={() => {handelSourceCodeChange(index); props.history.push(`/test/view?index=${Number(index)}&test_id=${test_id}`)}}>
+                                    {problems[index].name}</button>)
                                 }
                             </Dropup>
                         </div>
@@ -249,9 +289,11 @@ function DoTest(props) {
                             {
                                 problems.length !== 0 ?
                                     <>
-                                    <Button onPress={() => props.history.push(`/test/view?index=${Number(index)- 1}&test_id=${test_id}`)} disabled={index==0} >이전</Button>&nbsp;
+                                    <Button onPress={() => {handelSourceCodeChange(Number(index)- 1); props.history.push(`/test/view?index=${Number(index)- 1}&test_id=${test_id}`)}} 
+                                        disabled={index==0} >이전</Button>&nbsp;
                                         <span>{Number(index)+1}/{problems.length}</span>&nbsp;
-                                    <Button onPress={() => props.history.push(`/test/view?index=${Number(index)+ 1}&test_id=${test_id}`)} disabled={index == (problems.length-1)}>다음</Button>
+                                    <Button onPress={() => {handelSourceCodeChange(Number(index)+ 1); props.history.push(`/test/view?index=${Number(index)+ 1}&test_id=${test_id}`);}} 
+                                        disabled={index == (problems.length-1)}>다음</Button>
                                     </>
                                 : ""
                                 
@@ -303,7 +345,7 @@ function DoTest(props) {
                         <Button distance>오류 보고</Button>
                         <Button distance onPress={()=>resetEditor()}>초기화</Button>
                         <Button distance onPress={() => onTest()}>실행</Button>
-                        <Button distance test >제출</Button>
+                        <Button distance test onPress={() => onSubmit()}>제출</Button>
                         <Button test onPress={()=>TestButton()}>실험용</Button>
                     </div>
                 </div>

@@ -33,7 +33,7 @@ function TestPage(props) {
   const setTestList = async () => {
     try{
       const params = {
-        user_id: 2,
+        user_id: 2, // 임의로 2로 설정. 나중에 user에 대한 정보가 reducer나 localStore에 저장되면 그곳에서 꺼내 쓰면 된다.
       };
       const response = await testsAPI.getUserTests(params);
       const number = response.data.length -1;

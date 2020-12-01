@@ -55,31 +55,35 @@ function DoTest(props) {
         if((!timer && !startTimer )&& timeData.end){
             CheckStartTime();
         }
-    },[index, problems,timeData])
+    },[index, problems,timeData, submit])
 
     const handleEditorChange = (env, value) => {
         setContentEditor(value)
+        handelSourceCodeChange(index, value);
     }
 
-    const handelSourceCodeChange = (nextIndex, currentIndex=false) => {
+    const handelSourceCodeChange = (nextIndex, currentValue=false) => {
         // {problem_id: data.problem_id, language: "c", sourceCode: SampleCode["c"] }
-        if(nextIndex != Number(index)||currentIndex){ // 이동하려는 문제가 현재 문제이면 작동 X (예외로 currentIndex가 true이면 작동)
+        if(nextIndex == Number(index)){ // handleEditorChange에 의해서 코드가 변경될 때 마다 즉시 반영
             const changeCodes = sourceCodes.map((value, cIndex)=>{
-                if(cIndex==Number(index)) { // 현제 문제에 대하여
+                if(cIndex==nextIndex) { // 현제 문제에 대하여
                     return {
                         problem_id: value.problem_id,
                         language: language,
-                        sourceCode: contentEditor,
+                        sourceCode: currentValue||contentEditor,
                     };
-                } else if(cIndex==nextIndex){ // 이동하려는 문제에 대하여
+                } else return value; // 그 이외의 문제에 대하여
+            });
+            setSourceCodes(changeCodes);
+        } else{ // 이전, 다음 또는 목록에 의한 버튼을 눌렀을 때 해당 문제로 언어와 소스코드 변경
+            const changeCodes = sourceCodes.map((value, cIndex)=>{
+                if(cIndex==nextIndex) { // 현제 문제에 대하여
                     setLanguage(value.language)
                     setContentEditor(value.sourceCode);
                     return value;
                 } else return value; // 그 이외의 문제에 대하여
             });
             setSourceCodes(changeCodes);
-        } else{
-            console.log("not changed");
         }
     }
     const resetEditor = () => {
@@ -126,7 +130,6 @@ function DoTest(props) {
         const startTime = new Date().getTime() + 10*1000; // 테스트 용으로 들어온 시간의 10초 후 타이머 시작
         var x =setInterval(function() {
             var now = new Date().getTime();
-            console.log("hello");
             if(startTime <= now){
                 CheckTime();
                 clearInterval(x);
@@ -162,12 +165,15 @@ function DoTest(props) {
         setTimer(x);
     }
 
-    const TestButton = async () => {
+    const TestButton =  () => {
         try{
+            setSubmit(true);
             console.log(sourceCodes);
+            setSubmit(false);
         } catch (error) {
             alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
             console.log(error)
+            setSubmit(false);
         }
     }
 
@@ -212,7 +218,7 @@ function DoTest(props) {
 
     const onSubmit = async () => {
         try{
-            handelSourceCodeChange(index, true);
+            setSubmit(true);
             const params = {
                 test_id: test_id,
                 user_id: 2, // 임의로 설정
@@ -220,7 +226,9 @@ function DoTest(props) {
             };
             const response = await testsAPI.submit(params);
             console.log(response);
+            setSubmit(false);
         } catch (error) {
+            setSubmit(false);
             alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
             console.log(error)
         }
@@ -340,6 +348,7 @@ function DoTest(props) {
                                 value={contentEditor}
                                 onChange={handleEditorChange}
                                 loading={<WrapperLoading />}
+                                
                             /> 
                     </div>
                     <div className="tab__footer">

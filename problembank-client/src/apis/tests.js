@@ -3,7 +3,7 @@ import axiosClient from "./axios";
 const testAPI = {
     getAllTestData: (params) => {
         const url = '/tests/alltestdata';
-        return axiosClient.get(url);
+        return axiosClient.get(url, {params});
     },
 
     getTestProblems: (params) => {

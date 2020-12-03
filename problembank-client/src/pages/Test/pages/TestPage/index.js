@@ -19,8 +19,11 @@ import testsAPI from '../../../../apis/tests';
 
 function TestPage(props) {
   const [loading, setLoading] = useState(true);
-  const [tests, setTests] = useState([]);
+  const [tests, setTests] = useState([]); // 사용자가 신청한 대회 및 듣는 강의에 대한 시험 목록
+  const [contests, setContests] = useState([]); // 사용자가 신청하지 않은 대회 목록
   const [lastIndex, setLastIndex] = useState();
+  const [lastTotalIndex, setLastTotalIndex] = useState();
+  const [totalList, setTotalList] = useState([]);
 
   useEffect(()=>{
     if(loading){
@@ -39,6 +42,19 @@ function TestPage(props) {
       const number = response.data.length -1;
       setTests(response.data);
       setLastIndex(number-(number%3));
+
+      // contest 목록 가져오기
+      const c_response = await testsAPI.getAllTestData(params);
+      const result = c_response.data.filter((value)=> {
+        return (Number(value.in_entry)===0 && Number(value.is_exam)===0);
+      })
+      setContests(result);
+
+      // 두 배열을 합치기
+      const total = response.data.concat(result);
+      const total_num = total.length -1;
+      setTotalList(total);
+      setLastTotalIndex(total_num-(total_num%3))
     } catch (error) {
         alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
         console.log(error)
@@ -47,11 +63,8 @@ function TestPage(props) {
 
   const TestButton = async () => {
     try{
-      const params = {
-        user_id: 2,
-      };
-      const response = await testsAPI.getUserTests(params);
-        console.log(tests);
+      console.log(totalList); //lastTotalIndex
+      console.log(lastTotalIndex);
     } catch (error) {
         alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
         console.log(error)
@@ -76,7 +89,7 @@ function TestPage(props) {
           placeholder="내용을 입력해주세요"
           width={100}
         />
-        <Input type="checkbox" />
+        <Input type="checkbox" name="vaildTest"/>
         <Text>입장/신청 가능만 보기</Text>
       </InlineList>
       <Spacing vertical={10} />
@@ -86,14 +99,14 @@ function TestPage(props) {
           {({openModal})=>(
           <div>
         { 
-          tests.length !=0 &&
-          tests.map((value, index, itself)=>{
+          totalList.length !=0 &&
+          totalList.map((value, index, itself)=>{
             var prac;
             if(index%3 ==0){
-              if(index%3 !=lastIndex){
+              if(index%3 !=lastTotalIndex){
                 prac = itself.slice(index, index+3);
               } else {
-                prac = itself.slice(index, index+(tests.length%3));
+                prac = itself.slice(index, index+(totalList.length%3));
               }
               return (
                 <InlineList distribution contentDistribution>
@@ -101,15 +114,30 @@ function TestPage(props) {
                     prac.map((value, index)=>{
                       var start = new Date(value.start);
                       var end = new Date(value.end);
+                      var now = new Date();
+                      var invalid = false;
+                      if(now>end) invalid = true;
                       var startString = start.getFullYear() +"-"+start.getMonth()+"-"+start.getDate()+" "+start.getHours()+":"+start.getMonth();
                       var endString = end.getFullYear() +"-"+end.getMonth()+"-"+end.getDate()+" "+end.getHours()+":"+end.getMonth();
                       var totalString = startString + " ~ " + endString;
-                      return <TestDisplay onHeading={()=>{
+                      if(Number(value.is_exam)===1 || Number(value.in_entry)===1){ // 과목 시험이거나 내가 신청한 대회면은
+                        return <TestDisplay onHeading={()=>{
                           if(value.content)
                             openModal(NOTICE_MODAL, {title:value.test_name ,auth:value.admin_name, content: value.content})
                         }}
                         onButton={() => props.history.push(`/test/view?index=0&test_id=${value.test_id}`)}
-                        test_name={value.test_name} timestamp={totalString} auth={value.admin_name}/>;
+                        test_name={value.test_name} timestamp={totalString} auth={value.admin_name}
+                        disabled={invalid} type="enter"/>;
+                      } else{
+                        return <TestDisplay onHeading={()=>{
+                          if(value.content)
+                            openModal(NOTICE_MODAL, {title:value.name ,auth:value.admin_name, content: value.content})
+                        }}
+                        onButton={()=>{}}
+                        test_name={value.name} timestamp={totalString} auth={value.admin_name}
+                        disabled={invalid} type="apply"/>;
+                      }
+                      
                     })
                   }
                 </InlineList>
@@ -118,46 +146,6 @@ function TestPage(props) {
 
           })
         }
-        {/* <InlineList align="right" distribution>
-          <div>
-            <Heading level={4}>[기초프로그래밍] 중간고사</Heading>
-            <Text fade >김가영 교수님 - 시험</Text> <br />
-            <Text fade >2020-11-11 12:00 ~ 2020-11-11 18:00</Text> <br />
-            <Button disabled>불가</Button>
-          </div>
-          <div>
-            <Heading level={4}>[심화프로그래밍] 중간고사</Heading>
-            <Text fade >김준태 교수님 - 시험</Text> <br />
-            <Text fade >2020-11-11 12:00 ~ 2020-11-11 18:00</Text> <br />
-            <Button test>입장</Button>
-          </div>
-          <div>
-            <Heading level={4}>2020 동국대학교 프로그래밍 경진대회</Heading>
-            <Text fade >손윤식 교수님 - 대회</Text> <br />
-            <Text fade >2020-11-11 12:00 ~ 2020-11-11 18:00</Text> <br />
-            <Button contest>입장</Button>
-          </div>
-        </InlineList>
-        <InlineList align="right" distribution>
-          <div>
-            <Heading level={4}>[기초프로그래밍] 중간고사</Heading>
-            <Text fade >김가영 교수님 - 시험</Text> <br />
-            <Text fade >2020-11-11 12:00 ~ 2020-11-11 18:00</Text> <br />
-            <Button test>입장</Button>
-          </div>
-          <div>
-            <Heading level={4}>[심화프로그래밍] 중간고사</Heading>
-            <Text fade >김준태 교수님 - 시험</Text> <br />
-            <Text fade >2020-11-11 12:00 ~ 2020-11-11 18:00</Text> <br />
-            <Button disabled>불가</Button>
-          </div>
-          <div>
-            <Heading level={4}>2020 동국대학교 프로그래밍 경진대회</Heading>
-            <Text fade >손윤식 교수님 - 대회</Text> <br />
-            <Text fade >2020-11-11 12:00 ~ 2020-11-11 18:00</Text> <br />
-            <Button contest>입장</Button>
-          </div>
-        </InlineList> */}
         </div>
         )}
         </ModalConsumer>

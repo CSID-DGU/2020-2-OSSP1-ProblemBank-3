@@ -277,7 +277,32 @@ router.post('/createtest', async function (req, res) {
 })
 
 // 테스트 수정: 구현 예정
+router.post('/updatetest', async function (req, res) {
+    const {
+        test_id, testName, testContent, is_exam, start, end, subject_id
+    } = req.body
+    try {
+        if(is_exam == 0) subject_id = null
+        await db.query(sql.tests.updateTest, [testName, testContent, is_exam, start, end, subject_id, test_id])
+        res.status(200).send({
+            result: true,
+            data: [],
+            message: 'update test success'
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({
+            result: false,
+            data: [],
+            message: error
+        })
+    }
+})
+
 // 문제 수정: 구현 예정
+router.post('updateproblem', async function (req, res) {
+    
+})
 
 // 시험 신청
 router.post('/regtest', async function (req, res) {

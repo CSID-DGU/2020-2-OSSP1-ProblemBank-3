@@ -36,6 +36,7 @@ module.exports = {
     insertFeedback: "INSERT INTO pb_test_feedback (test_id, author_id, content) VALUES (?, ?, ?)",
 
     // UPDATE
+    updateTest: "UPDATE problems.pt_Tests SET name = ?, content = ?, is_exam = ?, start = ?, end = ?, subject_id = ? WHERE id = ?",
     updateTestUserScoreByTestUserId: "UPDATE problems.pb_test_users SET correct = ?, wrong = ?, applied = 1 WHERE test_id = ? AND user_id = ?",
 
     // DELETE

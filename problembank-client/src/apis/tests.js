@@ -36,6 +36,11 @@ const testAPI = {
         return axiosClient.get(url, {params});
     },
 
+    getUserAnswers: (params) => {
+        const url = '/tests/useranswer';
+        return axiosClient.get(url, {params});
+    },
+
     getUserTests: (params) => {
         const url = '/tests/usertests';
         return axiosClient.get(url, {params});

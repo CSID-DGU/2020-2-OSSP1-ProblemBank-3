@@ -137,13 +137,12 @@ router.get('/adminresult', async function (req, res) {
     }
 })
 
-//개인 시험 결과 출력
+// 개인 시험 결과 출력
 router.get('/userresult', async function (req, res) {
     const { user_id } = req.query
     try {
         let [rows] = await db.query(sql.tests.selectTestUsersByUserId, [user_id])
         for (let i = 0; i < rows.length; i++) {
-            // console.log(rows)
             const { test_id } = rows[i]
             const [testname] = await db.query(sql.tests.selectTestByTestId, [test_id])
             rows[i]["test_name"] = testname[0].name;
@@ -155,6 +154,25 @@ router.get('/userresult', async function (req, res) {
         })
     } catch (error) {
         console.log("User Result Data" + error)
+    }
+})
+
+// 답안 조회
+router.get('/useranswer', async function (req, res) {
+    const { test_id, user_id } = req.query
+    try {
+        const [rows] = await db.query(sql.tests.selectTestProblemsByTestId, [test_id])
+        for(let i = 0; i < rows.length; i++) {
+            const [answer] = await db.query(sql.tests.selectUserAnswerByIds, [test_id, rows[i].problem_id, user_id])
+            rows[i]["answer"] = answer[0]
+        }
+        res.status(200).send({
+            result: true,
+            data: rows,
+            message: '사용자 답안'
+        })
+    } catch (error) {
+        console.log("User Answer Error" + error)
     }
 })
 

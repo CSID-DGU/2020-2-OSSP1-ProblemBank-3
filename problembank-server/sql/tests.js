@@ -15,6 +15,7 @@ module.exports = {
     selectSubjectNameById: "SELECT name FROM problems.pb_subjects WHERE id = ?", 
     selectTestUsersByTestId: "SELECT * FROM problems.pb_test_users WHERE test_id = ?",
     selectTestUsersByUserId: "SELECT * FROM problems.pb_test_users WHERE user_id = ?",
+    selectTestUserByIds: "SELECT * FROM problems.pb_test_users WHERE test_id = ? AND user_id = ?",
     selectTestsByUserId: "SELECT test_id FROM problems.pb_test_users WHERE user_id = ?",
     selectUserNameById: "SELECT user_name FROM problems.pb_users WHERE id = ?",
     selectUserAnswerByIds: "SELECT content FROM problems.pb_test_answers WHERE test_id = ? AND problem_id = ? AND user_id = ?",

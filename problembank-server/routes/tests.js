@@ -4,12 +4,29 @@ var db = require('../modules/db-connection');
 var sql = require('../sql');
 var compiler = require('../modules/compile-run');
 const { updateTestUserScoreByTestUserId } = require('../sql/tests');
+const tests = require('../sql/tests');
 var { PROBLEM_START_DELEMETER: startDelem, PROBLEM_END_DELEMETER: endDelem } = process.env;
 
 // 전체 시험 출력
 router.get('/alltestdata', async function (req, res) {
+    const { user_id } = req.query
     try {
         const [rows] = await db.query(sql.tests.selectTests)
+        for(let i = 0; i < rows.length; i++) {
+            const [admin_name] = await db.query(sql.tests.selectUserNameById, [rows[i].admin_id])
+            rows[i]["admin_name"] = admin_name[0].user_name
+            if (rows[i].is_exam == '1') {
+                const [subject] = await db.query(sql.tests.selectSubjectNameById, [rows[i].subject_id])
+                rows[i]["subject_name"] = subject[0].name
+            }
+            else {
+                const [userlist] = await db.query(sql.tests.selectTestUserByIds, [rows[i].id, user_id])
+                if (userlist != 0)
+                    rows[i]["in_entry"] = 1
+                else
+                    rows[i]["in_entry"] = 0
+            }
+        }
         res.status(200).send({
             result: true,
             data: rows,

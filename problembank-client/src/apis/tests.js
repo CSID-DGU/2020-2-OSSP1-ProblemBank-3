@@ -56,6 +56,11 @@ const testAPI = {
         return axiosClient.post(url, params);
     },
 
+    cancelReg: (params) => {
+        const url = '/tests/cancelreg';
+        return axiosClient.post(url, params);
+    },
+
     testRun: (params) => {
         const url = '/tests/testrun';
         return axiosClient.post(url, params);

@@ -40,6 +40,8 @@ function DoTest(props) {
     const [message, setMessage] = useState("");
     
     const [loading, setLoading] = useState(true);
+    const [errorState, setErrorState] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("에러 발생");
     
     const { test_id, index } = queryString.parse(props.location.search); // index는 0부터 문제 개수-1 까지
     const [prevIndex, setPrevIndex] = useState();
@@ -48,7 +50,7 @@ function DoTest(props) {
     useEffect(() => {
         if(!problems){
             setTestList();
-        } else if(!problem.id || prevIndex !=index){ // 문제 설정이 되어있지 않거나 문제의 인덱스가 변했을 때만
+        } else if((!problem.id || prevIndex !=index)&& !errorState){ // 문제 설정이 되어있지 않거나 문제의 인덱스가 변했을 때만
             setPrevIndex(index);
             setTestProblem(problems[index].problem_id)
             
@@ -188,6 +190,10 @@ function DoTest(props) {
             const response = await testsAPI.getTestProblems(params);
             const timeData = await testsAPI.getTestTimes(params);
             setTimeData(timeData.data[0]);
+            if( response.data.length === 0 ) {
+                setErrorMessage("해당 테스트에 문제가 존재하지 않습니다.");
+                setErrorState(true);
+            }
             const result = response.data.map((data)=>{
                 return {problem_id: data.problem_id, name: data.name };
             });
@@ -237,9 +243,16 @@ function DoTest(props) {
         }
     }
 
+    if(errorState){
+        alert("error : " + errorMessage);
+        return <Redirect to={{ pathname: "/test" }}/>;
+    }
+
     if(loading){
         return <Loading  type={'bars'} color={'black'}  />
     }
+
+    
     return (
         <DetailProblemLayout>
             <div className="problem__detail__test">

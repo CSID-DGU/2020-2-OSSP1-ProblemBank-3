@@ -15,23 +15,20 @@ import Loading from '../../../../components/Loading/Loading';
 import {Consumer as ModalConsumer} from '../../../../components/Modal/createModalProvider';
 import {NOTICE_MODAL} from '../../../../components/Modal/ModalProviderWithKey';
 import testsAPI from '../../../../apis/tests';
+import {debounce} from '../../components/Debounce'
 
-
+const debounceRunner = debounce(action=> action(), 4000);
 function TestPage(props) {
   const [loading, setLoading] = useState(true);
-  const [tests, setTests] = useState([]); // 사용자가 신청한 대회 및 듣는 강의에 대한 시험 목록
-  const [contests, setContests] = useState([]); // 사용자가 신청하지 않은 대회 목록
-  const [lastIndex, setLastIndex] = useState();
   const [lastTotalIndex, setLastTotalIndex] = useState();
   const [totalList, setTotalList] = useState([]);
-
+  
   useEffect(()=>{
     if(loading){
       setTestList();
-      setLoading(false)
     }
     console.log("updated");
-  },[loading, tests])
+  },[loading, lastTotalIndex])
 
   const setTestList = async () => {
     try{
@@ -39,32 +36,62 @@ function TestPage(props) {
         user_id: 2, // 임의로 2로 설정. 나중에 user에 대한 정보가 reducer나 localStore에 저장되면 그곳에서 꺼내 쓰면 된다.
       };
       const response = await testsAPI.getUserTests(params);
-      const number = response.data.length -1;
-      setTests(response.data);
-      setLastIndex(number-(number%3));
 
-      // contest 목록 가져오기
+      // 신청하지 않은 contest 목록 가져오기
       const c_response = await testsAPI.getAllTestData(params);
       const result = c_response.data.filter((value)=> {
         return (Number(value.in_entry)===0 && Number(value.is_exam)===0);
       })
-      setContests(result);
 
       // 두 배열을 합치기
       const total = response.data.concat(result);
       const total_num = total.length -1;
       setTotalList(total);
-      setLastTotalIndex(total_num-(total_num%3))
+      setLastTotalIndex(total_num-(total_num%3));
+      setLoading(false);
     } catch (error) {
         alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
         console.log(error)
     }  
   }
 
+  const regTest = async (value)=> {
+    try{
+      setLoading(true)
+      const params = {
+        user_id: 2,
+        test_id:value,
+      };
+      const response = await testsAPI.regTest(params);
+      console.log(response);
+    } catch (error) {
+        alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
+        console.log(error)
+    }
+  }
+
+  const cancelReg = async (value)=> {
+    try{
+      setLoading(true)
+      const params = {
+        user_id: 2,
+        test_id:value,
+      };
+      const response = await testsAPI.cancelReg(params);
+      console.log(response);
+    } catch (error) {
+        alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
+        console.log(error)
+    }
+  }
+
   const TestButton = async () => {
     try{
-      console.log(totalList); //lastTotalIndex
-      console.log(lastTotalIndex);
+      const params = {
+        user_id: 2,
+      };
+      const response = await testsAPI.getUserTests(params);
+      console.log(response);
     } catch (error) {
         alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
         console.log(error)
@@ -115,7 +142,7 @@ function TestPage(props) {
                       var start = new Date(value.start);
                       var end = new Date(value.end);
                       var now = new Date();
-                      var invalid = false;
+                      var invalid = false; // 현재는 테스트를 위해 작동이 되지 않게 함
                       if(now>end) invalid = true;
                       var startString = start.getFullYear() +"-"+start.getMonth()+"-"+start.getDate()+" "+start.getHours()+":"+start.getMonth();
                       var endString = end.getFullYear() +"-"+end.getMonth()+"-"+end.getDate()+" "+end.getHours()+":"+end.getMonth();
@@ -127,13 +154,14 @@ function TestPage(props) {
                         }}
                         onButton={() => props.history.push(`/test/view?index=0&test_id=${value.test_id}`)}
                         test_name={value.test_name} timestamp={totalString} auth={value.admin_name}
-                        disabled={invalid} type="enter"/>;
+                        disabled={invalid} type="enter" isExam={value.is_exam} 
+                        onCancel={()=>{cancelReg(value.test_id);}}/>;
                       } else{
                         return <TestDisplay onHeading={()=>{
                           if(value.content)
                             openModal(NOTICE_MODAL, {title:value.name ,auth:value.admin_name, content: value.content})
                         }}
-                        onButton={()=>{}}
+                        onButton={()=>{regTest(value.id);}}
                         test_name={value.name} timestamp={totalString} auth={value.admin_name}
                         disabled={invalid} type="apply"/>;
                       }

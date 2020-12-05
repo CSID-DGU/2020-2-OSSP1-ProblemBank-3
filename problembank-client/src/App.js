@@ -12,6 +12,8 @@ import {signin} from './components/Authentication/Auth';
 import Authorized from './components/Authentication/Authorized';
 const LoginPage = React.lazy(() => import('./pages/LoginPage'))
 
+const TestRedirect = React.lazy(() => import('./components/TestRedirect'))
+
 const MainPage = React.lazy(() => import('./pages/MainPage'))
 const ProblemsByCategories = React.lazy(() => import('./pages/ProblemsByCategories'));
 const TotalProblems = React.lazy(() => import('./pages/TotalProblems'))
@@ -24,7 +26,17 @@ const AdminTestResult = React.lazy(() => import('./pages/AdminTestResult'))
 
 function App() {
     const [user, setUser] = useState(null);
-    const login = ({ id, password }) => setUser(signin({ id, password }));
+    const login = async ({id, password}) => {
+        try{
+            let res = await signin({id, password})
+            if (res.length == 0) throw new Error();
+            console.log(res[0].is_admin)
+            setUser(res[0]);
+        }
+        catch(e){
+            alert("로그인 실패")
+        }
+    }
     const logout = () => setUser(null);
     const auth = user != null;
 
@@ -39,24 +51,26 @@ function App() {
                 />
                 <Authorized
                     auth={auth}
-                    path="/totalproblems"
-                    // pass role info
-                    // 임시로 TotalProblems에 Auth경로 설정
-                    render={props => <TotalProblems role={user.role} />}
+                    path="/testRedirect"
+                    render={props => <TestRedirect user={user} {...props} />}
                 />
-                {/* <Authorized
+                <Authorized
+                    auth={auth}
+                    path="/managetest"
+                    render={props => <ManageTest user={user} {...props} />}
+                />
+                <Authorized
                     auth={auth}
                     path="/test"
-                    render={() => <Test role={user.role} />}
-                /> */}
+                    render={props => <Test user={user} {...props} />}
+                />
                 <Route exact path = "/"  component = {MainPage}/>
+                <Route path = "/totalproblems"  component = {TotalProblems}/>
                 <Route path = "/problemsbank"  component = {ProblemsByCategories}/>
                 <Route path = "/problem"  component = {Problem}/>
-                <Route path = "/test"  component = {Test}/>
-	        <Route exact path = "/managetest" component = {ManageTest}/>
-	        <Route exact path = "/createtest" component = {CreateTest}/>
+	            <Route exact path = "/createtest" component = {CreateTest}/>
                 <Route path="/admintestprogress" component={AdminTestProgress} />
-	        <Route path="/admintestresult" component={AdminTestResult} />
+	            <Route path="/admintestresult" component={AdminTestResult} />
                 <Route component = {NotFound} />
             </Switch>
           </BrowserRouter>

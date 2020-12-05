@@ -1,29 +1,21 @@
-import userApi from "../../apis/users";
-import {useState} from "react";
+import axiosClient from "../../apis/axios";
 
-// 임시 디비 대용 사용자 정보
-const users = [
-    { id: "admin", password: "123", role: "ADMIN"},
-    { id: "student", password: "123", role: "STUDENT"},
-]
-
-export function signin({ id, password }) {
-    const params = {
-        user_id: id,
-        user_pass: password,
-    };
-
-    // userInfo 가져오기
-    const response = userApi.getUserInfo(params);
-    console.log(response.data)
-
-    const user = response.data
-    // const user = users.find(
-    //     (user) => user.id === id && user.password === password
-    // )
-    // if (user === undefined) throw new Error()
-
-    if (user === undefined) throw new Error();
+export async function signin({id, password}) {
+    let user = undefined
+    await axiosClient.get('http://localhost:3003/users/userinfo', {
+        params: {
+            user_id: id,
+            user_pass: password
+        }
+    })
+        .then(function (response) {
+            console.log(response.data)
+            user = response.data
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 
     return user
+
 }

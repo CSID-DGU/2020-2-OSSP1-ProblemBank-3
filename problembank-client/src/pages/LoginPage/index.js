@@ -6,13 +6,9 @@ function LoginPage({ auth, login, location }) {
     const [password, setPassword] = useState("")
 
     const handleClick = () => {
-        try {
-            login({ id, password })
-        } catch (e) {
-            alert("로그인 실패")
-            setId("")
-            setPassword("")
-        }
+        login({ id, password })
+        setId("")
+        setPassword("")
     }
 
     const { from } = location.state || { from: { pathname: "/" } }

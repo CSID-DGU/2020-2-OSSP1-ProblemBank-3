@@ -18,10 +18,11 @@ import testsAPI from '../../../../apis/tests';
 import {debounce} from '../../components/Debounce'
 
 const debounceRunner = debounce(action=> action(), 4000);
-function TestPage({user, props}) {
+function TestPage(props) {
   const [loading, setLoading] = useState(true);
   const [lastTotalIndex, setLastTotalIndex] = useState();
   const [totalList, setTotalList] = useState([]);
+  const {user} = props;
   
   useEffect(()=>{
     if(loading){
@@ -59,7 +60,7 @@ function TestPage({user, props}) {
     try{
       setLoading(true)
       const params = {
-        user_id: 2,
+        user_id: user.id,
         test_id:value,
       };
       const response = await testsAPI.regTest(params);
@@ -74,7 +75,7 @@ function TestPage({user, props}) {
     try{
       setLoading(true)
       const params = {
-        user_id: 2,
+        user_id: user.id,
         test_id:value,
       };
       const response = await testsAPI.cancelReg(params);
@@ -88,10 +89,10 @@ function TestPage({user, props}) {
   const TestButton = async () => {
     try{
       const params = {
-        user_id: 2,
+        user_id: user.id,
       };
-      const response = await testsAPI.getUserTests(params);
-      console.log(response);
+      // const response = await testsAPI.getUserTests(params);
+      console.log(user.id);
     } catch (error) {
         alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
         console.log(error)

@@ -20,7 +20,7 @@ import {debounce} from '../../components/Debounce'
 
 var moment = require('moment'); //?
 const debounceRunner = debounce(action=> action(), 4000);
-function DoTest({props, user}) {
+function DoTest(props) {
     const [problems, setProblems] = useState();
     const [problem, setProblem] = useState({testcases:[]});
     // const [index, setIndex] = useState(0);
@@ -42,6 +42,7 @@ function DoTest({props, user}) {
     
     const { test_id, index } = queryString.parse(props.location.search); // index는 0부터 문제 개수-1 까지
     const [prevIndex, setPrevIndex] = useState();
+    const {user} = props;
 
     useEffect(() => {
         if(!problems){

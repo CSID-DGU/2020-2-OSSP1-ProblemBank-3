@@ -19,13 +19,11 @@ router.get('/alltestdata', async function (req, res) {
                 const [subject] = await db.query(sql.tests.selectSubjectNameById, [rows[i].subject_id])
                 rows[i]["subject_name"] = subject[0].name
             }
-            else {
-                const [userlist] = await db.query(sql.tests.selectTestUserByIds, [rows[i].id, user_id])
-                if (userlist != 0)
-                    rows[i]["in_entry"] = 1
-                else
-                    rows[i]["in_entry"] = 0
-            }
+            const [userlist] = await db.query(sql.tests.selectTestUserByIds, [rows[i].id, user_id])
+            if (userlist != 0)
+                rows[i]["in_entry"] = 1
+            else
+                rows[i]["in_entry"] = 0
         }
         res.status(200).send({
             result: true,
@@ -329,7 +327,7 @@ router.post('/regtest', async function (req, res) {
     }
 })
 
-// 시험 신청 취로
+// 시험 신청 취소
 router.post('/cancelreg', async function(req, res) {
     const { user_id, test_id } = req.body;
     try {

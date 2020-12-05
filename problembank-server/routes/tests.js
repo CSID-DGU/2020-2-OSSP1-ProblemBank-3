@@ -19,13 +19,11 @@ router.get('/alltestdata', async function (req, res) {
                 const [subject] = await db.query(sql.tests.selectSubjectNameById, [rows[i].subject_id])
                 rows[i]["subject_name"] = subject[0].name
             }
-            else {
-                const [userlist] = await db.query(sql.tests.selectTestUserByIds, [rows[i].id, user_id])
-                if (userlist != 0)
-                    rows[i]["in_entry"] = 1
-                else
-                    rows[i]["in_entry"] = 0
-            }
+            const [userlist] = await db.query(sql.tests.selectTestUserByIds, [rows[i].id, user_id])
+            if (userlist != 0)
+                rows[i]["in_entry"] = 1
+            else
+                rows[i]["in_entry"] = 0
         }
         res.status(200).send({
             result: true,
@@ -185,28 +183,9 @@ router.get('/usertests', async function (req, res) {
             const { test_id } = tests[i]
             // console.log(tests)
             const [test] = await db.query(sql.tests.selectTestByTestId, [test_id])
-            const { admin_id } = test[0];
-            const [admin_name] = await db.query(sql.tests.selectUserNameById, [admin_id])
             tests[i]["test_name"] = test[0].name
-            tests[i]["start"] = test[0].start
-            tests[i]["end"] = test[0].end
-            tests[i]["admin_name"] = admin_name[0].user_name
+            tests[i]["date"] = test[0].start
             tests[i]["is_exam"] = test[0].is_exam
-
-            if (test[0].is_exam == '1') {
-                const { subject_id } = test[0]
-                const [subject] = await db.query(sql.tests.selectSubjectNameById, [subject_id])
-                tests[i]["subject_name"] = subject[0].name
-            }
-            else {
-                const userlist = await db.query(sql.tests.selectTestUsersByUserId, [user_id])
-                if (userlist)
-                    tests[i]["in_entry"] = 1
-                else
-                    tests[i]["in_entry"] = 0
-            }
-
-            tests[i]["content"] = test[0].content
         }
         res.status(200).send({
             result: true,
@@ -329,7 +308,7 @@ router.post('/regtest', async function (req, res) {
     }
 })
 
-// 시험 신청 취로
+// 시험 신청 취소
 router.post('/cancelreg', async function(req, res) {
     const { user_id, test_id } = req.body;
     try {

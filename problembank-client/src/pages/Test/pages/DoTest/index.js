@@ -20,7 +20,7 @@ import {debounce} from '../../components/Debounce'
 
 var moment = require('moment'); //?
 const debounceRunner = debounce(action=> action(), 4000);
-function DoTest(props) {
+function DoTest({props, user}) {
     const [problems, setProblems] = useState();
     const [problem, setProblem] = useState({testcases:[]});
     // const [index, setIndex] = useState(0);
@@ -221,7 +221,7 @@ function DoTest(props) {
             setSubmit(true);
             const params = {
                 test_id: test_id,
-                user_id: 2, // 임의로 설정
+                user_id: user.id,
                 problems: sourceCodes,
             };
             const response = await testsAPI.submit(params);

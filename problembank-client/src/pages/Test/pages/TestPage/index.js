@@ -18,7 +18,7 @@ import testsAPI from '../../../../apis/tests';
 import {debounce} from '../../components/Debounce'
 
 const debounceRunner = debounce(action=> action(), 4000);
-function TestPage(props) {
+function TestPage({user, props}) {
   const [loading, setLoading] = useState(true);
   const [lastTotalIndex, setLastTotalIndex] = useState();
   const [totalList, setTotalList] = useState([]);
@@ -33,7 +33,7 @@ function TestPage(props) {
   const setTestList = async () => {
     try{
       const params = {
-        user_id: 2, // 임의로 2로 설정. 나중에 user에 대한 정보가 reducer나 localStore에 저장되면 그곳에서 꺼내 쓰면 된다.
+        user_id: user.id,
       };
       const response = await testsAPI.getUserTests(params);
 

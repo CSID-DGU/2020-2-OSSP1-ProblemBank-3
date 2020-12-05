@@ -1,7 +1,8 @@
 import React, {Component, useState} from 'react'
-import { withRouter } from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import './style.scss'
 import testAPI from '../../../../apis/tests';
+import Button from "react-bootstrap/Button";
 
 class MyTestsTable extends Component{
 
@@ -20,11 +21,18 @@ class MyTestsTable extends Component{
             code: response.result,
             result: response.data
         })
+        console.log(this.state.result)
+    }
+
+    handleClick = () => {
+        console.log("click!")
     }
 
     componentDidMount() {
         this.getMyTests()
     }
+
+
 
     render() {
         return(
@@ -46,7 +54,13 @@ class MyTestsTable extends Component{
                                 <tr key = {index}>
                                     <td style={{textAlign: "center"}}>{index+1}</td>
                                     <td style={{textAlign: "center"}}>{item.test_name}</td>
-                                    <td style={{textAlign: "center"}}><button>취소</button></td>
+                                    <td style={{textAlign: "center"}}>
+                                        {item.is_exam ? (
+                                            <button2>불가</button2>
+                                        ) : (
+                                            <button onClick={this.handleClick}>취소</button>
+                                        )}
+                                    </td>
                                     <td style={{textAlign: "center"}}>{date}</td>
                                 </tr>
                             )

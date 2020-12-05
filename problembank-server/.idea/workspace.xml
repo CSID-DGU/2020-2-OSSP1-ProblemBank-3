@@ -20,18 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a2f59a0d-f558-407b-bbba-4b4bb6fb3971" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../problembank-client/src/layouts/MyTestsLayout.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyTests/components/MyTestsTable/.index.js.swp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyTests/components/MyTestsTable/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyTests/components/MyTestsTable/style.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyTests/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyTests/pages/MyTestsPage/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyTests/pages/MyTestsPage/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/LoginPage/LoginPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/LoginPage/LoginPage.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyTests/components/MyTestsTable/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyTests/components/MyTestsTable/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/build.bat" beforeDir="false" afterPath="$PROJECT_DIR$/docker/build.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/build.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +80,7 @@
       <workItem from="1606464648007" duration="47000" />
       <workItem from="1606645612479" duration="11447000" />
       <workItem from="1606952864352" duration="7933000" />
-      <workItem from="1607108842232" duration="8104000" />
+      <workItem from="1607108842232" duration="8824000" />
     </task>
     <servers />
   </component>

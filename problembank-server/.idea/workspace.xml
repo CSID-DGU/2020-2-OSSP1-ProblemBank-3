@@ -20,11 +20,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a2f59a0d-f558-407b-bbba-4b4bb6fb3971" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/apis/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/apis/users.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/components/Authentication/Auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/components/Authentication/Auth.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../problembank-client/src/layouts/MyTestsLayout.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyTests/components/MyTestsTable/.index.js.swp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyTests/components/MyTestsTable/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyTests/components/MyTestsTable/style.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyTests/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyTests/pages/MyTestsPage/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyTests/pages/MyTestsPage/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/LoginPage/LoginPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/LoginPage/LoginPage.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/users.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sql/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/sql/users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/build.bat" beforeDir="false" afterPath="$PROJECT_DIR$/docker/build.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/build.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +89,7 @@
       <workItem from="1606464648007" duration="47000" />
       <workItem from="1606645612479" duration="11447000" />
       <workItem from="1606952864352" duration="7933000" />
-      <workItem from="1607108842232" duration="4097000" />
+      <workItem from="1607108842232" duration="8104000" />
     </task>
     <servers />
   </component>
@@ -110,25 +117,25 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="578" y="279" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1605156491503" />
-    <state width="1659" height="295" key="GridCell.Tab.0.bottom" timestamp="1607143008376">
+    <state width="1659" height="295" key="GridCell.Tab.0.bottom" timestamp="1607158672967">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="1659" height="295" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1607012454862" />
-    <state width="1659" height="295" key="GridCell.Tab.0.bottom/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1607143008376" />
-    <state width="1659" height="295" key="GridCell.Tab.0.center" timestamp="1607143008374">
+    <state width="1659" height="295" key="GridCell.Tab.0.bottom/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1607158672967" />
+    <state width="1659" height="295" key="GridCell.Tab.0.center" timestamp="1607158672965">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="1659" height="295" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1607012454861" />
-    <state width="1659" height="295" key="GridCell.Tab.0.center/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1607143008374" />
-    <state width="1659" height="295" key="GridCell.Tab.0.left" timestamp="1607143008373">
+    <state width="1659" height="295" key="GridCell.Tab.0.center/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1607158672965" />
+    <state width="1659" height="295" key="GridCell.Tab.0.left" timestamp="1607158672964">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="1659" height="295" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1607012454861" />
-    <state width="1659" height="295" key="GridCell.Tab.0.left/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1607143008373" />
-    <state width="1659" height="295" key="GridCell.Tab.0.right" timestamp="1607143008375">
+    <state width="1659" height="295" key="GridCell.Tab.0.left/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1607158672964" />
+    <state width="1659" height="295" key="GridCell.Tab.0.right" timestamp="1607158672966">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="1659" height="295" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1607012454862" />
-    <state width="1659" height="295" key="GridCell.Tab.0.right/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1607143008375" />
+    <state width="1659" height="295" key="GridCell.Tab.0.right/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1607158672966" />
   </component>
 </project>

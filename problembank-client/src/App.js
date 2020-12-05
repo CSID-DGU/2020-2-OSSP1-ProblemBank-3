@@ -23,6 +23,9 @@ const ManageTest = React.lazy(() => import('./pages/ManageTest'))
 const CreateTest = React.lazy(() => import('./pages/CreateTest'))
 const AdminTestProgress = React.lazy(() => import('./pages/AdminTestProgressPage'))
 const AdminTestResult = React.lazy(() => import('./pages/AdminTestResult'))
+const MyTests = React.lazy(() => import('./pages/MyTests'))
+// const MyAdminTests = React.lazy(() => import('./pages/MyAdminTests'))
+
 
 function App() {
     const [user, setUser] = useState(null);
@@ -64,6 +67,11 @@ function App() {
                     path="/test"
                     render={props => <Test user={user} {...props} />}
                 />
+                <Authorized
+                    auth={auth}
+                    path="/mytests"
+                    render={props => <MyTests user={user} {...props} />}
+                />
                 <Route exact path = "/"  component = {MainPage}/>
                 <Route path = "/totalproblems"  component = {TotalProblems}/>
                 <Route path = "/problemsbank"  component = {ProblemsByCategories}/>
@@ -71,6 +79,9 @@ function App() {
 	            <Route exact path = "/createtest" component = {CreateTest}/>
                 <Route path="/admintestprogress" component={AdminTestProgress} />
 	            <Route path="/admintestresult" component={AdminTestResult} />
+                {/*<Route path="/myadmintests" component={MyAdminTests} />*/}
+
+
                 <Route component = {NotFound} />
             </Switch>
           </BrowserRouter>

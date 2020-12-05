@@ -36,16 +36,18 @@ function TestPage(props) {
       const params = {
         user_id: user.id,
       };
-      const response = await testsAPI.getUserTests(params);
 
       // 신청하지 않은 contest 목록 가져오기
-      const c_response = await testsAPI.getAllTestData(params);
-      const result = c_response.data.filter((value)=> {
+      const response = await testsAPI.getAllTestData(params);
+      const entry = response.data.filter((value)=> {
+        return (Number(value.in_entry)===1);
+      })
+      const result = response.data.filter((value)=> {
         return (Number(value.in_entry)===0 && Number(value.is_exam)===0);
       })
 
       // 두 배열을 합치기
-      const total = response.data.concat(result);
+      const total = entry.concat(result);
       const total_num = total.length -1;
       setTotalList(total);
       setLastTotalIndex(total_num-(total_num%3));
@@ -92,7 +94,7 @@ function TestPage(props) {
         user_id: user.id,
       };
       // const response = await testsAPI.getUserTests(params);
-      console.log(user.id);
+      console.log(totalList);
     } catch (error) {
         alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
         console.log(error)
@@ -148,15 +150,15 @@ function TestPage(props) {
                       var startString = start.getFullYear() +"-"+start.getMonth()+"-"+start.getDate()+" "+start.getHours()+":"+start.getMonth();
                       var endString = end.getFullYear() +"-"+end.getMonth()+"-"+end.getDate()+" "+end.getHours()+":"+end.getMonth();
                       var totalString = startString + " ~ " + endString;
-                      if(Number(value.is_exam)===1 || Number(value.in_entry)===1){ // 과목 시험이거나 내가 신청한 대회면은
+                      if(Number(value.in_entry)===1){ // 과목 시험이거나 내가 신청한 대회면은
                         return <TestDisplay onHeading={()=>{
                           if(value.content)
-                            openModal(NOTICE_MODAL, {title:value.test_name ,auth:value.admin_name, content: value.content})
+                            openModal(NOTICE_MODAL, {title:value.name ,auth:value.admin_name, content: value.content})
                         }}
-                        onButton={() => props.history.push(`/test/view?index=0&test_id=${value.test_id}`)}
-                        test_name={value.test_name} timestamp={totalString} auth={value.admin_name}
+                        onButton={() => props.history.push(`/test/view?index=0&test_id=${value.id}`)}
+                        test_name={value.name} timestamp={totalString} auth={value.admin_name}
                         disabled={invalid} type="enter" isExam={value.is_exam} 
-                        onCancel={()=>{cancelReg(value.test_id);}}/>;
+                        onCancel={()=>{cancelReg(value.id);}}/>;
                       } else{
                         return <TestDisplay onHeading={()=>{
                           if(value.content)

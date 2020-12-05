@@ -25,10 +25,10 @@ const AdminTestProgress = React.lazy(() => import('./pages/AdminTestProgressPage
 const AdminTestResult = React.lazy(() => import('./pages/AdminTestResult'))
 
 function App() {
-    const [user, setUser] = useState(null);
+    // const [user, setUser] = useState(null);
     // 로그인 하기가 귀찮을 때 테스트 할 아이디를 선택해서 주석 해제. 할 때 위에꺼 주석하는거 잊지 말기
     // const [user, setUser] = useState({id:1, is_admin: 1}); //admin 용
-    // const [user, setUser] = useState({id:2, is_admin: 0}); // student 용
+    const [user, setUser] = useState({id:2, is_admin: 0}); // student 용
     const login = async ({id, password}) => {
         try{
             let res = await signin({id, password})

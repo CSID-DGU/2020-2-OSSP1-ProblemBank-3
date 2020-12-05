@@ -17,6 +17,7 @@ import Button from '../../../../components/DesignComponent/Button';
 import Dropup from '../../../../components/DesignComponent/Dropup';
 import Toast from '../../../../components/DesignComponent/Toast';
 import {debounce} from '../../components/Debounce'
+import { Redirect } from 'react-router-dom';
 
 var moment = require('moment'); //?
 const debounceRunner = debounce(action=> action(), 4000);
@@ -38,7 +39,7 @@ function DoTest(props) {
     const [showToast, setShowToast] = useState(false);
     const [message, setMessage] = useState("");
     
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true);
     
     const { test_id, index } = queryString.parse(props.location.search); // index는 0부터 문제 개수-1 까지
     const [prevIndex, setPrevIndex] = useState();
@@ -48,9 +49,9 @@ function DoTest(props) {
         if(!problems){
             setTestList();
         } else if(!problem.id || prevIndex !=index){ // 문제 설정이 되어있지 않거나 문제의 인덱스가 변했을 때만
-            setTestProblem(problems[index].problem_id)
             setPrevIndex(index);
-            setLoading(false);
+            setTestProblem(problems[index].problem_id)
+            
         }
         console.log("updated");
         if((!timer && !startTimer )&& timeData.end){
@@ -199,7 +200,7 @@ function DoTest(props) {
             setSourceCodes(codes);
         } catch (error) {
             alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
-            console.log(error)
+            console.log(error);
         }  
     }
 
@@ -210,9 +211,10 @@ function DoTest(props) {
             };
             const response = await testsAPI.getTestProblemData(params);
             setProblem(response.data[0]); // 객체 형태
+            setLoading(false);
         } catch (error) {
             alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
-            console.log(error)
+            console.log(error);
         }
         
     }

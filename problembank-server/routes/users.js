@@ -5,7 +5,7 @@ var sql = require('../sql');
 
 
 // 로그인
-router.get('/userinfo', async function(req, res) {
+router.get('/login', async function(req, res) {
     const {user_id, user_pass} = req.query
     try {
         const [users] = await db.query(sql.users.selectUserByIdPass, [user_id, user_pass])
@@ -18,7 +18,21 @@ router.get('/userinfo', async function(req, res) {
     } catch (error) {
         console.log("User info" + error)
     }
-
 })
+
+router.get('/userinfo', async function(req, res) {
+    try {
+        const [users] = await db.query(sql.users.selectAllUsers)
+        res.status(200).json({
+            result: true,
+            data: users,
+            message: '사용자 정보'
+        })
+
+    } catch (error) {
+        console.log("User info" + error)
+    }
+})
+
 
 module.exports = router;

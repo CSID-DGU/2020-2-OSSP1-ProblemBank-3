@@ -20,16 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a2f59a0d-f558-407b-bbba-4b4bb6fb3971" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../problembank-client/src/pages/LoginPage/LoginPage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/components/TestRedirect/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/components/TestRedirect/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/LoginPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/LoginPage/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/ManageTest/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/ManageTest/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/Test/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/Test/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/Test/pages/DoTest/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/Test/pages/DoTest/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/Test/pages/TestPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/Test/pages/TestPage/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/apis/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/apis/users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/components/Authentication/Auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/components/Authentication/Auth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sql/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/sql/users.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +82,7 @@
       <workItem from="1606464648007" duration="47000" />
       <workItem from="1606645612479" duration="11447000" />
       <workItem from="1606952864352" duration="7933000" />
-      <workItem from="1607108842232" duration="3515000" />
+      <workItem from="1607108842232" duration="4097000" />
     </task>
     <servers />
   </component>

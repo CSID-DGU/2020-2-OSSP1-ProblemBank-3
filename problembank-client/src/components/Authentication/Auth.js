@@ -1,13 +1,11 @@
-import axiosClient from "../../apis/axios";
+import userAPI from "../../apis/users";
 
 export async function signin({id, password}) {
     let user = undefined
-    await axiosClient.get('http://localhost:3003/users/userinfo', {
-        params: {
+    await userAPI.login({
             user_id: id,
             user_pass: password
-        }
-    })
+        })
         .then(function (response) {
             console.log(response.data)
             user = response.data

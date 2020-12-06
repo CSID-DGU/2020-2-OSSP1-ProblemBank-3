@@ -46,9 +46,14 @@ const testAPI = {
         return axiosClient.get(url, {params});
     },
 
-    createTest: (params) => { // 개발중
+    createTest: (params) => {
         const url = '/tests/createtest';
         return axiosClient.post(url, params);
+    },
+
+    updateTest: (params) => {
+        const url = '/tests/updatetest';
+        return axiosClient.post(url, params)
     },
 
     regTest: (params) => {

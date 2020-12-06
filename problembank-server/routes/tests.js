@@ -181,7 +181,6 @@ router.get('/usertests', async function (req, res) {
         let [tests] = await db.query(sql.tests.selectTestsByUserId, [user_id])
         for (let i = 0; i < tests.length; i++) {
             const { test_id } = tests[i]
-            // console.log(tests)
             const [test] = await db.query(sql.tests.selectTestByTestId, [test_id])
             tests[i]["test_name"] = test[0].name
             tests[i]["date"] = test[0].start
@@ -227,8 +226,6 @@ router.post('/createtest', async function (req, res) {
 
                     await db.query(sql.tests.insertTestCases, [input, output, inserted[0].id])
                 }
-                // inserted = await db.query(sql.tests.selectInsertedId)
-                // await db.query(sql.tests.insertTestIdForTestCases, [inserted[0].id])
             }
             else { // 존재하지 않는 문제
                 const { problemName, problemContent, input, output } = problems[i]
@@ -260,14 +257,34 @@ router.post('/createtest', async function (req, res) {
     }
 })
 
-// 테스트 수정: 구현 예정
+// 테스트 수정
 router.post('/updatetest', async function (req, res) {
     const {
-        test_id, testName, testContent, is_exam, start, end, subject_id
+        test_id, testName, testContent, is_exam, start, end, subject_id,
+        problems
     } = req.body
     try {
-        if(is_exam == 0) subject_id = null
         await db.query(sql.tests.updateTest, [testName, testContent, is_exam, start, end, subject_id, test_id])
+        await db.query(sql.tests.deleteAllTestUsers, [test_id])
+        if (is_exam != 0) {
+            const [subjectUsers] = await db.query(sql.tests.selectSubjectUsersBySubjectId, [subject_id])
+            for (let i = 0; i < subjectUsers.length; i++) {
+                const { user_id } = subjectUsers[i]
+                await db.query(sql.tests.insertTestUser, [user_id, test_id])
+            }
+        }
+
+        for (let i = 0; i < problems.length; i++) {
+            const { problem_id, problemName, problemContent, input, output } = problems[i]
+            const { testcases } = problems[i]
+            await db.query(sql.tests.updateProblem, [problemName, problemContent, input, output, problem_id])
+            await db.query(sql.tests.deleteAllTestCases, [problem_id])
+
+            for (let j = 0; j < testcases.length; j++) {
+                const { input_ex, output_ex } = testcases[j]
+                await db.query(sql.tests.insertTestCases, [input_ex, output_ex, problem_id])
+            }
+        }
         res.status(200).send({
             result: true,
             data: [],
@@ -281,11 +298,6 @@ router.post('/updatetest', async function (req, res) {
             message: error
         })
     }
-})
-
-// 문제 수정: 구현 예정
-router.post('updateproblem', async function (req, res) {
-    
 })
 
 // 시험 신청

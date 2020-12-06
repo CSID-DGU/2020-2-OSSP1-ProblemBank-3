@@ -28,17 +28,18 @@ module.exports = {
     insertProblem: "INSERT INTO problems.pb_test_problem_contents (name, content, input, output) VALUES (?, ?, ?, ?)",
     insertProblemFromProblemBank: "INSERT INTO problems.pb_test_problem_contents (name, content, input, output) SELECT name, content, input, output FROM problems.plass_problems WHERE id = ?",
     insertTestCases: "INSERT INTO problems.pb_test_testcases (input_example, output_example, problem_id) VALUES (?, ?, ?)",
-    // insertTestCasesFromProblemBank: "INSERT INTO problems.pb_test_testcases (input_example, output_example) SELECT input_example, output_example FROM problems.plass_testcases WHERE problem_id = ?",
     insertTestIdForTestCases: "INSERT INTO problems.pb_test_testcases (problem_id) VALUES (?)",
     insertTestUser: "INSERT INTO pb_test_users (user_id, test_id) VALUES (?, ?)",
-    // insertTestUsers: "INSERT INTO pb_test_users (user_id, test_id) SELECT user_id FROM problems.pb_subject_users WHERE subject_id = ? VALUES (?)",
     insertUserAnswers: "INSERT INTO pb_test_answers (test_id, problem_id, user_id, content) VALUES (?, ?, ?, ?)",
     insertFeedback: "INSERT INTO pb_test_feedback (test_id, author_id, content) VALUES (?, ?, ?)",
 
     // UPDATE
-    updateTest: "UPDATE problems.pt_Tests SET name = ?, content = ?, is_exam = ?, start = ?, end = ?, subject_id = ? WHERE id = ?",
+    updateTest: "UPDATE problems.pb_tests SET name = ?, content = ?, is_exam = ?, start = ?, end = ?, subject_id = ? WHERE id = ?",
     updateTestUserScoreByTestUserId: "UPDATE problems.pb_test_users SET correct = ?, wrong = ?, applied = 1 WHERE test_id = ? AND user_id = ?",
+    updateProblem: "UPDATE problems.pb_test_problem_contents SET name = ?, content = ?, input = ?, output = ? WHERE id = ?",
 
     // DELETE
+    deleteAllTestUsers: "DELETE FROM problems.pb_test_users WHERE test_id = ?",
     deleteTestUser: "DELETE FROM problems.pb_test_users WHERE user_id = ? and test_id = ?",
+    deleteAllTestCases: "DELETE FROM problems.pb_test_testcases WHERE problem_id = ?"
 }

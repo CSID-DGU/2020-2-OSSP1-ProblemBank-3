@@ -1,15 +1,71 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import "./style.scss";
 import CreateTestLayout from "../../../../layouts/CreateTestLayout";
-import InlineList from "../../../../components/DesignComponent/InlineList";
-import Input from "../../../../components/DesignComponent/Input";
+import testAPI from "../../../../apis/tests";
 import Text from "../../../../components/DesignComponent/Text";
-import Spacing from "../../../../components/DesignComponent/Spacing";
 
-function CreateTestPage(props) {
-    const [loading, setLoading] = useState(false);
-    const [type, setType] = useState(false);
+class CreateTestPage extends Component {
 
+    constructor(props){
+        super(props);
+	this.state = {
+	    params : {
+	        testName : "",
+		testContent : "",
+		is_exam : 0,
+		start : null,
+		end : null,
+		admin_id : -1,
+		subject_id : -1,
+		problems : []
+	    }
+	};
+    };
+
+    componentDidMount(){
+	for(var i = 0; i < 2; i++)
+            document.getElementsByClassName("data-calander")[i].value = new Date().toISOString().slice(0, 16);
+    }
+
+    //getUserInfo = async() => 
+
+    saveTest = (props) => {
+	alert("asdf");
+        this.setState(params => ({
+	    testName : document.getElementById("name-text").value,
+	    testContent : document.getElementById("textarea").value,
+	    is_exam : document.getElementById("checkbox").value,
+	    start : document.getElementsByClassName("data-calander")[0].value,
+	    end : document.getElementsByClassName("data-calander")[1].value
+	    // admin_id : 
+ 	    // subject_id : 
+	    // problems :
+	}));
+	console.log("asdf");
+	console.log(this.params);
+    }
+
+    /*
+    const createTest = async (value)=>{
+        
+	setLoading(true);
+	const ret = {
+            testName : document.getElementById("name-label").value,
+	    testContent : document.getElementById("textarea").value,
+	    is_exam : document.getElementById("checkbox").value,
+	    start : document.getElementsByClassName("data-calander")[0].value,
+	    end : document.getElementsByClassName("data-calender")[1].value
+	    // admin_id : 
+	    // subject_id : 
+	    // problems :  
+	};
+	alert(ret);
+
+	//const response = await testAPI.regTest(ret);
+	console.log(ret);
+    }*/
+    
+    render(){
     return (
 	<CreateTestLayout>
 	<div id="CreateTestLayoutBody">
@@ -52,11 +108,12 @@ function CreateTestPage(props) {
 	        <button class="button">목록 수정</button>
 	    </div>
 	    <div class="save">
-	        <button class="button">저장</button>
+	        <button class="button" onClick={this.saveTest}>저장</button>
 	    </div>
 	</div>
 	</CreateTestLayout>
     );
+    }
 }
 
 export default CreateTestPage;

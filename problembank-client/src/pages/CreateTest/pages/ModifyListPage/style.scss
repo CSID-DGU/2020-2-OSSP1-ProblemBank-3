@@ -1,0 +1,74 @@
+#layout{
+	#problem-list-block{
+		float : left;
+		width : 320px;
+		padding : 10px;
+		.text{
+			float : left;
+		}
+		select{
+			float : right;
+			vertical-align : top;
+			height : 130px;
+			width : 200px;
+			padding : 10px;
+		}
+		#problem-list{
+			height : 130px;
+			padding : 5px;
+			padding-left : 20px;
+		}
+		#button-box{
+			height : 35px;
+			padding-left : 165px;
+			padding-top : 10px;
+			button{
+				height : 25px;
+				width : 25px;
+				font-size : 20px;
+				font-weight : bold;
+				text-align : center;
+			}	
+		}
+		#test-problem-list{
+			height : 130px;
+			padding : 5px;
+		}
+	}
+	#new-problem{
+		float : left;
+		width : 530px;
+		padding : 15px;
+		.form{
+			width : 500px;
+			padding : 5px;
+			input{
+				padding-left : 10px;
+				height : 26px;
+				width : 430px;
+			}
+		}
+		#testcase-div{
+			#input-case{
+				float : left;
+				width : 220px;
+				padding-left : 5px;
+			}
+			#output-case{
+				float : left;
+				width : 220px;
+				padding-left : 5px;
+			}
+			width : 450px;
+			input{
+				height : 26px;
+				width : 210px;
+				margin-bottom : 6px;
+				margin-top : 6px;
+				padding-left : 4px;
+				border-style : none;
+				background-color : #DDDDDD;
+			}
+		}
+	}
+}

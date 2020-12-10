@@ -3,8 +3,6 @@ var router = express.Router();
 var db = require('../modules/db-connection');
 var sql = require('../sql');
 var compiler = require('../modules/compile-run');
-const { updateTestUserScoreByTestUserId } = require('../sql/tests');
-const tests = require('../sql/tests');
 var { PROBLEM_START_DELEMETER: startDelem, PROBLEM_END_DELEMETER: endDelem } = process.env;
 
 // 전체 시험 출력
@@ -344,7 +342,7 @@ router.post('/cancelreg', async function(req, res) {
 router.post('/testrun', async function (req, res) {
     const { sourceCode, problem_id, language } = req.body;
     const [testCases] = await db.query(sql.tests.selectTwoTestCaseByProblemId, [problem_id]);
-    let errormsg, output
+    let errormsg
     try {
         let result = [], count = 0;
 
@@ -382,7 +380,7 @@ router.post('/testrun', async function (req, res) {
             });
         })
 
-        for (let i = 0; i < promises.length; i++) { await promises[i] }
+        await Promise.all(promises)
         if (errormsg) errormsg = "컴파일 에러"
 
         res.status(200).send({
@@ -405,11 +403,11 @@ router.post('/submit', async function (req, res) {
     const { test_id, user_id, problems } = req.body;
     let correct = 0, wrong;
     try {
-        for (let i = 0; i < problems.length; i++) {
+        const promises1 = problems.map(async problem => {
             let correctCount = 0;
-            const { sourceCode, problem_id, language } = problems[i];
+            const { sourceCode, problem_id, language } = problem;
             const [testCases] = await db.query(sql.tests.selectTestCaseByProblemId, [problem_id]);
-            const promises = testCases.map(testcase => {
+            const promises2 = testCases.map(testcase => {
                 return new Promise((resolve) => {
                     const docker = compiler.getProblemDocker(sourceCode, language);
                     let isStarted = false;
@@ -435,12 +433,14 @@ router.post('/submit', async function (req, res) {
                     });
                 });
             })
-            for (let i = 0; i < promises.length; i++) { await promises[i] }
+            await Promise.all(promises2)
             if (correctCount == testCases.length) {
                 correct++
             }
             await db.query(sql.tests.insertUserAnswers, [test_id, problem_id, user_id, sourceCode])
-        }
+            return Promise.resolve()
+        })
+        await Promise.all(promises1)
 
         wrong = problems.length - correct
 

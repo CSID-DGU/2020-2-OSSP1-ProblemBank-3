@@ -358,11 +358,11 @@ router.post('/testrun', async function (req, res) {
                     if (!isStarted) return;
                     const line = (data.toString('utf-8'))
                     let output = line.replace("\n" + endDelem + "\n", "")
-                    output = output.replace(endDelem + "\n")
-                    output = output.replace(/\"/gi, "")
-                    output = output.replace(/\[[0-9]\]\ /, "")
+                    output = output.replace(/\[[0-9]\]\ \"/, "")
+                    output = output.replace(/\"\n$/, "\n")
                     if (output != "" && output != "\n" && output != "undefined") {
                         result[count] = { input_example: testcase.input_example, output }
+                        if(output.replace(/\n$/, "") == testcase.output_example) console.log("correct")
                         count++;
                     }
                 })
@@ -418,7 +418,12 @@ router.post('/submit', async function (req, res) {
                     docker.stdout.on("data", (data) => {
                         if (!isStarted) return;
                         const line = data.toString('utf-8');
-                        if (line.includes(testcase.output_example)) correctCount++;
+                        let output = line.replace("\n" + endDelem + "\n", "")
+                        output = output.replace(/\[[0-9]\]\ \"/, "")
+                        output = output.replace(/\"\n$/, "\n")
+                        if (output != "" && output != "\n" && output != "undefined") {
+                            if(output.replace(/\n$/, "") == testcase.output_example) correctCount++;
+                        }
                     })
 
                     docker.stdout.on("data", (data) => {

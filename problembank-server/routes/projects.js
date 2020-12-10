@@ -23,7 +23,12 @@ router.post('/compile', async function(req, res){
                 docker.stdout.on("data", (data) => {
                     if(!isStarted) return;
                     const line = data.toString('utf-8');
-                    if(line.includes(testcase.output)) correctCount++;
+                    let output = line.replace("\n" + endDelem + "\n", "")
+                    output = output.replace(/\[[0-9]\]\ \"/, "")
+                    output = output.replace(/\"\n$/, "\n")
+                    if (output != "" && output != "\n" && output != "undefined") {
+                        if(output.replace(/\n$/, "") == testcase.output) correctCount++;
+                    }
                 })
     
                 docker.stdout.on("data", (data) => {

@@ -184,7 +184,7 @@ function TestPage(props) {
         </Spacing>
         
       </div>
-      <Button test onPress={()=>TestButton()}>실험용</Button>
+      {/* <Button test onPress={()=>TestButton()}>실험용</Button> */}
     </TestLayout>
   );
 }

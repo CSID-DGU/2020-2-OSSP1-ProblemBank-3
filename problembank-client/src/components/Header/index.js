@@ -32,7 +32,7 @@ function Header(props) {
                         </li>
                         {/*사용자에 따라 test 또는 managetest로 redirect*/}
                         <li>
-                            <NavLink to="/testRedirect" activeClassName='active_class'>시험/대회</NavLink>
+                            <NavLink to="/test" activeClassName='active_class'>시험/대회</NavLink>
                         </li>
                         {/*<li>*/}
                         {/*    <NavLink to="/test" activeClassName='active_class'>시험/대회</NavLink>*/}

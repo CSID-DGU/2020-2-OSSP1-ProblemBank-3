@@ -57,18 +57,18 @@ function App() {
                 />
                 <Authorized
                     auth={auth}
-                    path="/testRedirect"
-                    render={props => <TestRedirect user={user} {...props} />}
+                    path="/test/student"
+                    render={props => <Test user={user} {...props} />}
                 />
                 <Authorized
                     auth={auth}
-                    path="/managetest"
+                    path="/test/admin"
                     render={props => <ManageTest user={user} {...props} />}
                 />
                 <Authorized
                     auth={auth}
                     path="/test"
-                    render={props => <Test user={user} {...props} />}
+                    render={props => <TestRedirect user={user} {...props} />}
                 />
                 <Authorized
                     auth={auth}

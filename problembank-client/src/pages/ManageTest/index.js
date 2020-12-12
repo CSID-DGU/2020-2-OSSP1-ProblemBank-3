@@ -11,7 +11,7 @@ function ManageTest({user}) {
             <Route exact path = {`${match.url}`} component = {ManageTestPage} />
         </Switch>
     )
-    else return <Redirect to="/test" />
+    else return <Redirect to="/test/student" />
 }
 
 export default ManageTest;

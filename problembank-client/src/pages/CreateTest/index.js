@@ -8,10 +8,13 @@ function CreateTest() {
     const match = useRouteMatch();
     console.log(match.url);
     return (
-        <Switch>
+        <div className="create-page-container" style={{marginLeft: '20px', marginTop: '20px'}}>
+            <Switch>
             <Route exact path = {`${match.url}`} component = {CreateTestPage} />
-	    <Route exact path = {`${match.url}/modifylist`} component = {ModifyListPage} />
-        </Switch>
+            <Route exact path = {`${match.url}/modifylist`} component = {ModifyListPage} />
+            </Switch>
+        </div>
+        
     )
 }
 

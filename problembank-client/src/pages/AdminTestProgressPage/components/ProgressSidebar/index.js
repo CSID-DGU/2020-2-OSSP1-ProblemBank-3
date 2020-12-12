@@ -5,7 +5,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 function ProgressSidebar(props) {
 
 	const history = useHistory();
-	const location = useLocation()
+	const location = useLocation();
 
     function handleFeedbackClick() {
 		history.push("/admintestprogress")

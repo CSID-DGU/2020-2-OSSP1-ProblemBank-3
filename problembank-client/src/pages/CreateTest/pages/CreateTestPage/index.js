@@ -3,75 +3,78 @@ import "./style.scss";
 import CreateTestLayout from "../../../../layouts/CreateTestLayout";
 import testAPI from "../../../../apis/tests";
 import Text from "../../../../components/DesignComponent/Text";
+import problemsBank from "../../../../apis/problemsBank";
+import { ThemeProvider } from "styled-components";
 
 class CreateTestPage extends Component {
 
     constructor(props){
-        super(props);
-	this.state = {
-	    params : {
-	        testName : "",
-		testContent : "",
-		is_exam : 0,
-		start : null,
-		end : null,
-		admin_id : -1,
-		subject_id : -1,
-		problems : []
-	    }
-	};
+		super(props);
+		this.state={
+			subject : [],
+			problem : []
+		}
     };
 
-    componentDidMount(){
-	for(var i = 0; i < 2; i++)
-            document.getElementsByClassName("data-calander")[i].value = new Date().toISOString().slice(0, 16);
-    }
+    async componentDidMount(){  
 
-    //getUserInfo = async() => 
+		const _subject = await problemsBank.getCategory();  // subject name select input
+		let { data } = _subject;
+		this.setState({
+			subject : data
+		})
+
+		for(var i = 0; i < 2; i++)  // input calander setting
+			document.getElementsByClassName("data-calander")[i].value = new Date().toISOString().slice(0, 16);
+		
+		document.getElementsByClassName("data-calander")[1].min = document.getElementsByClassName("data-calander")[0].value
+		document.getElementsByClassName("data-calander")[0].onchange = function() {
+			document.getElementsByClassName("data-calander")[1].min = document.getElementsByClassName("data-calander")[0].value
+		};
+	};
 
     saveTest = (props) => {
-	alert("asdf");
-        this.setState(params => ({
-	    testName : document.getElementById("name-text").value,
-	    testContent : document.getElementById("textarea").value,
-	    is_exam : document.getElementById("checkbox").value,
-	    start : document.getElementsByClassName("data-calander")[0].value,
-	    end : document.getElementsByClassName("data-calander")[1].value
-	    // admin_id : 
- 	    // subject_id : 
-	    // problems :
-	}));
-	console.log("asdf");
-	console.log(this.params);
-    }
+		if(document.getElementById("name-text").value === "")
+			alert("시험명을 입력해주세요");
+		else{
+			var params = {
+				'testName' : document.getElementById("name-text").value,
+				'testContent' : document.getElementById("textarea").value,
+				'start' : document.getElementsByClassName("data-calander")[0].value,
+				'end' : document.getElementsByClassName("data-calander")[1].value,
+				'admin_id' : props.id,
+				'subject_id' : document.getElementsByClassName("select")[0].value,
+				'problems' : this.state.problem
+			};
 
-    /*
-    const createTest = async (value)=>{
-        
-	setLoading(true);
-	const ret = {
-            testName : document.getElementById("name-label").value,
-	    testContent : document.getElementById("textarea").value,
-	    is_exam : document.getElementById("checkbox").value,
-	    start : document.getElementsByClassName("data-calander")[0].value,
-	    end : document.getElementsByClassName("data-calender")[1].value
-	    // admin_id : 
-	    // subject_id : 
-	    // problems :  
-	};
-	alert(ret);
+			if (document.getElementById("checkbox").value === "on")
+				params.is_exam = 1;
+			else
+				params.is_exam = 0;
 
-	//const response = await testAPI.regTest(ret);
-	console.log(ret);
-    }*/
+			const response = testAPI.createTest(params);
+			/* for debug
+			alert(params.testName);
+			alert(params.testContent);
+			alert(params.is_exam);
+			alert(params.start);
+			alert(params.end);
+			alert(params.admin_id);
+			alert(params.subject_id);
+			alert(params.problems);
+			*/
+		}
+		
+    };
     
     render(){
+
     return (
 	<CreateTestLayout>
 	<div id="CreateTestLayoutBody">
 	    <div class="testDate">
 	        <Text id="data-label">시험 일자</Text>
-	        <input type='datetime-local' class="data-calander"></input>  
+	        <input type='datetime-local' class="data-calander" onchange="calanderChange"></input>  
 	        <Text>~</Text>
 	        <input type='datetime-local' class="data-calander"></input>
 	    </div>
@@ -88,9 +91,12 @@ class CreateTestPage extends Component {
 
 	    <div class="className">
 	        <Text>과목명</Text>
-	        <select id="select">
-	            <option label="기초프로그래밍"/>
-	            <option label="웹프로그래밍"/>
+	        <select class="select">
+				{
+					this.state.subject.map(subject =>
+						( <option label={subject.name}/> )
+					)
+				}
 	        </select>
 	    </div>
 
@@ -102,8 +108,11 @@ class CreateTestPage extends Component {
 	    <div class="selectProblem">
 	        <Text>문제 선택</Text>
 	        <select multiple="multiple" id="select">
-	            <option label="자료구조"/>
-	            <option label="알고리즘"/>
+				{
+					this.state.problem.map(problem =>
+						( <option label={problem}/> )
+					)
+				}
 	        </select>
 	        <button class="button">목록 수정</button>
 	    </div>

@@ -20,8 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a2f59a0d-f558-407b-bbba-4b4bb6fb3971" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../problembank-client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../problembank-client/src/_actions/testAction.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/_actions/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/_actions/types.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyTests/components/MyTestsTable/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyTests/components/MyTestsTable/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyTests/pages/MyTestsPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyTests/pages/MyTestsPage/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyTests/pages/MyTestsPage/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyTests/pages/MyTestsPage/style.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -81,6 +84,8 @@
       <workItem from="1606645612479" duration="11447000" />
       <workItem from="1606952864352" duration="7933000" />
       <workItem from="1607108842232" duration="8824000" />
+      <workItem from="1607313408249" duration="196000" />
+      <workItem from="1607825325119" duration="2606000" />
     </task>
     <servers />
   </component>
@@ -108,25 +113,25 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="578" y="279" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1605156491503" />
-    <state width="1659" height="295" key="GridCell.Tab.0.bottom" timestamp="1607158672967">
+    <state width="1659" height="295" key="GridCell.Tab.0.bottom" timestamp="1607312500655">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1659" height="295" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1607012454862" />
+    <state width="1659" height="295" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1607312500655" />
     <state width="1659" height="295" key="GridCell.Tab.0.bottom/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1607158672967" />
-    <state width="1659" height="295" key="GridCell.Tab.0.center" timestamp="1607158672965">
+    <state width="1659" height="295" key="GridCell.Tab.0.center" timestamp="1607312500654">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1659" height="295" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1607012454861" />
+    <state width="1659" height="295" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1607312500654" />
     <state width="1659" height="295" key="GridCell.Tab.0.center/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1607158672965" />
-    <state width="1659" height="295" key="GridCell.Tab.0.left" timestamp="1607158672964">
+    <state width="1659" height="295" key="GridCell.Tab.0.left" timestamp="1607312500653">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1659" height="295" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1607012454861" />
+    <state width="1659" height="295" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1607312500653" />
     <state width="1659" height="295" key="GridCell.Tab.0.left/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1607158672964" />
-    <state width="1659" height="295" key="GridCell.Tab.0.right" timestamp="1607158672966">
+    <state width="1659" height="295" key="GridCell.Tab.0.right" timestamp="1607312500654">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1659" height="295" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1607012454862" />
+    <state width="1659" height="295" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1607312500654" />
     <state width="1659" height="295" key="GridCell.Tab.0.right/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1607158672966" />
   </component>
 </project>

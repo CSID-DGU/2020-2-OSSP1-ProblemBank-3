@@ -2,37 +2,14 @@ import React, {Component, useState} from 'react'
 import {Link, withRouter} from 'react-router-dom';
 import './style.scss'
 import testAPI from '../../../../apis/tests';
-import Button from "react-bootstrap/Button";
+
 
 class MyTestsTable extends Component{
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            code: false,
-            result: [],
-        }
-
-    }
-
-    getMyTests = async()  => {
-        const response = await testAPI.getUserTests({user_id: this.props.user.id});
-        this.setState({
-            code: response.result,
-            result: response.data
-        })
-        console.log(this.state.result)
-    }
-
-    handleClick = () => {
-        console.log("click!")
-    }
-
-    componentDidMount() {
-        this.getMyTests()
-    }
-
-
+    // handleClick = (test_id) => {
+    //     console.log("click!")
+    //     testAPI.cancelReg({user_id: this.props.user.id, test_id: test_id})
+    // }
 
     render() {
         return(
@@ -48,8 +25,8 @@ class MyTestsTable extends Component{
                 </thead>
                 <tbody>
                     {
-                        this.state.result.map((item,index) => {
-                            let date = item.start.substring(0,item.start.indexOf('T'))
+                        this.props.getTests().map((item,index) => {
+                            let date = item.date.substring(0,item.date.indexOf('T'))
                             return (
                                 <tr key = {index}>
                                     <td style={{textAlign: "center"}}>{index+1}</td>
@@ -58,7 +35,7 @@ class MyTestsTable extends Component{
                                         {item.is_exam ? (
                                             <button2>불가</button2>
                                         ) : (
-                                            <button onClick={this.handleClick}>취소</button>
+                                            <button onClick={() => this.props.handleClick(item.test_id)}>취소</button>
                                         )}
                                     </td>
                                     <td style={{textAlign: "center"}}>{date}</td>

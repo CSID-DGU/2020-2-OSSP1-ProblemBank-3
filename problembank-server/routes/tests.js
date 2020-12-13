@@ -298,6 +298,34 @@ router.post('/updatetest', async function (req, res) {
     }
 })
 
+// 문제 수정
+router.post('/updateproblem', async function (req, res) {
+    const { problem_id, problemName, problemContent, input, output } = req.body
+    const { testcases } = req.body
+    try {
+        await db.query(sql.tests.updateProblem, [problemName, problemContent, input, output, problem_id])
+        await db.query(sql.tests.deleteAllTestCases, [problem_id])
+
+        for (let j = 0; j < testcases.length; j++) {
+            const { input_ex, output_ex } = testcases[j]
+            await db.query(sql.tests.insertTestCases, [input_ex, output_ex, problem_id])
+        }
+
+        res.status(200).send({
+            result: true,
+            data: [],
+            message: 'update problem success'
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({
+            result: false,
+            data: [],
+            message: error
+        })
+    }
+})
+
 // 시험 신청
 router.post('/regtest', async function (req, res) {
     const { user_id, test_id } = req.body;

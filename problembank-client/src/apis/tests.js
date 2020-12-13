@@ -56,6 +56,11 @@ const testAPI = {
         return axiosClient.post(url, params)
     },
 
+    updateProblem: (params) => {
+        const url = '/tests/updateproblem';
+        return axiosClient.post(url, params)
+    },
+
     regTest: (params) => {
         const url = '/tests/regtest';
         return axiosClient.post(url, params);

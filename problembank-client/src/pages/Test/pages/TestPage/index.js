@@ -20,7 +20,6 @@ import testsAPI from '../../../../apis/tests';
 
 function TestPage(props) {
   const [loading, setLoading] = useState(true);
-  const [lastTotalIndex, setLastTotalIndex] = useState();
   const [totalList, setTotalList] = useState([]);
   const {user} = props;
   
@@ -29,39 +28,38 @@ function TestPage(props) {
       setTestList();
     }
     console.log("updated");
-  },[loading, lastTotalIndex])
+  },[loading])
 
   const setTestList = async () => {
     try{
-      const params = {
-        user_id: user.id,
-      };
-
-      // 신청하지 않은 contest 목록 가져오기
-      const response = await testsAPI.getAllTestData(params);
+      
+      
       if(user.is_admin==0){
+        const params = {
+          user_id: user.id,
+        };
+        // 신청하지 않은 contest 목록 가져오기
+        const response = await testsAPI.getAllTestData(params);
         const entry = response.data.filter((value)=> {
           return (Number(value.in_entry)===1);
         })
-        const result = response.data.filter((value)=> {
+        const entry2 = response.data.filter((value)=> {
           return (Number(value.in_entry)===0 && Number(value.is_exam)===0);
         })
   
         // 두 배열을 합치기
-        const total = entry.concat(result);
-        const total_num = total.length -1;
-        setTotalList(total);
-        setLastTotalIndex(total_num-(total_num%3));
+        const result = entry.concat(entry2);
+        setTotalList(result);
         setLoading(false);
       } else {
+        const params = {
+          admin_id: user.id,
+        };
+        const response = await testsAPI.getAdminTestList(params);
         const result = response.data;
         setTotalList(result);
-
-        const result_num = result.length -1;
-        setLastTotalIndex(result_num-(result_num%3));
         setLoading(false);
-      }
-      
+      } 
     } catch (error) {
         alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
         console.log(error)
@@ -101,9 +99,9 @@ function TestPage(props) {
   const TestButton = async () => {
     try{
       const params = {
-        user_id: 1,
+        admin_id: 1,
       };
-      const response = await testsAPI.getAllTestData(params);
+      const response = await testsAPI.getAdminTestList(params);
       console.log(response);
     } catch (error) {
         alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
@@ -143,15 +141,19 @@ function TestPage(props) {
           totalList.map((value, index, itself)=>{
             var prac;
             if(index%3 ==0){
-              if(totalList.length-(index+1) >=3){
+              if(totalList.length-index >3){
                 prac = itself.slice(index, index+3);
               } else {
                 prac = itself.slice(index, index+(totalList.length%3));
+                for(var i=0; i<(3-totalList.length%3);i++){
+                  prac.push(<div></div>);
+                }
               }
               return (
                 <InlineList distribution contentDistribution>
                   {
                     prac.map((value, index)=>{
+                      if(value.type=="div") return value;
                       var start = new Date(value.start);
                       var end = new Date(value.end);
                       var now = new Date();
@@ -178,7 +180,6 @@ function TestPage(props) {
                         test_name={value.name} timestamp={totalString} auth={value.admin_name}
                         disabled={invalid} type="apply"/>;
                       }
-                      
                     })
                   }
                 </InlineList>
@@ -191,15 +192,19 @@ function TestPage(props) {
           totalList.map((value, index, itself)=>{
             var prac;
             if(index%3 ==0){ // 3개씩 처리
-              if(totalList.length-(index+1) >=3){ // 끝부분이 3개로 정확히 나누어질 때 
+              if(totalList.length-index >3){ // 끝부분이 3개로 정확히 나누어질 때 
                 prac = itself.slice(index, index+3);
               } else {
                 prac = itself.slice(index, index+(totalList.length%3));
+                for(var i=0; i<(3-totalList.length%3);i++){
+                  prac.push(<div></div>);
+                }
               }
               return (
                 <InlineList distribution contentDistribution>
                   {
                     prac.map((value, index)=>{
+                      if(value.type=="div") return value;
                       var start = new Date(value.start);
                       var end = new Date(value.end);
                       var now = new Date();
@@ -210,7 +215,7 @@ function TestPage(props) {
                       var totalString = startString + " ~ " + endString;
                       return <TestDisplay onHeading={()=>{  
                         if(value.content)
-                          openModal(NOTICE_MODAL, {title:value.name ,auth:value.admin_name, content: value.content})
+                          openModal(NOTICE_MODAL, {title:value.name ,auth:user.name, content: value.content})
                       }}
                       // 이동하고 싶은 페이지 주소 적기
                       // onButton={() => props.history.push(`/test/student/view?index=0&test_id=${value.id}`)}

@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import Text from "../../../../components/DesignComponent/Text";
 import Heading from "../../../../components/DesignComponent/Heading";
 import Button from "../../../../components/DesignComponent/Button";
+import InlineList from "../../../../components/DesignComponent/InlineList";
 
 function TestDisplay(props)  {
 
@@ -22,7 +23,7 @@ function TestDisplay(props)  {
         <Heading level={4} onPress={onHeading}>{test_name}</Heading>
         <Text fade >{auth}</Text> <br />
         <Text fade >{timestamp}</Text> <br />
-        <div>
+        <InlineList align='right'>
         {
           (type === "enter" || type === "admin") ?
             (disabled?
@@ -42,7 +43,7 @@ function TestDisplay(props)  {
           ): ""
           
         }
-        </div>
+        </InlineList>
       </div>
     );
 }

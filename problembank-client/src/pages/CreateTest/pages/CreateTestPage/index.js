@@ -4,17 +4,27 @@ import CreateTestLayout from "../../../../layouts/CreateTestLayout";
 import testAPI from "../../../../apis/tests";
 import Text from "../../../../components/DesignComponent/Text";
 import problemsBank from "../../../../apis/problemsBank";
-import { ThemeProvider } from "styled-components";
+import ModifyListModal from "../../component/ModifyListModal";
 
 class CreateTestPage extends Component {
 
     constructor(props){
 		super(props);
 		this.state={
+			isModalOpen : true,
 			subject : [],
 			problem : []
 		}
     };
+
+	openModal = () => {
+		alert("asdf");
+		this.setState({ isModalOpen : true});
+	};
+
+	closeModal = () => {
+		this.setState({ isModalOpen : false});
+	}
 
     async componentDidMount(){  
 
@@ -64,12 +74,12 @@ class CreateTestPage extends Component {
 			alert(params.problems);
 			*/
 		}
-		
     };
     
     render(){
 
     return (
+	<>
 	<CreateTestLayout user = {this.props.user}>
 	<div id="CreateTestLayoutBody">
 	    <div class="testDate">
@@ -114,13 +124,15 @@ class CreateTestPage extends Component {
 					)
 				}
 	        </select>
-	        <button class="button">목록 수정</button>
+	        <button class="button" onClick={this.openModal}>목록 수정</button>
+			<ModifyListModal isOpen={this.state.isModalOpen} close={this.closeModal}/>
 	    </div>
 	    <div class="save">
 	        <button class="button" onClick={this.saveTest}>저장</button>
 	    </div>
 	</div>
 	</CreateTestLayout>
+	</>
     );
     }
 }

@@ -147,11 +147,11 @@ function TestPage(props) {
                       var now = new Date();
                       var invalid = false; // 현재는 테스트를 위해 작동이 되지 않게 함
                       if(now>end) invalid = true;
-                      var startString = start.getFullYear() +"-"+start.getMonth()+"-"+start.getDate()+" "+start.getHours()+":"+start.getMonth();
-                      var endString = end.getFullYear() +"-"+end.getMonth()+"-"+end.getDate()+" "+end.getHours()+":"+end.getMonth();
+                      var startString = start.getFullYear() +"-"+(start.getMonth()+1)+"-"+start.getDate()+" "+start.getHours()+":"+ (start.getMinutes()<10?'0':'') + start.getMinutes();
+                      var endString = end.getFullYear() +"-"+(end.getMonth()+1)+"-"+end.getDate()+" "+end.getHours()+":"+ (end.getMinutes()<10?'0':'') + end.getMinutes();
                       var totalString = startString + " ~ " + endString;
                       if(Number(value.in_entry)===1){ // 과목 시험이거나 내가 신청한 대회면은
-                        return <TestDisplay onHeading={()=>{
+                        return <TestDisplay onHeading={()=>{  
                           if(value.content)
                             openModal(NOTICE_MODAL, {title:value.name ,auth:value.admin_name, content: value.content})
                         }}

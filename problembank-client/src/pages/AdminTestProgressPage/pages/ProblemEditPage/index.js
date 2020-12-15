@@ -7,14 +7,35 @@ async function getTestProblemsList({test_id}) {
 	const response = await testAPI.getTestProblems({test_id});
 	if(response.result === true) {
 		return response.data;
-	} else throw new Error(response.data);
+	}
+	throw new Error(response.data);
 }
 
 async function getTestProblemData({problem_id}) {
 	const response = await testAPI.getTestProblemData({problem_id});
 	if(response.result === true) {
 		return response.data[0];
-	} else throw new Error(response.data[0]);
+	}
+	throw new Error(response.data[0]);
+}
+
+async function updateProblem({problemId, editData }) {
+	const data = {
+		problem_id: problemId, 
+		problemName: editData.name,
+		problemContent: editData.content,
+		input: editData.input,
+		output: editData.output,
+		testcases : editData.testcases
+	}
+	
+	console.log(data);
+	const response = await testAPI.updateProblem(data);
+	if(response.result === true) {
+		console.log(response.data)
+		// return response.data[0];
+	}
+	// throw new Error(response.data[0]);
 }
 
 function ProblemEditPage({ id }) {
@@ -65,6 +86,7 @@ function ProblemInputArea({problemId}) {
 		setEditData(data);
 	}, [data])
 
+
 	const handleChangeData = useCallback(
 		(event) => {
 			const { name, value } = event.target;
@@ -90,6 +112,13 @@ function ProblemInputArea({problemId}) {
 		},
 		[editData],
 	);
+
+	const handleSubmit = useCallback(
+		(event) => {
+			updateProblem({problemId, editData});
+		},
+		[problemId, editData],
+	)
 
 	if (error) return error.message;
 	if (editData) return (
@@ -166,7 +195,7 @@ function ProblemInputArea({problemId}) {
 							}
 						</div>
 					</div>
-				<button>수정</button>
+				<button onClick={handleSubmit}>수정</button>
 			</div>
 	);
 

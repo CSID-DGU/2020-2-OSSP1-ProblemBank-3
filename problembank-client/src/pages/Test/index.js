@@ -13,7 +13,7 @@ function Test({user}) {
         <Switch>
             <Route exact path = {`${match.url}/view`} render={(props) => <DoTest user={user} {...props} /> } />
             <Route exact path = {`${match.url}`} render={(props) => <TestPage user={user} {...props} /> } />
-            <Route exact path = {`${match.url}`} component = {NotFound} />
+            {/* <Route exact path = {`${match.url}`} component = {NotFound} /> */}
         </Switch>
     )
     else return <Redirect to="/test/admin"/>

@@ -10,7 +10,7 @@ router.get('/alltestdata', async function (req, res) {
     const { user_id } = req.query
     try {
         const [rows] = await db.query(sql.tests.selectTests)
-        for(let i = 0; i < rows.length; i++) {
+        for (let i = 0; i < rows.length; i++) {
             const [admin_name] = await db.query(sql.tests.selectUserNameById, [rows[i].admin_id])
             rows[i]["admin_name"] = admin_name[0].user_name
             if (rows[i].is_exam == '1') {
@@ -30,6 +30,21 @@ router.get('/alltestdata', async function (req, res) {
         })
     } catch (error) {
         console.log(`전체 시험 출력 API 오류 ${error}`)
+    }
+})
+
+// 관리자 시험 목록 출력
+router.get('/admintestlist', async function (req, res) {
+    const { admin_id } = req.query
+    try {
+        const [rows] = await db.query(sql.tests.selectTestsByAdminId, [admin_id])
+        res.status(200).send({
+            result: true,
+            data: rows,
+            message: 'admin test list'
+        })
+    } catch (error) {
+        console.log(error);
     }
 })
 
@@ -159,7 +174,7 @@ router.get('/useranswer', async function (req, res) {
     const { test_id, user_id } = req.query
     try {
         const [rows] = await db.query(sql.tests.selectTestProblemsByTestId, [test_id])
-        for(let i = 0; i < rows.length; i++) {
+        for (let i = 0; i < rows.length; i++) {
             const [answer] = await db.query(sql.tests.selectUserAnswerByIds, [test_id, rows[i].problem_id, user_id])
             rows[i]["answer"] = answer[0]
         }
@@ -348,7 +363,7 @@ router.post('/regtest', async function (req, res) {
 })
 
 // 시험 신청 취소
-router.post('/cancelreg', async function(req, res) {
+router.post('/cancelreg', async function (req, res) {
     const { user_id, test_id } = req.body;
     try {
         await db.query(sql.tests.deleteTestUser, [user_id, test_id])
@@ -374,7 +389,7 @@ router.post('/testrun', async function (req, res) {
     let errormsg
     try {
         let result = [], count = 0;
-        
+
         const promises = testCases.map(testcase => {
             return new Promise((resolve) => {
                 const docker = compiler.getProblemDocker(sourceCode, language);
@@ -451,7 +466,7 @@ router.post('/submit', async function (req, res) {
                         output = output.replace(/\[[0-9]\]\ \"/, "")
                         output = output.replace(/\"\n$/, "\n")
                         if (output != "" && output != "\n" && output != "undefined") {
-                            if(output.replace(/\n$/, "") == testcase.output_example) correctCount++;
+                            if (output.replace(/\n$/, "") == testcase.output_example) correctCount++;
                         }
                     })
 
@@ -497,7 +512,7 @@ router.post('/submit', async function (req, res) {
 
 // 오류 보고
 router.post('reporterror', async function (req, res) {
-    const {test_id, user_id, content} = req.body;
+    const { test_id, user_id, content } = req.body;
     try {
         await db.query(sql.tests.insertfeedback, [test_id, user_id, content])
         req.status(200).send({

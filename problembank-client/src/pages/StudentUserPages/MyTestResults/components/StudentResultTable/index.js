@@ -31,7 +31,14 @@ class StudentResultTable extends Component{
                                     <td style={{textAlign: "center"}}>{item.test_name}</td>
                                     <td style={{textAlign: "center"}}>{item.correct}</td>
                                     <td style={{textAlign: "center"}}>{item.wrong}</td>
-                                    <td style={{textAlign: "center"}}><button>열람</button></td>
+                                    <td style={{textAlign: "center"}}>
+                                        {Date.parse(item.date) < Date.now() ? (
+                                            <button>열람</button>
+                                        ) : (
+                                            <button2>열람</button2>
+                                        )}
+                                    </td>
+
                                     <td style={{textAlign: "center"}}>{date}</td>
                                 </tr>
                             )

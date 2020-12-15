@@ -24,20 +24,20 @@ function TestDisplay(props)  {
         <Text fade >{timestamp}</Text> <br />
         <div>
         {
-          (type === "enter") ?
+          (type === "enter" || type === "admin") ?
             (disabled?
-              <Button test distance onPress={onButton}>입장</Button>:
+              <Button test distance disabled onPress={onButton}>입장</Button>:
               <Button test distance onPress={onButton}>입장</Button>
             ):
             (disabled?
-              <Button contest onPress={onButton} >신청</Button>:
+              <Button contest disabled onPress={onButton} >신청</Button>:
               <Button contest onPress={onButton}>신청</Button>
             )
         }
         {
           (type === "enter" && Number(isExam) === 0) ?
           (disabled?
-            <Button test onPress={onCancel}>취소</Button>:
+            <Button test disabled onPress={onCancel}>취소</Button>:
             <Button test onPress={onCancel}>취소</Button>
           ): ""
           

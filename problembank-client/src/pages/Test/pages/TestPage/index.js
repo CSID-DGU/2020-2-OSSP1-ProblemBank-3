@@ -15,9 +15,9 @@ import Loading from '../../../../components/Loading/Loading';
 import {Consumer as ModalConsumer} from '../../../../components/Modal/createModalProvider';
 import {NOTICE_MODAL} from '../../../../components/Modal/ModalProviderWithKey';
 import testsAPI from '../../../../apis/tests';
-import {debounce} from '../../components/Debounce'
 
-const debounceRunner = debounce(action=> action(), 4000);
+
+
 function TestPage(props) {
   const [loading, setLoading] = useState(true);
   const [lastTotalIndex, setLastTotalIndex] = useState();
@@ -39,19 +39,29 @@ function TestPage(props) {
 
       // 신청하지 않은 contest 목록 가져오기
       const response = await testsAPI.getAllTestData(params);
-      const entry = response.data.filter((value)=> {
-        return (Number(value.in_entry)===1);
-      })
-      const result = response.data.filter((value)=> {
-        return (Number(value.in_entry)===0 && Number(value.is_exam)===0);
-      })
+      if(user.is_admin==0){
+        const entry = response.data.filter((value)=> {
+          return (Number(value.in_entry)===1);
+        })
+        const result = response.data.filter((value)=> {
+          return (Number(value.in_entry)===0 && Number(value.is_exam)===0);
+        })
+  
+        // 두 배열을 합치기
+        const total = entry.concat(result);
+        const total_num = total.length -1;
+        setTotalList(total);
+        setLastTotalIndex(total_num-(total_num%3));
+        setLoading(false);
+      } else {
+        const result = response.data;
+        setTotalList(result);
 
-      // 두 배열을 합치기
-      const total = entry.concat(result);
-      const total_num = total.length -1;
-      setTotalList(total);
-      setLastTotalIndex(total_num-(total_num%3));
-      setLoading(false);
+        const result_num = result.length -1;
+        setLastTotalIndex(result_num-(result_num%3));
+        setLoading(false);
+      }
+      
     } catch (error) {
         alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
         console.log(error)
@@ -91,10 +101,10 @@ function TestPage(props) {
   const TestButton = async () => {
     try{
       const params = {
-        user_id: user.id,
+        user_id: 1,
       };
-      // const response = await testsAPI.getUserTests(params);
-      console.log(totalList);
+      const response = await testsAPI.getAllTestData(params);
+      console.log(response);
     } catch (error) {
         alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
         console.log(error)
@@ -128,12 +138,12 @@ function TestPage(props) {
           <ModalConsumer>
           {({openModal})=>(
           <div>
-        { 
+        { (user.is_admin == 0)?
           totalList.length !=0 &&
           totalList.map((value, index, itself)=>{
             var prac;
             if(index%3 ==0){
-              if(index%3 !=lastTotalIndex){
+              if(totalList.length-(index+1) >=3){
                 prac = itself.slice(index, index+3);
               } else {
                 prac = itself.slice(index, index+(totalList.length%3));
@@ -145,7 +155,7 @@ function TestPage(props) {
                       var start = new Date(value.start);
                       var end = new Date(value.end);
                       var now = new Date();
-                      var invalid = false; // 현재는 테스트를 위해 작동이 되지 않게 함
+                      var invalid = false; 
                       if(now>end) invalid = true;
                       var startString = start.getFullYear() +"-"+(start.getMonth()+1)+"-"+start.getDate()+" "+start.getHours()+":"+ (start.getMinutes()<10?'0':'') + start.getMinutes();
                       var endString = end.getFullYear() +"-"+(end.getMonth()+1)+"-"+end.getDate()+" "+end.getHours()+":"+ (end.getMinutes()<10?'0':'') + end.getMinutes();
@@ -176,6 +186,45 @@ function TestPage(props) {
             }
 
           })
+          :
+          totalList.length !=0 &&
+          totalList.map((value, index, itself)=>{
+            var prac;
+            if(index%3 ==0){ // 3개씩 처리
+              if(totalList.length-(index+1) >=3){ // 끝부분이 3개로 정확히 나누어질 때 
+                prac = itself.slice(index, index+3);
+              } else {
+                prac = itself.slice(index, index+(totalList.length%3));
+              }
+              return (
+                <InlineList distribution contentDistribution>
+                  {
+                    prac.map((value, index)=>{
+                      var start = new Date(value.start);
+                      var end = new Date(value.end);
+                      var now = new Date();
+                      var invalid = false; 
+                      if(now>end || now<start) invalid = true;
+                      var startString = start.getFullYear() +"-"+(start.getMonth()+1)+"-"+start.getDate()+" "+start.getHours()+":"+ (start.getMinutes()<10?'0':'') + start.getMinutes();
+                      var endString = end.getFullYear() +"-"+(end.getMonth()+1)+"-"+end.getDate()+" "+end.getHours()+":"+ (end.getMinutes()<10?'0':'') + end.getMinutes();
+                      var totalString = startString + " ~ " + endString;
+                      return <TestDisplay onHeading={()=>{  
+                        if(value.content)
+                          openModal(NOTICE_MODAL, {title:value.name ,auth:value.admin_name, content: value.content})
+                      }}
+                      // 이동하고 싶은 페이지 주소 적기
+                      // onButton={() => props.history.push(`/test/student/view?index=0&test_id=${value.id}`)}
+                      onButton={() => {}}
+                      test_name={value.name} timestamp={totalString} auth={value.admin_name}
+                      disabled={invalid} type="admin" isExam={value.is_exam} 
+                      />;
+                    })
+                  }
+                </InlineList>
+              );
+            }
+
+          })
         }
         </div>
         )}
@@ -184,7 +233,7 @@ function TestPage(props) {
         </Spacing>
         
       </div>
-      {/* <Button test onPress={()=>TestButton()}>실험용</Button> */}
+      <Button test onPress={()=>TestButton()}>실험용</Button>
     </TestLayout>
   );
 }

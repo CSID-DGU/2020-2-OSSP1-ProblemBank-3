@@ -9,14 +9,21 @@ function Test({user}) {
     const match = useRouteMatch();
     console.log(match.url);
 
-    if(!user.is_admin) return (
-        <Switch>
-            <Route exact path = {`${match.url}/view`} render={(props) => <DoTest user={user} {...props} /> } />
-            <Route exact path = {`${match.url}`} render={(props) => <TestPage user={user} {...props} /> } />
-            {/* <Route exact path = {`${match.url}`} component = {NotFound} /> */}
-        </Switch>
-    )
-    else return <Redirect to="/test/admin"/>
+    return (
+    <Switch>
+        <Route exact path = {`${match.url}/view`} render={(props) => <DoTest user={user} {...props} /> } />
+        <Route exact path = {`${match.url}`} render={(props) => <TestPage user={user} {...props} /> } />
+        {/* <Route exact path = {`${match.url}`} component = {NotFound} /> */}
+    </Switch>);
+
+    // if(!user.is_admin) return (
+    //     <Switch>
+    //         <Route exact path = {`${match.url}/view`} render={(props) => <DoTest user={user} {...props} /> } />
+    //         <Route exact path = {`${match.url}`} render={(props) => <TestPage user={user} {...props} /> } />
+    //         {/* <Route exact path = {`${match.url}`} component = {NotFound} /> */}
+    //     </Switch>
+    // )
+    // else return <Redirect to="/test/admin"/>
 }
 
 export default Test;

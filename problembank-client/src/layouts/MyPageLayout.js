@@ -1,7 +1,7 @@
 import React from 'react';
 import Sidebar from '../components/Sidebar/mypage';
 
-function MyTestsLayout(props) {
+function MyPageLayout(props) {
     const { children } = props;
     const { user } = props;
     return (
@@ -14,4 +14,4 @@ function MyTestsLayout(props) {
     );
 }
 
-export default MyTestsLayout;
+export default MyPageLayout;

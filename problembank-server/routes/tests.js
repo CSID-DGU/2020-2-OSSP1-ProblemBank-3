@@ -142,6 +142,7 @@ router.get('/userresult', async function (req, res) {
             const { test_id } = rows[i]
             const [testname] = await db.query(sql.tests.selectTestByTestId, [test_id])
             rows[i]["test_name"] = testname[0].name;
+            rows[i]["date"] = testname[0].start;
         }
         res.status(200).send({
             result: true,

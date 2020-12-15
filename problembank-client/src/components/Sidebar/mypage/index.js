@@ -55,7 +55,7 @@ function Sidebar(props) {
 								</li>
 							) : (
 								<li>
-									<NavLink to="/" className="navLink">시험 결과 조회</NavLink>
+									<NavLink to="/studenttestresult" className="navLink">시험 결과 조회</NavLink>
 								</li>
 							)}
 
@@ -65,7 +65,7 @@ function Sidebar(props) {
 								</li>
 							) : (
 								<li>
-									<NavLink to="/mytests" className="navLink">시험 조회 및 수정</NavLink>
+									<NavLink to="/mytests" className="navLink">신청 시험 조회</NavLink>
 								</li>
 							)}
 

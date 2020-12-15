@@ -20,17 +20,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a2f59a0d-f558-407b-bbba-4b4bb6fb3971" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTestResults/components/StudentResultTable/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTestResults/components/StudentResultTable/style.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTestResults/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTestResults/pages/StudentTestResultPage/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTestResults/pages/StudentTestResultPage/style.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTests/components/MyTestsTable/.index.js.swp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../problembank-client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/_actions/testAction.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/_actions/testAction.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/_actions/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/_actions/types.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../problembank-client/src/components/Sidebar/mypage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/components/Sidebar/mypage/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/layouts/CreateTestLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/layouts/CreateTestLayout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/layouts/ManageTestLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/layouts/ManageTestLayout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/CreateTest/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/CreateTest/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/CreateTest/pages/CreateTestPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/CreateTest/pages/CreateTestPage/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/ManageTest/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/ManageTest/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/ManageTest/pages/ManageTestPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/ManageTest/pages/ManageTestPage/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/MyPagePage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/MyPagePage/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/Test/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/Test/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/layouts/MyTestsLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/layouts/MyPageLayout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyProblems/components/FavoritePanel/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyProblems/components/MyListContainer/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyProblems/components/ProgressPanel/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyProblems/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyProblems/pages/MyListPage/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyProblems/pages/MyListPage/style.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyTests/components/MyTestsTable/.index.js.swp" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTestResults/components/StudentResultTable/.index.js.swp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyTests/components/MyTestsTable/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTests/components/MyTestsTable/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyTests/components/MyTestsTable/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTests/components/MyTestsTable/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyTests/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTests/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyTests/pages/MyTestsPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTests/pages/MyTestsPage/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyTests/pages/MyTestsPage/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTests/pages/MyTestsPage/style.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/tests.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/tests.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +105,7 @@
       <workItem from="1607108842232" duration="8824000" />
       <workItem from="1607313408249" duration="196000" />
       <workItem from="1607825325119" duration="3127000" />
-      <workItem from="1607996318532" duration="1322000" />
+      <workItem from="1607996318532" duration="3991000" />
     </task>
     <servers />
   </component>
@@ -119,25 +133,25 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="578" y="279" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1605156491503" />
-    <state width="1659" height="295" key="GridCell.Tab.0.bottom" timestamp="1607896821366">
+    <state width="1659" height="244" key="GridCell.Tab.0.bottom" timestamp="1608008070503">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="1659" height="295" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1607896821366" />
-    <state width="1659" height="295" key="GridCell.Tab.0.bottom/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1607842517887" />
-    <state width="1659" height="295" key="GridCell.Tab.0.center" timestamp="1607896821365">
+    <state width="1659" height="244" key="GridCell.Tab.0.bottom/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1608008070503" />
+    <state width="1659" height="244" key="GridCell.Tab.0.center" timestamp="1608008070501">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="1659" height="295" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1607896821365" />
-    <state width="1659" height="295" key="GridCell.Tab.0.center/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1607842517885" />
-    <state width="1659" height="295" key="GridCell.Tab.0.left" timestamp="1607896821364">
+    <state width="1659" height="244" key="GridCell.Tab.0.center/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1608008070501" />
+    <state width="1659" height="244" key="GridCell.Tab.0.left" timestamp="1608008070500">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="1659" height="295" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1607896821364" />
-    <state width="1659" height="295" key="GridCell.Tab.0.left/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1607842517884" />
-    <state width="1659" height="295" key="GridCell.Tab.0.right" timestamp="1607896821365">
+    <state width="1659" height="244" key="GridCell.Tab.0.left/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1608008070500" />
+    <state width="1659" height="244" key="GridCell.Tab.0.right" timestamp="1608008070502">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="1659" height="295" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1607896821365" />
-    <state width="1659" height="295" key="GridCell.Tab.0.right/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1607842517886" />
+    <state width="1659" height="244" key="GridCell.Tab.0.right/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1608008070502" />
   </component>
 </project>

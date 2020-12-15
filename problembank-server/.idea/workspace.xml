@@ -20,8 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a2f59a0d-f558-407b-bbba-4b4bb6fb3971" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTestResults/components/StudentResultTable/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTestResults/components/StudentResultTable/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTestResults/components/StudentResultTable/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTestResults/components/StudentResultTable/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTests/components/MyTestsTable/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTests/components/MyTestsTable/style.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

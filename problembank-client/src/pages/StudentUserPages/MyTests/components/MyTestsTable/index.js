@@ -28,9 +28,9 @@ class MyTestsTable extends Component{
                                     <td style={{textAlign: "center"}}>{item.test_name}</td>
                                     <td style={{textAlign: "center"}}>
                                         {item.is_exam ? (
-                                            <button2>불가</button2>
+                                            <buttonGrey>불가</buttonGrey>
                                         ) : (
-                                            <button onClick={() => this.props.handleClick(item.test_id)}>취소</button>
+                                            <buttonRed onClick={() => this.props.handleClick(item.test_id)}>취소</buttonRed>
                                         )}
                                     </td>
                                     <td style={{textAlign: "center"}}>{date}</td>

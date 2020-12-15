@@ -1,16 +1,14 @@
 import React from 'react'
-import {Route, Switch, useRouteMatch} from 'react-router-dom';
+import {Route, useRouteMatch} from 'react-router-dom';
 import AdminTestResultPage from './pages/AdminTestResultPage';
-import NotFound from '../../components/404NotFound';
 
-function AdminTestResult() {
+function AdminTestResult({user}) {
     const match = useRouteMatch();
     console.log(match.url);
     return (
-        <Switch>
-            <Route exact path = {`${match.url}`} component = {AdminTestResultPage} />
-        </Switch>
-    )
+        <Route exact path = {`${match.url}`} render={(props) => <AdminTestResultPage user={user} {...props}/>} />
+        )
+
 }
 
 export default AdminTestResult;

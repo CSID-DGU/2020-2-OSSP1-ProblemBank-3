@@ -71,7 +71,7 @@ function MyTestsPage(props) {
 	}
 
     return(
-    	<MyTestsLayout>
+    	<MyTestsLayout user = {user}>
 	    <div id="content">
 	        <div id="content-header">
 	            <div id="testDate">

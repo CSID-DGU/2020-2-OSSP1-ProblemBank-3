@@ -4,9 +4,9 @@ import AdminTestResultLayout from "../../../../layouts/AdminTestResultLayout";
 import AdminResultTable from "../../components/AdminResultTable";
 
 function AdminTestResultPage(props) {
-
+	const {user} = props
     return(
-        <AdminTestResultLayout>
+        <AdminTestResultLayout user = {user}>
 	    <div id="content">
 	        <div id="content-header">
 	            <div id="testDate">

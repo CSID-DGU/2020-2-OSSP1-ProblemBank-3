@@ -12,7 +12,7 @@ import {signin} from './components/Authentication/Auth';
 import Authorized from './components/Authentication/Authorized';
 const LoginPage = React.lazy(() => import('./pages/LoginPage'))
 
-const TestRedirect = React.lazy(() => import('./components/TestRedirect'))
+const TestRedirect = React.lazy(() => import('./pages/TestRedirect'))
 
 const MainPage = React.lazy(() => import('./pages/MainPage'))
 const ProblemsByCategories = React.lazy(() => import('./pages/ProblemsByCategories'));
@@ -24,6 +24,8 @@ const CreateTest = React.lazy(() => import('./pages/CreateTest'))
 const AdminTestProgress = React.lazy(() => import('./pages/AdminTestProgressPage'))
 const AdminTestResult = React.lazy(() => import('./pages/AdminTestResult'))
 const MyTests = React.lazy(() => import('./pages/MyTests'))
+const MyPage = React.lazy(() => import('./pages/MyPage'))
+
 // const MyAdminTests = React.lazy(() => import('./pages/MyAdminTests'))
 
 
@@ -72,8 +74,18 @@ function App() {
                 />
                 <Authorized
                     auth={auth}
+                    path="/mypage"
+                    render={props => <MyPage user={user} {...props} />}
+                />
+                <Authorized
+                    auth={auth}
                     path="/mytests"
                     render={props => <MyTests user={user} {...props} />}
+                />
+                <Authorized
+                    auth={auth}
+                    path="/admintestresult"
+                    render={props => <AdminTestResult user={user} {...props} />}
                 />
                 <Route exact path = "/"  component = {MainPage}/>
                 <Route path = "/totalproblems"  component = {TotalProblems}/>
@@ -81,8 +93,7 @@ function App() {
                 <Route path = "/problem"  component = {Problem}/>
 	            <Route path = "/createtest" component = {CreateTest}/>
                 <Route path="/admintestprogress" component={AdminTestProgress} />
-	            <Route path="/admintestresult" component={AdminTestResult} />
-                {/*<Route path="/myadmintests" component={MyAdminTests} />*/}
+                {/*<Route path="/studenttestresult" component={MyAdminTests} />*/}
 
 
                 <Route component = {NotFound} />

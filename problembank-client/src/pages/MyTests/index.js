@@ -6,9 +6,7 @@ function MyTests({user}) {
     const match = useRouteMatch();
     console.log(match.url);
     return (
-        <Switch>
-            <Route exact path = {`${match.url}`} render={(props) => <MyTestsPage user={user} {...props}/>} />
-        </Switch>
+        <Route exact path = {`${match.url}`} render={(props) => <MyTestsPage user={user} {...props}/>} />
     )
 }
 

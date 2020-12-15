@@ -3,9 +3,10 @@ import Sidebar from '../components/Sidebar/mypage';
 
 function MyTestsLayout(props) {
     const { children } = props;
+    const { user } = props;
     return (
         <div>
-	    <Sidebar></Sidebar>
+	    <Sidebar user = {user}></Sidebar>
             <div>
                 { children }
             </div>

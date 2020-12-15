@@ -34,12 +34,11 @@ function Header(props) {
                         <li>
                             <NavLink to="/test" activeClassName='active_class'>시험/대회</NavLink>
                         </li>
-                        {/*<li>*/}
-                        {/*    <NavLink to="/test" activeClassName='active_class'>시험/대회</NavLink>*/}
-                        {/*</li>*/}
-                        {/*<li>*/}
-                        {/*    <NavLink to="/managetest" activeClassName='active_class'>시험/대회(관리자)</NavLink>*/}
-                        {/*</li>*/}
+                        {/*마이페이지*/}
+                        <li>
+                            <NavLink to="/mypage" activeClassName='active_class'>마이페이지</NavLink>
+                        </li>
+
                         <li>
                             {/*auth 상태에 따라 다르게 표시*/}
                             {props.auth ? (

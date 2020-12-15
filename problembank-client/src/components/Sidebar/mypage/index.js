@@ -53,11 +53,16 @@ function Sidebar(props) {
 	                            <NavLink to="/" className="navLink">시험 결과 조회</NavLink>
 	                        </li>
 	                        <li>
-	                            <NavLink to="/" className="navLink">시험 조회 및 수정</NavLink>
+	                            <NavLink to="/mytests" className="navLink">시험 조회 및 수정</NavLink>
 	                        </li>
-	                        <li>
-	                            <NavLink to="/" className="navLink">시험 생성</NavLink>
-	                        </li>
+							{props.user.is_admin ? (
+								<li>
+									<NavLink to="/" className="navLink">시험 생성</NavLink>
+								</li>
+							) : (
+								<li/>
+							)}
+
 	                    </ul>
 	                </div>
 	            </div>
@@ -66,5 +71,6 @@ function Sidebar(props) {
 	</div>
     )
 }
+
 
 export default Sidebar

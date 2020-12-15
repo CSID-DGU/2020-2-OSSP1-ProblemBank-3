@@ -44,8 +44,8 @@ function LoginPage({auth, login, location}) {
                             <input
                                 class="inputArea"
                                 type="password"
-                                   size="15"
-                                   onChange={(e) => setId(e.target.value)}
+                                size="15"
+                                onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
                     </Form.Group>

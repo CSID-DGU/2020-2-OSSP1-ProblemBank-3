@@ -6,6 +6,11 @@ const testAPI = {
         return axiosClient.get(url, {params});
     },
 
+    getAdminTestList: (params) => {
+        const url = '/tests/admintestlist';
+        return axiosClient.get(url, {params});
+    },
+
     getTestProblems: (params) => {
         const url = '/tests/testproblems';
         return axiosClient.get(url, {params});

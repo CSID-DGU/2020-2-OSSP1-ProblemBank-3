@@ -311,7 +311,7 @@ function DoTest(props) {
                                 {
                                     problems.length !==0 &&
                                     problems.map((value, index)=>
-                                <button onClick={() => {handelSourceCodeChange(index); props.history.push(`/test/view?index=${Number(index)}&test_id=${test_id}`)}}>
+                                <button onClick={() => {handelSourceCodeChange(index); props.history.push(`/test/student/view?index=${Number(index)}&test_id=${test_id}`)}}>
                                     {problems[index].name}</button>)
                                 }
                             </Dropup>
@@ -320,10 +320,10 @@ function DoTest(props) {
                             {
                                 problems.length !== 0 ?
                                     <>
-                                    <Button onPress={() => {handelSourceCodeChange(Number(index)- 1); props.history.push(`/test/view?index=${Number(index)- 1}&test_id=${test_id}`)}} 
+                                    <Button onPress={() => {handelSourceCodeChange(Number(index)- 1); props.history.push(`/test/student/view?index=${Number(index)- 1}&test_id=${test_id}`)}} 
                                         disabled={index==0} >이전</Button>&nbsp;
                                         <span>{Number(index)+1}/{problems.length}</span>&nbsp;
-                                    <Button onPress={() => {handelSourceCodeChange(Number(index)+ 1); props.history.push(`/test/view?index=${Number(index)+ 1}&test_id=${test_id}`);}} 
+                                    <Button onPress={() => {handelSourceCodeChange(Number(index)+ 1); props.history.push(`/test/student/view?index=${Number(index)+ 1}&test_id=${test_id}`);}} 
                                         disabled={index == (problems.length-1)}>다음</Button>
                                     </>
                                 : ""

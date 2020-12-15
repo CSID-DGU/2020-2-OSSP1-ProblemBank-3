@@ -49,15 +49,29 @@ function Sidebar(props) {
 	                <button className={`accordion ${location.pathname === '/createtest' && 'active'}`} onClick={SidebarClick}>내 시험/대회</button>
 	                <div class="panel">
 	                    <ul>
-	                        <li>
-	                            <NavLink to="/" className="navLink">시험 결과 조회</NavLink>
-	                        </li>
-	                        <li>
-	                            <NavLink to="/mytests" className="navLink">시험 조회 및 수정</NavLink>
-	                        </li>
 							{props.user.is_admin ? (
 								<li>
-									<NavLink to="/" className="navLink">시험 생성</NavLink>
+									<NavLink to="/admintestresult" className="navLink">시험 결과 조회</NavLink>
+								</li>
+							) : (
+								<li>
+									<NavLink to="/" className="navLink">시험 결과 조회</NavLink>
+								</li>
+							)}
+
+							{props.user.is_admin ? (
+								<li>
+									<NavLink to="/test/admin" className="navLink">시험 조회 및 수정</NavLink>
+								</li>
+							) : (
+								<li>
+									<NavLink to="/mytests" className="navLink">시험 조회 및 수정</NavLink>
+								</li>
+							)}
+
+							{props.user.is_admin ? (
+								<li>
+									<NavLink to="/createtest" className="navLink">시험 생성</NavLink>
 								</li>
 							) : (
 								<li/>

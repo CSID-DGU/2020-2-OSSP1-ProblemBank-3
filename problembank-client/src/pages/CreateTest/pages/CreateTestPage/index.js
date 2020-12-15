@@ -70,7 +70,7 @@ class CreateTestPage extends Component {
     render(){
 
     return (
-	<CreateTestLayout>
+	<CreateTestLayout user = {this.props.user}>
 	<div id="CreateTestLayoutBody">
 	    <div class="testDate">
 	        <Text id="data-label">시험 일자</Text>

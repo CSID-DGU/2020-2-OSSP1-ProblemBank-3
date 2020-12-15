@@ -9,9 +9,9 @@ import Spacing from "../../../../components/DesignComponent/Spacing";
 function TestPage(props) {
     const [loading, setLoading] = useState(false);
     const [type, setType] = useState(false);
-
+	const {user} = props
     return (
-	<ManageTestLayout>
+	<ManageTestLayout user = {user}>
         <div class="ManageTestPage">
 	    <div class="testName1">
                 <Text id="name-label">시험명</Text>

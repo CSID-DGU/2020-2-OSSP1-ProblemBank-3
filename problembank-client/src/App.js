@@ -30,10 +30,10 @@ const MyPage = React.lazy(() => import('./pages/MyPage'))
 
 
 function App() {
-    // const [user, setUser] = useState(null);
+    const [user, setUser] = useState(null);
     // 로그인 하기가 귀찮을 때 테스트 할 아이디를 선택해서 주석 해제. 할 때 위에꺼 주석하는거 잊지 말기
     // const [user, setUser] = useState({id:1, is_admin: 1}); //admin 용
-    const [user, setUser] = useState({id:2, is_admin: 0}); // student 용
+    // const [user, setUser] = useState({id:2, is_admin: 0}); // student 용
     const login = async ({id, password}) => {
         try{
             let res = await signin({id, password})
@@ -87,11 +87,15 @@ function App() {
                     path="/admintestresult"
                     render={props => <AdminTestResult user={user} {...props} />}
                 />
+                <Authorized
+                    auth={auth}
+                    path="/createtest"
+                    render={props => <CreateTest user={user} {...props} />}
+                />
                 <Route exact path = "/"  component = {MainPage}/>
                 <Route path = "/totalproblems"  component = {TotalProblems}/>
                 <Route path = "/problemsbank"  component = {ProblemsByCategories}/>
                 <Route path = "/problem"  component = {Problem}/>
-	            <Route path = "/createtest" component = {CreateTest}/>
                 <Route path="/admintestprogress" component={AdminTestProgress} />
                 {/*<Route path="/studenttestresult" component={MyAdminTests} />*/}
 

@@ -16,7 +16,7 @@ function Test({user}) {
             <Route exact path = {`${match.url}`} component = {NotFound} />
         </Switch>
     )
-    else return <Redirect to="/test/admin" />
+    else return <Redirect to="/test/admin"/>
 }
 
 export default Test;

@@ -235,9 +235,9 @@ router.post('/createtest', async function (req, res) {
                 await db.query(sql.tests.insertProblemIntoTest, [test_id[0].id, inserted[0].id])
 
                 for (let j = 0; j < testcases.length; j++) {
-                    const { input_ex, output_ex } = testcases[j]
+                    const { input_exp, output_exp } = testcases[j]
 
-                    await db.query(sql.tests.insertTestCases, [input_ex, output_ex, inserted[0].id])
+                    await db.query(sql.tests.insertTestCases, [input_exp, output_exp, inserted[0].id])
                 }
             }
         }
@@ -280,8 +280,8 @@ router.post('/updatetest', async function (req, res) {
             await db.query(sql.tests.deleteAllTestCases, [problem_id])
 
             for (let j = 0; j < testcases.length; j++) {
-                const { input_ex, output_ex } = testcases[j]
-                await db.query(sql.tests.insertTestCases, [input_ex, output_ex, problem_id])
+                const { input_exp, output_exp } = testcases[j]
+                await db.query(sql.tests.insertTestCases, [input_exp, output_exp, problem_id])
             }
         }
         res.status(200).send({

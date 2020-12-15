@@ -117,7 +117,13 @@ function DoTest(props) {
             
             var timeOutSubmit = function(){
                 // alert(`채점 결과 ${data.correctCount} / ${data.count}`);
-                alert(response.message);
+                let alertstring = ""
+                if (response.data.errormsg == undefined)
+                    for (let i = 0; i < response.data.result.length; i++) {
+                        alertstring = alertstring + response.data.result[i].input_example + " -> " + response.data.result[i].output + "\n"
+                    }
+                else alertstring = response.data.errormsg
+                alert(alertstring);
                 setSubmit(false);
             };
             setTimeout(timeOutSubmit, 1000);

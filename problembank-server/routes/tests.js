@@ -374,7 +374,7 @@ router.post('/testrun', async function (req, res) {
     let errormsg
     try {
         let result = [], count = 0;
-
+        
         const promises = testCases.map(testcase => {
             return new Promise((resolve) => {
                 const docker = compiler.getProblemDocker(sourceCode, language);
@@ -389,9 +389,9 @@ router.post('/testrun', async function (req, res) {
                     let output = line.replace("\n" + endDelem + "\n", "")
                     output = output.replace(/\[[0-9]\]\ \"/, "")
                     output = output.replace(/\"\n$/, "\n")
+                    output = output.replace(/\n$/, "")
                     if (output != "" && output != "\n" && output != "undefined") {
                         result[count] = { input_example: testcase.input_example, output }
-                        if(output.replace(/\n$/, "") == testcase.output_example) console.log("correct")
                         count++;
                     }
                 })

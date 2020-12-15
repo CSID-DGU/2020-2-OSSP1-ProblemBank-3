@@ -15,6 +15,7 @@ import Loading from '../../../../components/Loading/Loading';
 import {Consumer as ModalConsumer} from '../../../../components/Modal/createModalProvider';
 import {NOTICE_MODAL} from '../../../../components/Modal/ModalProviderWithKey';
 import testsAPI from '../../../../apis/tests';
+import userAPI from '../../../../apis/users';
 
 
 
@@ -28,7 +29,7 @@ function TestPage(props) {
       setTestList();
     }
     console.log("updated");
-  },[loading])
+  },[loading, totalList])
 
   const setTestList = async () => {
     try{
@@ -98,11 +99,16 @@ function TestPage(props) {
 
   const TestButton = async () => {
     try{
+      // const params = {
+      //   user_id: 1,
+      //   user_pass: "pass"
+      // };
+      // const response = await userAPI.getUserInfo(params);
       const params = {
         admin_id: 1,
       };
       const response = await testsAPI.getAdminTestList(params);
-      console.log(response);
+      console.log(totalList);
     } catch (error) {
         alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
         console.log(error)
@@ -141,7 +147,7 @@ function TestPage(props) {
           totalList.map((value, index, itself)=>{
             var prac;
             if(index%3 ==0){
-              if(totalList.length-index >3){
+              if(totalList.length-index >=3){
                 prac = itself.slice(index, index+3);
               } else {
                 prac = itself.slice(index, index+(totalList.length%3));
@@ -192,7 +198,7 @@ function TestPage(props) {
           totalList.map((value, index, itself)=>{
             var prac;
             if(index%3 ==0){ // 3개씩 처리
-              if(totalList.length-index >3){ // 끝부분이 3개로 정확히 나누어질 때 
+              if(totalList.length-index >=3){ // 끝부분이 3개로 정확히 나누어질 때 
                 prac = itself.slice(index, index+3);
               } else {
                 prac = itself.slice(index, index+(totalList.length%3));

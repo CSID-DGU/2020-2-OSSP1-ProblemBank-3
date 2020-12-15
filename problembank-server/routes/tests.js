@@ -308,8 +308,8 @@ router.post('/updateproblem', async function (req, res) {
         await db.query(sql.tests.deleteAllTestCases, [problem_id])
 
         for (let j = 0; j < testcases.length; j++) {
-            const { input_ex, output_ex } = testcases[j]
-            await db.query(sql.tests.insertTestCases, [input_ex, output_ex, problem_id])
+            const { input_exp, output_exp } = testcases[j]
+            await db.query(sql.tests.insertTestCases, [input_exp, output_exp, problem_id])
         }
 
         res.status(200).send({
@@ -374,7 +374,7 @@ router.post('/testrun', async function (req, res) {
     let errormsg
     try {
         let result = [], count = 0;
-
+        
         const promises = testCases.map(testcase => {
             return new Promise((resolve) => {
                 const docker = compiler.getProblemDocker(sourceCode, language);
@@ -389,9 +389,9 @@ router.post('/testrun', async function (req, res) {
                     let output = line.replace("\n" + endDelem + "\n", "")
                     output = output.replace(/\[[0-9]\]\ \"/, "")
                     output = output.replace(/\"\n$/, "\n")
+                    output = output.replace(/\n$/, "")
                     if (output != "" && output != "\n" && output != "undefined") {
                         result[count] = { input_example: testcase.input_example, output }
-                        if(output.replace(/\n$/, "") == testcase.output_example) console.log("correct")
                         count++;
                     }
                 })

@@ -32,10 +32,10 @@ async function updateProblem({problemId, editData }) {
 	console.log(data);
 	const response = await testAPI.updateProblem(data);
 	if(response.result === true) {
-		console.log(response.data)
-		// return response.data[0];
+		alert("문제 수정이 완료되었습니다.");
+		return;
 	}
-	// throw new Error(response.data[0]);
+	throw new Error(response.message);
 }
 
 function ProblemEditPage({ id }) {

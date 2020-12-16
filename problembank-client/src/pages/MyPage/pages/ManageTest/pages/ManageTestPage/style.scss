@@ -1,121 +1,104 @@
 .ManageTestPage{
-    width : 600px;
-	margin-top : 10px;
+    display : block; 
+}
+.button{
+    border : 1px none #333333;
+    border-radius : 4px;
+    color : #FFFFFF;
+    padding : 4px 10px;
+    font-weight : bold;
+    background-color : #FF9900;
+}
+.testName1 {
+	margin-top : 20px;
+	margin-bottom : 2px;
+	padding-left : 16px;
 
-	&__Container {
-		display: flex;
-		flex-flow: nowrap row;
-		justify-content: center;
-		flex-basis: calc(100% - 165px);
-	}
-
-    .button {
-        border : 1px none rgb(51, 51, 51);
-		border-radius : 4px;
-		color : rgb(255, 255, 255);
-		padding : 4px 10px;
+	#name-label{
 		font-weight : bold;
-		background-color : rgb(255, 153, 0);
 	}
 
-    .testName1 {
-		margin-top : 20px;
-		margin-bottom : 2px;
-		padding-left : 16px;
-
-		#name-label{
-			font-weight : bold;
-		}
-
-		#name-text{
-			height : 26px;
-			width : 400px;
-			margin-left : 10px;
-			margin-right : 10px;
-		}
+	#name-text{
+		height : 26px;
+		width : 400px;
+		margin-left : 10px;
+		margin-right : 10px;
 	}
-
-    .testDate {
-		margin-top : 20px;
-		margin-bottom : 20px;
-
-		#data-name {
-			font-weight : bold;
-		}
-
-		.data-calander{
-				height : 26px;
-			margin-left : 10px;
-			margin-right : 10px;
-		}
-	}
-
-    .testName2 {
-        margin-top : 20px;
-		margin-bottom : 20px;
-		padding-left : 16px;
-		left: 0px;
-
-		#name-text{
-			height : 26px;
-			width : 500px;
-			margin-left : 10px;
-		}
-	}
-
-    .termExam{
-        margin-top : 20px;
-		margin-bottom : 20px;
-		padding-left : 10px;
-
-		#checkbox{
-			margin-right : 10px;
-		}
-	}
-
-    .className{
-        margin-top : 20px;
-		margin-bottom : 20px;
-		padding-left : 16px;
-		left: 0px;
-        #select {
-			height : 26px;
-			width : 500px;
-			margin-left : 10px;
-		}
-	}
-
-    .testContent {
-        margin-top : 20px;
-		margin-bottom : 20px;
-
-		#textarea{
-			vertical-align : top;
-			margin-left:10px;
-			height : 130px;
-			width : 500px;
-			padding : 10px;
-		}
-	}
-
-    .selectProblem{
-        margin-top : 20px;
-		margin-bottom : 20px;
-
-		#select {
-			vertical-align : top;
-			margin-left : 10px;
-			margin-right : 10px;
-			height : 130px;
-			width : 200px;
-			padding : 10px;
-			overflow : hidden;
-		}
-	}
-
-    .save {
-        .button {
-			margin-left : 520px;
-		}
+}
+.testDate{
+    margin-top : 20px;
+    margin-bottom : 20px;
+    #data-name{
+	font-weight : bold;
+    }
+    .data-calander{
+        height : 26px;
+	width : 200px;
+	margin-left : 10px;
+	margin-right : 10px;
     }
 }
+.testName2{
+    position : relative;
+    left : 16px;
+    margin-top : 20px;
+    margin-bottom : 20px;
+    padding-left : 16px;
+    #name-text{
+	height : 26px;
+	width : 500px;
+	margin-left : 10px;
+    }
+}
+.termExam{
+    position : relative;
+    left : 40px;
+    margin-top : 20px;
+    margin-bottom : 20px;
+    padding-left : 10px;
+    #checkbox{
+	margin-right : 10px;
+    }
+}
+.className{
+    position : relative;
+    left : 16px;
+    margin-top : 20px;
+    margin-bottom : 20px;
+    padding-left : 16px;
+    .select{
+	height : 26px;
+	width : 500px;
+	margin-left : 10px;
+    }
+}
+.testContent{
+    margin-top : 20px;
+    margin-bottom : 20px;
+    #textarea{
+	vertical-align : top;
+	margin-left:10px;
+	height : 130px;
+	width : 500px;
+	padding : 10px;
+    }
+}
+.selectProblem{
+    margin-top : 20px;
+    margin-bottom : 20px;
+    #select{
+	vertical-align : top;
+	margin-left : 10px;
+	margin-right : 10px;
+	height : 130px;
+	width : 200px;
+	padding : 10px;
+        overflow : hidden;
+    }
+}
+.save{
+    .button{
+        margin-left : 520px;
+    }
+}
+

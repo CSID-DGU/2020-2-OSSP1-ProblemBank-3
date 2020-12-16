@@ -8,10 +8,11 @@ function CreateTest( {user}) {
     console.log(user);
 
     return (
-
+        <div className="create-page-container" style={{marginLeft: '20px', marginTop: '20px'}}>
             <Switch>
                 <Route exact path = {`${match.url}`} render={(props) => <CreateTestPage user={user} {...props}/>}/>
             </Switch>
+        </div>
         
     )
 }

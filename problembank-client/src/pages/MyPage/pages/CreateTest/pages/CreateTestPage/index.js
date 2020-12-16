@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import "./style.scss";
-import CreateTestLayout from "../../../../../../layouts/CreateTestLayout";
-import testAPI from "../../../../../../apis/tests";
-import Text from "../../../../../../components/DesignComponent/Text";
-import problemsBank from "../../../../../../apis/problemsBank";
+import CreateTestLayout from "../../../../layouts/CreateTestLayout";
+import testAPI from "../../../../apis/tests";
+import Text from "../../../../components/DesignComponent/Text";
+import problemsBank from "../../../../apis/problemsBank";
 import ModifyListModal from "../../component/ModifyListModal";
 
 class CreateTestPage extends Component {
@@ -37,9 +37,11 @@ class CreateTestPage extends Component {
 		}
 	};
 
-    async componentDidMount(){  
-		const _subject = await problemsBank.getCategory();  // subject name select input
-		let { data } = _subject;
+    async componentDidMount(){
+		const _subject = await testAPI.getSubjectList({ user_id : this.props.user.id });
+		let { data } = _subject
+		console.log(_subject);
+		console.log(this.props.user.id);
 		this.setState({
 			subject : data
 		})
@@ -97,8 +99,8 @@ class CreateTestPage extends Component {
     render(){
 
     return (
-	<div className="CreateTestPage__Container">
-
+	<>
+	<CreateTestLayout user = {this.props.user}>
 	<div id="CreateTestLayoutBody">
 	    <div class="testDate">
 	        <Text id="data-label">시험 일자</Text>
@@ -161,8 +163,8 @@ class CreateTestPage extends Component {
 	        <button class="button" onClick={this.saveTest}>저장</button>
 	    </div>
 	</div>
-
-	</div>
+	</CreateTestLayout>
+	</>
     );
     }
 }

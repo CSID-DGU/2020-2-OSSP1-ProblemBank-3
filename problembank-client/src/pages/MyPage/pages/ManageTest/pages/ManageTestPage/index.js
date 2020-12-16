@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import "./style.scss";
-import ManageTestLayout from "../../../../layouts/ManageTestLayout";
-import InlineList from "../../../../components/DesignComponent/InlineList";
-import Input from "../../../../components/DesignComponent/Input";
-import Text from "../../../../components/DesignComponent/Text";
-import Spacing from "../../../../components/DesignComponent/Spacing";
+import ManageTestLayout from "../../../../../../layouts/ManageTestLayout";
+import InlineList from "../../../../../../components/DesignComponent/InlineList";
+import Input from "../../../../../../components/DesignComponent/Input";
+import Text from "../../../../../../components/DesignComponent/Text";
+import Spacing from "../../../../../../components/DesignComponent/Spacing";
 
 function TestPage(props) {
     const [loading, setLoading] = useState(false);
     const [type, setType] = useState(false);
 	const {user} = props
     return (
-	<ManageTestLayout user = {user}>
+	<div>
         <div class="ManageTestPage">
 	    <div class="testName1">
                 <Text id="name-label">시험명</Text>
@@ -64,7 +64,7 @@ function TestPage(props) {
 	        <button class="button">저장</button>
 	    </div>
         </div>
-	</ManageTestLayout>
+	</div>
     );
 }
 

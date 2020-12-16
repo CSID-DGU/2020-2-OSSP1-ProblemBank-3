@@ -7,7 +7,6 @@ import {getUserResult} from "../../../../../../_actions/testAction";
 
 function StudentTestResultPage(props) {
 	const {user} = props
-	console.log(user)
 
 	const [keyword, setKeyword] = useState();
 	const [start, setStart] = useState(null);

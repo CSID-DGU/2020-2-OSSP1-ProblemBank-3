@@ -122,7 +122,7 @@ class CreateTestPage extends Component {
 	        <select class="select">
 				{
 					this.state.subject.map(subject =>
-						( <option label={subject.name}/> )
+						( <option value={subject.id} label={subject.name}/> )
 					)
 				}
 	        </select>

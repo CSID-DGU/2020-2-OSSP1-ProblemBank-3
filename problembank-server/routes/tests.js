@@ -191,7 +191,10 @@ router.get('/useranswer', async function (req, res) {
         const [rows] = await db.query(sql.tests.selectTestProblemsByTestId, [test_id])
         for (let i = 0; i < rows.length; i++) {
             const [answer] = await db.query(sql.tests.selectUserAnswerByIds, [test_id, rows[i].problem_id, user_id])
-            rows[i]["answer"] = answer[0]
+            const [name] = await db.query(sql.tests.selectTestProblemNameByProblemId, [rows[i].problem_id])
+            rows[i]["problem_name"] = name[0].name
+            rows[i]["answer"] = answer[0].content
+            rows[i]["is_correct"] = answer[0].is_correct
         }
         res.status(200).send({
             result: true,
@@ -438,7 +441,7 @@ router.post('/testrun', async function (req, res) {
                 });
             });
         })
-        
+
         await Promise.all(promises)
         if (errormsg) errormsg = "컴파일 에러"
         if (result[0].input_example != testCases[0].input_example) [result[0], result[1]] = [result[1], result[0]]
@@ -461,7 +464,7 @@ router.post('/testrun', async function (req, res) {
 // 채점
 router.post('/submit', async function (req, res) {
     const { test_id, user_id, problems } = req.body;
-    let correct = 0, wrong;
+    let correct = 0, wrong, is_correct = 0;
     try {
         const promises1 = problems.map(async problem => {
             let correctCount = 0;
@@ -501,8 +504,9 @@ router.post('/submit', async function (req, res) {
             await Promise.all(promises2)
             if (correctCount == testCases.length) {
                 correct++
+                is_correct = 1;
             }
-            await db.query(sql.tests.insertUserAnswers, [test_id, problem_id, user_id, sourceCode])
+            await db.query(sql.tests.insertUserAnswers, [test_id, problem_id, user_id, sourceCode, is_correct])
             return Promise.resolve()
         })
         await Promise.all(promises1)

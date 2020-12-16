@@ -7,7 +7,7 @@ import Spacing from '../../DesignComponent/Spacing';
 import Heading from '../../DesignComponent/Heading';
 import InlineList from '../../DesignComponent/InlineList';
 
-export default function NoticeContent({title, auth, content}) { //나중에 서버에서 받아오는 것으로 바꾸기
+export default function NoticeContent({title, auth, content}) { 
     return (
         <Consumer>
             {({closeModal})=> (

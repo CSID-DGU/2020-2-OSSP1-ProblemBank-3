@@ -314,7 +314,7 @@ function TestPage(props) {
                       // 이동하고 싶은 페이지 주소 적기
                       // onButton={() => props.history.push(`/test/view?index=0&test_id=${value.id}`)}
                       
-                      onButton={() => props.history.push(`/adminprogress?test_id=${value.id}`)}
+                      onButton={() => props.history.push(`/test/adminprogress?test_id=${value.id}`)}
                       test_name={value.name} timestamp={totalString} auth={value.admin_name}
                       disabled={invalid} type="admin" isExam={value.is_exam} 
                       />;

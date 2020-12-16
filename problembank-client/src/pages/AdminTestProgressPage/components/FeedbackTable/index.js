@@ -16,7 +16,7 @@ class FeedbackTable extends Component{
     }
 
     getFeedbacks = async()  => {
-        const response = await testAPI.getTestFeedback({test_id: 1});
+        const response = await testAPI.getTestFeedback({test_id: this.props.test_id});
         this.setState({
             code: response.result,
             feedbacks: response.data
@@ -28,7 +28,7 @@ class FeedbackTable extends Component{
     }
 
     render() {
-        return(
+        return(<div>
             <table className="table table-contribution">
                 <thead>
                     <tr>
@@ -40,6 +40,7 @@ class FeedbackTable extends Component{
                 </thead>
                 <tbody>
                     {
+                        
                         this.state.feedbacks.map((item,index) => {
                             return (
 
@@ -54,6 +55,10 @@ class FeedbackTable extends Component{
                     }
                 </tbody>
             </table>
+            {
+                this.state.feedbacks.length == 0 ? <p className="empty-feedbacks">도착한 피드백이 없습니다.</p>:null
+            }
+            </div>
         )
     }
 }

@@ -48,7 +48,7 @@ router.get('/admintestlist', async function (req, res) {
     }
 })
 
-//시험 정보
+// 시험 정보
 router.get('/testinfo', async function(req, res) {
     const { test_id } = req.query
     try {
@@ -84,7 +84,7 @@ router.get('/testproblems', async function (req, res) {
     }
 })
 
-//시험 진행시간
+// 시험 진행시간
 router.get('/testtimes', async function (req, res) {
     const { test_id } = req.query
     try {
@@ -143,7 +143,22 @@ router.get('/testfeedback', async function (req, res) {
     }
 })
 
-//전체 응시자 결과 출력
+// 관리자 과목 출력
+router.get('/adminsubjects', async function (req, res) {
+    const { user_id } = req.query
+    try {
+        let [rows] = await db.query(sql.tests.selectSubjectsByAdminId, [user_id])
+        res.status(200).send({
+            result: true,
+            data: rows,
+            message: '전체 결과'
+        })
+    } catch (error) {
+        console.log("Result Data" + error)
+    }
+})
+
+// 전체 응시자 결과 출력
 router.get('/adminresult', async function (req, res) {
     const { test_id } = req.query
     try {

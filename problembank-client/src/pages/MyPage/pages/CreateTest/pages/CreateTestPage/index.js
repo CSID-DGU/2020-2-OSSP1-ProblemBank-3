@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import "./style.scss";
-import CreateTestLayout from "../../../../layouts/CreateTestLayout";
-import testAPI from "../../../../apis/tests";
-import Text from "../../../../components/DesignComponent/Text";
-import problemsBank from "../../../../apis/problemsBank";
+import CreateTestLayout from "../../../../../../layouts/CreateTestLayout";
+import testAPI from "../../../../../../apis/tests";
+import Text from "../../../../../../components/DesignComponent/Text";
+import problemsBank from "../../../../../../apis/problemsBank";
 import ModifyListModal from "../../component/ModifyListModal";
 
 class CreateTestPage extends Component {
@@ -97,8 +97,8 @@ class CreateTestPage extends Component {
     render(){
 
     return (
-	<>
-	<CreateTestLayout user = {this.props.user}>
+	<div className="CreateTestPage__Container">
+
 	<div id="CreateTestLayoutBody">
 	    <div class="testDate">
 	        <Text id="data-label">시험 일자</Text>
@@ -161,8 +161,8 @@ class CreateTestPage extends Component {
 	        <button class="button" onClick={this.saveTest}>저장</button>
 	    </div>
 	</div>
-	</CreateTestLayout>
-	</>
+
+	</div>
     );
     }
 }

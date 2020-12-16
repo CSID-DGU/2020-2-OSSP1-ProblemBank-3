@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./style.scss";
-import { getProblemData } from "../../../../_actions/problemAction";
-import problemsBank from "../../../../apis/problemsBank";
+import { getProblemData } from "../../../../../../_actions/problemAction";
+import problemsBank from "../../../../../../apis/problemsBank";
 
 class ModifyListModal extends Component {
     

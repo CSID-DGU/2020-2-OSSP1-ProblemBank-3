@@ -1,6 +1,14 @@
 .CreateTestLayoutBody{
     display : block; 
 }
+
+.CreateTestPage__Container {
+    display: flex;
+    flex-flow: nowrap row;
+    justify-content: center;
+    flex-basis: calc(100% - 165px);
+}
+
 .button{
     border : 1px none #333333;
     border-radius : 4px;

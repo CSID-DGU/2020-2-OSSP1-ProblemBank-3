@@ -13,21 +13,31 @@ class CreateTestPage extends Component {
 		this.state={
 			isModalOpen : true,
 			subject : [],
-			problem : []
-		}
+			DB_problem : [],  // added problem in database (problem_id and problem_name)
+			new_problem : []  // new problem
+		};
     };
 
 	openModal = () => {
-		alert("asdf");
 		this.setState({ isModalOpen : true});
 	};
 
 	closeModal = () => {
 		this.setState({ isModalOpen : false});
-	}
+	};
+
+	// if option == 0, edit DB_problem
+	// else if option == 1, edit new_problem
+	editProblemArray = (option, list) => {
+		if(option == 0) {
+			this.setState({ DB_problem : list });
+		}
+		else if(option == 1) {
+			this.setState({ new_problem : list });
+		}
+	};
 
     async componentDidMount(){  
-
 		const _subject = await problemsBank.getCategory();  // subject name select input
 		let { data } = _subject;
 		this.setState({
@@ -52,7 +62,7 @@ class CreateTestPage extends Component {
 				'testContent' : document.getElementById("textarea").value,
 				'start' : document.getElementsByClassName("data-calander")[0].value,
 				'end' : document.getElementsByClassName("data-calander")[1].value,
-				'admin_id' : props.id,
+				'admin_id' : props.admin_id,
 				'subject_id' : document.getElementsByClassName("select")[0].value,
 				'problems' : this.state.problem
 			};
@@ -61,8 +71,9 @@ class CreateTestPage extends Component {
 				params.is_exam = 1;
 			else
 				params.is_exam = 0;
-
-			const response = testAPI.createTest(params);
+			
+			alert(params.admin_id);
+			//const response = testAPI.createTest(params);
 			/* for debug
 			alert(params.testName);
 			alert(params.testContent);
@@ -84,7 +95,7 @@ class CreateTestPage extends Component {
 	<div id="CreateTestLayoutBody">
 	    <div class="testDate">
 	        <Text id="data-label">시험 일자</Text>
-	        <input type='datetime-local' class="data-calander" onchange="calanderChange"></input>  
+	        <input type='datetime-local' class="data-calander" onChange="calanderChange"></input>  
 	        <Text>~</Text>
 	        <input type='datetime-local' class="data-calander"></input>
 	    </div>
@@ -119,13 +130,24 @@ class CreateTestPage extends Component {
 	        <Text>문제 선택</Text>
 	        <select multiple="multiple" id="select">
 				{
-					this.state.problem.map(problem =>
+					this.state.DB_problem.map(problem =>
+						( <option label={problem}/> )
+					)
+				}
+				{
+					this.state.new_problem.map(problem =>
 						( <option label={problem}/> )
 					)
 				}
 	        </select>
 	        <button class="button" onClick={this.openModal}>목록 수정</button>
-			<ModifyListModal isOpen={this.state.isModalOpen} close={this.closeModal}/>
+			<ModifyListModal 
+				isOpen={this.state.isModalOpen} 
+				close={this.closeModal}
+				DB_problem={this.state.DB_problem}
+				new_problem={this.state.new_problem}
+				editProblemArray={this.editProblemArray}
+			/>
 	    </div>
 	    <div class="save">
 	        <button class="button" onClick={this.saveTest}>저장</button>

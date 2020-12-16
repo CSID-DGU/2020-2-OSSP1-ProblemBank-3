@@ -1,16 +1,57 @@
 import React, { Component } from "react";
 import "./style.scss";
-import testAPI from "../../../../apis/tests";
+import { getProblemData } from "../../../../_actions/problemAction";
+import problemsBank from "../../../../apis/problemsBank";
 
 class ModifyListModal extends Component {
     
 	constructor(props){
 		super(props);
+		this.state={
+			keyword : "",
+			problems : [],  // total problem
+			resultProblem : []  // searched problem
+		};
+	};
+
+	async componentDidMount(){
+		const request = await problemsBank.getProblemAllData();
+		this.setState({ problems : request.data })
+		this.setState({ resultProblem : request.data })
+	};
+
+	searchProblem = () => {  // operate when click search button
+		const searchValue = document.getElementById("search-box").value;
+		const filterProblems = this.state.problems.filter(
+			element => element.id === Number(searchValue) || 
+			element.name.match(new RegExp(searchValue, "i"))
+		);
+		this.setState({ keyword : searchValue });
+		this.setState({ resultProblem : filterProblems });
+	};
+
+	addProblem = () => {/*
+		const insertProblemId = Document.getElementById("added-problem").value;
+		var obj = new Object();
+		obj.problem_id = insertProblemId;
+
+		const index = this.state.problems.find(element => element.id == insertProblemId);
+		obj.problem_name = this.state.problems[index].name;
+
+		var tempArray = this.props.DB_problem;
+		tempArray.push(obj)
+
+		this.props.editProblemArray(tempArray);*/
+		alert("asdf");
+	};
+
+	removeProblem = () => {
+
 	};
 
     render() {
 
-		const { isOpen, close } = this.props;
+		const { isOpen, close, DB_problem, new_problem } = this.props;
 
 		return (
 			<>
@@ -22,29 +63,47 @@ class ModifyListModal extends Component {
 							</span>
 							<div id="modifyList" onClick={isOpen}>
 								<div id="problem-list-block">
-									<div id="problem-list">
-										<div class="text">
-											<p>문제 목록</p>
+									<div id="problem-search-box">
+										<div id="search-bar">
+											<input 
+												type="text" 
+												id="search-box" 
+												onChange={this.searchProblem}
+												placeholder="문제 제목, 번호로 검색"
+											/>
 										</div>
-										<select multiple="multiple" id="problem-list-select">
-											<option label="몫과 나머지"/>
-											<option label="합과 곱"/>
-										</select>
-									</div>
-									<div id="button-box">
-										<button>+</button>
-										&nbsp;&nbsp;
-										<button>-</button>
+										<select multiple id="problem-list-select">
+											{
+												this.state.resultProblem.map(resultProblem =>
+													( <option value={resultProblem.id}>{resultProblem.id}. {resultProblem.name}</option> )
+												)
+											}
+	        							</select>
+										<div id="add-problem-button-div">
+											<button onClick={this.addProblem}>+</button>
+											&nbsp;&nbsp;&nbsp;
+											<button>-</button>
+										</div>
 									</div>
 									<div id="test-problem-list">
 										<div class="text">
 											<p>추가된 문제</p>
 										</div>
-										<select multiple="multiple" id="test-problem-list-select">ㅑ
-											<option label="주식 계산"/>
+										<select multiple id="added-problem">
+											{
+												DB_problem.map(DB_problem =>
+													( <option value={DB_problem.id}>{DB_problem.id}. {DB_problem.name}</option> )	
+												)
+											}
+											{
+												new_problem.map(new_problem =>
+													( <option value={new_problem.problemName}>+ {new_problem.problemName}</option> )	
+												)
+											}
 										</select>
 									</div>
 								</div>
+								<div id="middle-line"></div>
 								<div id="new-problem">
 									<div class="form">
 										<input 

@@ -11,7 +11,7 @@ class CreateTestPage extends Component {
     constructor(props){
 		super(props);
 		this.state={
-			isModalOpen : true,
+			isModalOpen : false,
 			subject : [],
 			DB_problem : [],  // added problem in database (problem_id and problem_name)
 			new_problem : []  // new problem
@@ -53,7 +53,7 @@ class CreateTestPage extends Component {
 		};
 	};
 
-    saveTest = (props) => {
+    saveTest = async () => {
 		if(document.getElementById("name-text").value === "")
 			alert("시험명을 입력해주세요");
 		else{
@@ -69,7 +69,7 @@ class CreateTestPage extends Component {
 				'testContent' : document.getElementById("textarea").value,
 				'start' : document.getElementsByClassName("data-calander")[0].value,
 				'end' : document.getElementsByClassName("data-calander")[1].value,
-				'admin_id' : props.user,
+				'admin_id' : this.props.user.id,
 				'subject_id' : document.getElementsByClassName("select")[0].value,
 				'problems' : problemArray
 			};
@@ -80,7 +80,7 @@ class CreateTestPage extends Component {
 				params.is_exam = 0;
 			
 			console.log(params);
-			//const response = testAPI.createTest(params);
+			const response = await testAPI.createTest(params);
 			/* for debug
 			alert(params.testName);
 			alert(params.testContent);

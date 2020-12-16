@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./style.scss";
 import MyTestsTable from "../../components/MyTestsTable";
-import MyPageLayout from "../../../../../layouts/MyPageLayout";
-import {getUserTest} from "../../../../../_actions/testAction";
+import MyPageLayout from "../../../../../../layouts/MyPageLayout";
+import {getUserTest} from "../../../../../../_actions/testAction";
 import {useDispatch} from "react-redux";
-import testAPI from "../../../../../apis/tests";
+import testAPI from "../../../../../../apis/tests";
 
 function MyTestsPage(props) {
 	const {user} = props
@@ -45,9 +45,6 @@ function MyTestsPage(props) {
 		))
 		setfilteredTests(filterTests)
 	}
-	const getFilteredTests = () =>{
-		return filteredTests
-	}
 
 	async function cancelTest(test_id) {
 		const response = await testAPI.cancelReg({user_id : user.id, test_id : test_id});
@@ -60,9 +57,9 @@ function MyTestsPage(props) {
 	}
 
 
-	const handleClick = (test_id) => {
+	const handleClick = async (test_id) => {
 		console.log("click!")
-		cancelTest(test_id);
+		await cancelTest(test_id);
 		
 		dispatch(getUserTest(user.id))
 			.then(response => {
@@ -81,7 +78,7 @@ function MyTestsPage(props) {
 	}
 
     return(
-    	<MyPageLayout user = {user}>
+
 	    <div id="content">
 	        <div id="content-header">
 	            <div id="testDate">
@@ -97,10 +94,10 @@ function MyTestsPage(props) {
 	            <button onClick={handleFilter}>조회</button>
 	        </div>
 			<div id="content-table">
-	            <MyTestsTable handleClick={handleClick} getTests={getFilteredTests} {...props} ></MyTestsTable>
+	            <MyTestsTable handleClick={handleClick} testLists={filteredTests} {...props} ></MyTestsTable>
 	        </div>
 	    </div>
-		</MyPageLayout>
+
     );
 }
 

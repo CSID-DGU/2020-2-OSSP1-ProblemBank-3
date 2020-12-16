@@ -1,11 +1,21 @@
 import React from "react"
-import {Redirect, Route, useRouteMatch} from "react-router-dom"
-import MyPagePage from "./pages/MyPagePage";
-
+import {Redirect, Route, useRouteMatch, Switch} from "react-router-dom"
+import Sidebar from "../../components/Sidebar/mypage";
+import MyTestResults from "./pages/MyTestResults";
+import MyTests from "./pages/MyTests";
+import './style.scss';
 function MyPage( {user} ) {
     const match = useRouteMatch();
-    return (
-        <Route exact path = {`${match.url}`} render={(props) => <MyPagePage user={user} {...props}/>} />
+    return (<div className="container-mypage">
+
+        <Sidebar user = {user}/>
+
+        <Switch>
+            <Route exact path = {`${match.url}`} render={(props) => <MyTestResults user={user} {...props}/>} />
+            <Route exact path = {`${match.url}/apply`} render={(props) => <MyTests user={user} {...props}/>} />
+        </Switch>
+    </div>
+        
     )
 }
 

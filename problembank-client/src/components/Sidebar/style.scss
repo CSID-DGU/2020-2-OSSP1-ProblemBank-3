@@ -26,10 +26,10 @@
     font-size: 15px;
     transition: 0.4s;
   }
-
+  
   .panel {
     padding-left: 15px;
-    display: none;
+    // display: none;
     background-color: white;
     font-size: 12px;
 
@@ -41,6 +41,11 @@
       transition: 0.4s;
       cursor: pointer;
     }
+  }
+  .buttonStyle {
+    border-radius: 0;
+    font-weight: normal;
+
   }
 
   .active, .accordion:hover {

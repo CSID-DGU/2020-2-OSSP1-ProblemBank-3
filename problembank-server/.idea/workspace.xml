@@ -20,15 +20,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a2f59a0d-f558-407b-bbba-4b4bb6fb3971" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/style.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../problembank-client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/_actions/testAction.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/_actions/testAction.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/_actions/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/_actions/types.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/CreateTest/component/ModifyListModal/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/CreateTest/component/ModifyListModal/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTestResults/components/StudentResultTable/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTestResults/components/StudentResultTable/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/TestResult/components/TestResultTable/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/TestResult/components/TestResultTable/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/TestResult/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/TestResult/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/TestResult/pages/DetailedResultPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/TestResult/pages/DetailedResultPage/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/components/Header/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/components/Header/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/components/Sidebar/mypage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/components/Sidebar/mypage/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/components/Sidebar/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/components/Sidebar/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/AdminTestProgressPage/components/ProgressSidebar/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/AdminTestProgressPage/components/ProgressSidebar/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/AdminTestProgressPage/components/ProgressSidebar/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/AdminTestProgressPage/components/ProgressSidebar/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/MyPagePage/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/MyPagePage/style.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/MyTestResults/components/StudentResultTable/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/MyTestResults/components/StudentResultTable/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTestResults/components/StudentResultTable/.index.js.swp" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/MyTestResults/components/StudentResultTable/.index.js.swp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTestResults/components/StudentResultTable/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTestResults/components/StudentResultTable/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/MyTestResults/components/StudentResultTable/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTestResults/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/MyTestResults/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTestResults/pages/StudentTestResultPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/MyTestResults/pages/StudentTestResultPage/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTestResults/pages/StudentTestResultPage/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/MyTestResults/pages/StudentTestResultPage/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTests/components/MyTestsTable/.index.js.swp" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/MyTests/components/MyTestsTable/.index.js.swp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTests/components/MyTestsTable/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/MyTests/components/MyTestsTable/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTests/components/MyTestsTable/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/MyTests/components/MyTestsTable/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTests/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/MyTests/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTests/pages/MyTestsPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/MyTests/pages/MyTestsPage/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/StudentUserPages/MyTests/pages/MyTestsPage/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/MyTests/pages/MyTestsPage/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/Test/components/TestDisplay/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/Test/components/TestDisplay/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/Test/pages/TestPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/Test/pages/TestPage/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/tests.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/tests.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sql/tests.js" beforeDir="false" afterPath="$PROJECT_DIR$/sql/tests.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +111,7 @@
       <workItem from="1608011605804" duration="3133000" />
       <workItem from="1608049201222" duration="106000" />
       <workItem from="1608096968903" duration="573000" />
-      <workItem from="1608124521765" duration="3035000" />
+      <workItem from="1608124521765" duration="3344000" />
     </task>
     <servers />
   </component>

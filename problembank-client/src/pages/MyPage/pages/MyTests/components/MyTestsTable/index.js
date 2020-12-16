@@ -1,7 +1,7 @@
 import React, {Component, useState} from 'react'
 import {Link, withRouter} from 'react-router-dom';
 import './style.scss'
-import testAPI from '../../../../../apis/tests';
+import testAPI from '../../../../../../apis/tests';
 
 
 class MyTestsTable extends Component{
@@ -20,7 +20,7 @@ class MyTestsTable extends Component{
                 </thead>
                 <tbody>
                     {
-                        this.props.getTests().map((item,index) => {
+                        this.props.testLists.map((item,index) => {
                             let date = item.date.substring(0,item.date.indexOf('T'))
                             return (
                                 <tr key = {index}>

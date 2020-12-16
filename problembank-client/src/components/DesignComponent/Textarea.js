@@ -34,6 +34,8 @@ class Textarea extends PureComponent {
         default: {
           resize: 'none',
           padding: '12px',
+          width: '600px',
+          height: '300px',
           backgroundColor: '#f8f8f8',
           borderRadius: '4px',
           fontSize: "16px",
@@ -47,8 +49,6 @@ class Textarea extends PureComponent {
     return (
       <textarea
         style={computedStyle}
-        rows = {20}
-        cols = {80}
         ref={this.setRef}
         onChange = {this.handleChange}
         name={name}

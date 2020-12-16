@@ -1,9 +1,9 @@
 import React from "react";
 import FeedbackTable from "../../components/FeedbackTable";
 
-function FeedbackPage() {
+function FeedbackPage(props) {
     return(<div>
-        <FeedbackTable />
+        <FeedbackTable test_id={props.test_id}/>
     </div>)
 }
 

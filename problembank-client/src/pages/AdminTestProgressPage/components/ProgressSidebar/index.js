@@ -6,16 +6,15 @@ function ProgressSidebar(props) {
 
 	const history = useHistory();
 	const location = useLocation();
+	const test_id = props.test_id;
 
     function handleFeedbackClick() {
-		history.push("/adminprogress")
+		history.push(`/adminprogress?test_id=${test_id}`)
 	}
 
 	function handleProblemEditClick() {
-    	history.push("/adminprogress/problemedit")
+    	history.push(`/adminprogress/problemedit?test_id=${test_id}`)
 	}
-
-	console.log(location)
     return (
 	<div className="Sidebar">
 	    <ul className="Sidebar-list">

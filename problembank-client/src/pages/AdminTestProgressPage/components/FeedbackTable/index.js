@@ -16,7 +16,7 @@ class FeedbackTable extends Component{
     }
 
     getFeedbacks = async()  => {
-        const response = await testAPI.getTestFeedback({test_id: 1});
+        const response = await testAPI.getTestFeedback({test_id: this.props.test_id});
         this.setState({
             code: response.result,
             feedbacks: response.data

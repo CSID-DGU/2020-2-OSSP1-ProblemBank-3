@@ -19,11 +19,11 @@ class CreateTestPage extends Component {
     };
 
 	openModal = () => {
-		this.setState({ isModalOpen : true});
+		this.setState({ isModalOpen : true });
 	};
 
 	closeModal = () => {
-		this.setState({ isModalOpen : false});
+		this.setState({ isModalOpen : false });
 	};
 
 	// if option == 0, edit DB_problem
@@ -57,14 +57,21 @@ class CreateTestPage extends Component {
 		if(document.getElementById("name-text").value === "")
 			alert("시험명을 입력해주세요");
 		else{
+			var DBArray = new Array();
+			for(var i = 0; i < this.state.DB_problem.length; i++){
+				var obj = new Object();
+				obj.problem_id = this.state.DB_problem[i].problem_id;
+				DBArray.push(obj);
+			}
+			const problemArray = this.state.new_problem.concat(DBArray);
 			var params = {
 				'testName' : document.getElementById("name-text").value,
 				'testContent' : document.getElementById("textarea").value,
 				'start' : document.getElementsByClassName("data-calander")[0].value,
 				'end' : document.getElementsByClassName("data-calander")[1].value,
-				'admin_id' : props.admin_id,
+				'admin_id' : props.user,
 				'subject_id' : document.getElementsByClassName("select")[0].value,
-				'problems' : this.state.problem
+				'problems' : problemArray
 			};
 
 			if (document.getElementById("checkbox").value === "on")
@@ -72,7 +79,7 @@ class CreateTestPage extends Component {
 			else
 				params.is_exam = 0;
 			
-			alert(params.admin_id);
+			console.log(params);
 			//const response = testAPI.createTest(params);
 			/* for debug
 			alert(params.testName);
@@ -131,18 +138,19 @@ class CreateTestPage extends Component {
 	        <select multiple="multiple" id="select">
 				{
 					this.state.DB_problem.map(problem =>
-						( <option label={problem}/> )
+						( <option value={problem.problem_id}>{problem.problem_id}. {problem.problem_name}</option> )
 					)
 				}
 				{
 					this.state.new_problem.map(problem =>
-						( <option label={problem}/> )
+						( <option value={problem.problemName}>+ {problem.problemName}</option> )
 					)
 				}
 	        </select>
 	        <button class="button" onClick={this.openModal}>목록 수정</button>
 			<ModifyListModal 
 				isOpen={this.state.isModalOpen} 
+				open={this.openModal}
 				close={this.closeModal}
 				DB_problem={this.state.DB_problem}
 				new_problem={this.state.new_problem}

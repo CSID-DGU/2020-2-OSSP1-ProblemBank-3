@@ -19,13 +19,8 @@ const ProblemsByCategories = React.lazy(() => import('./pages/ProblemsByCategori
 const TotalProblems = React.lazy(() => import('./pages/TotalProblems'))
 const Problem = React.lazy(() => import('./pages/Problem'))
 const Test = React.lazy(() => import('./pages/Test'))
-const ManageTest = React.lazy(() => import('./pages/ManageTest'))
 const CreateTest = React.lazy(() => import('./pages/CreateTest'))
-const AdminTestProgress = React.lazy(() => import('./pages/AdminTestProgressPage'))
-const AdminTestResult = React.lazy(() => import('./pages/AdminTestResult'))
 const MyPage = React.lazy(() => import('./pages/MyPage'))
-const MyTests = React.lazy(() => import('./pages/StudentUserPages/MyTests'))
-const MyTestResults = React.lazy(() => import('./pages/StudentUserPages/MyTestResults'))
 
 
 function App() {

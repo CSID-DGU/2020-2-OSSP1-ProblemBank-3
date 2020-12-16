@@ -11,7 +11,7 @@ function TestPage(props) {
     const [type, setType] = useState(false);
 	const {user} = props
     return (
-	<div>
+	<div class="ManageTestPage__Container">
         <div class="ManageTestPage">
 	    <div class="testName1">
                 <Text id="name-label">시험명</Text>

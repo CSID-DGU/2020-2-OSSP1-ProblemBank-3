@@ -15,16 +15,13 @@
       font-size : 15px;
       transition : 0.4s;
     }
-
+    .buttonStyle {
+        border-radius: 0;
+        font-weight: normal;
+    
+      }
     .active, .accordion:hover {
         background-color : #FF9900;
         color : #FFFFFF;
-    }
-
-    .panel{
-        padding-left : 18px;
-        display : none;
-        background-color : white;
-        font-size : 12px;
     }
 }

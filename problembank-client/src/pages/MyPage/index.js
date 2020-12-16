@@ -15,7 +15,6 @@ function MyPage( {user} ) {
     return (
         <div className="container-mypage">
             <Sidebar user = {user}/>
-
             <Switch>
                 <Route exact path = {`${match.url}`} render={(props) => <MyTestResults user={user} {...props}/>} />
                 <Route exact path = {`${match.url}/apply`} render={(props) => <MyTests user={user} {...props}/>} />

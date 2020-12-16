@@ -20,7 +20,7 @@ function StudentTestResultPage(props) {
 		dispatch(getUserResult(user.id))
 			.then(response => {
 				const { data } = response.payload;
-				console.log(data)
+				// console.log(data)
 				setResults(data)
 				setFilteredResults(data)
 			})

@@ -7,7 +7,7 @@ import testAPI from '../../../../../../apis/tests';
 async function getResultAdmin({test_id}) {
 	const response = await testAPI.getResultAdmin({test_id});
 	if(response.result === true) {
-		console.log(response);
+		// console.log(response);
 		return response.data;
 	}
 	throw new Error(response.data);
@@ -41,7 +41,12 @@ function AdminResultTable({test_id}){
                                     <td style={{textAlign: "center"}}>{item.user_name}</td>
                                     <td style={{textAlign: "center"}}>{item.correct}</td>
                                     <td style={{textAlign: "center"}}>{item.wrong}</td>
-				    <td style={{textAlign: "center"}}><button>열람</button></td>
+				                    <td style={{textAlign: "center"}}>
+                                        {
+                                            item.applied == 1 ?
+                                            <button>열람</button> :
+                                            <button2>열람</button2>
+                                        }</td>
                                 </tr>
                             )
                         })

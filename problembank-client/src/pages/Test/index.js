@@ -8,7 +8,7 @@ import AdminTestProgress from '../AdminTestProgressPage/'
 
 function Test({user}) {
     const match = useRouteMatch();
-    console.log(match.url);
+    // console.log(match.url);
 
     return (
     <Switch>

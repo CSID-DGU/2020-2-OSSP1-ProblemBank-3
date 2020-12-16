@@ -4,7 +4,7 @@ import StudentTestResultPage from './pages/StudentTestResultPage';
 
 function MyTestResults({user}) {
     const match = useRouteMatch();
-    console.log(match.url);
+    // console.log(match.url);
     return (
         <Route exact path = {`${match.url}`} render={(props) => <StudentTestResultPage user={user} {...props}/>} />
         )

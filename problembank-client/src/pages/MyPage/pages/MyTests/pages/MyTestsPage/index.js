@@ -8,7 +8,6 @@ import testAPI from "../../../../../../apis/tests";
 
 function MyTestsPage(props) {
 	const {user} = props
-	console.log(user)
 
 	const [keyword, setKeyword] = useState();
 	const [start, setStart] = useState(null);
@@ -22,7 +21,7 @@ function MyTestsPage(props) {
 		dispatch(getUserTest(user.id))
 		.then(response => {
 			const { data } = response.payload;
-			console.log(data)
+			// console.log(data)
 			setTests(data)
 			setfilteredTests(data)
 		})
@@ -57,13 +56,12 @@ function MyTestsPage(props) {
 
 
 	const handleClick = async (test_id) => {
-		console.log("click!")
 		await cancelTest(test_id);
 		
 		dispatch(getUserTest(user.id))
 			.then(response => {
 				const { data } = response.payload;
-				console.log(data)
+				// console.log(data)
 				setTests(data)
 
 				setfilteredTests(

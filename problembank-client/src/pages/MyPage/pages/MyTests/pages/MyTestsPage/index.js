@@ -49,7 +49,6 @@ function MyTestsPage(props) {
 	async function cancelTest(test_id) {
 		const response = await testAPI.cancelReg({user_id : user.id, test_id : test_id});
 		if(response.result === true) {
-			console.log(response.data[0]);
 			alert("신청을 취소했습니다.");
 			return response.data[0];
 		}

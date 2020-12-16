@@ -20,7 +20,8 @@ import userAPI from '../../../../apis/users';
 
 
 function TestPage(props) {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [allLoading, setAllLoading] = useState(true);
   const [constList, setConstList] = useState([]); // 한번 가져오면 변하지 않는 리스트
   const [totalList, setTotalList] = useState([]);
   const [first, setFirst] = useState(false);
@@ -32,12 +33,15 @@ function TestPage(props) {
   useEffect(()=>{
     if(!first){
       setTestList();
-    }
+    } 
     console.log("updated");
-  },[loading, totalList])
+  },[ totalList, first])
 
   const setTestList = async () => {
     try{
+      setVaildButton(false);
+      setSearchValue("");
+      setTypeValue("all");
       if(user.is_admin==0){
         const params = {
           user_id: user.id,
@@ -56,7 +60,6 @@ function TestPage(props) {
         setFirst(true);
         setTotalList(result);
         setConstList(result);
-        setLoading(false);
       } else {
         const params = {
           admin_id: user.id,
@@ -66,8 +69,8 @@ function TestPage(props) {
         setFirst(true);
         setTotalList(result);
         setConstList(result);
-        setLoading(false);
-      } 
+      }
+      setAllLoading(false);
     } catch (error) {
         alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
         console.log(error)
@@ -76,13 +79,14 @@ function TestPage(props) {
 
   const regTest = async (value)=> {
     try{
-      setLoading(true)
+      setAllLoading(true);
       const params = {
         user_id: user.id,
         test_id:value,
       };
       const response = await testsAPI.regTest(params);
       console.log(response);
+      setFirst(false);
     } catch (error) {
         alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
         console.log(error)
@@ -91,13 +95,14 @@ function TestPage(props) {
 
   const cancelReg = async (value)=> {
     try{
-      setLoading(true)
+      setAllLoading(true)
       const params = {
         user_id: user.id,
         test_id:value,
       };
       const response = await testsAPI.cancelReg(params);
       console.log(response);
+      setFirst(false);
     } catch (error) {
         alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
         console.log(error)
@@ -201,6 +206,9 @@ function TestPage(props) {
     
   }
 
+  if(allLoading){
+    return <Loading  type={'bars'} color={'black'}  />
+  }
   return (
     <TestLayout>
       <Spacing vertical={3} />
@@ -272,7 +280,7 @@ function TestPage(props) {
                         }}
                         onButton={()=>{regTest(value.id);}}
                         test_name={value.name} timestamp={totalString} auth={value.admin_name}
-                        disabled={invalid} type="apply"/>;
+                        disabled={!invalid} type="apply"/>;
                       }
                     })
                   }

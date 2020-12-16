@@ -37,7 +37,7 @@ function TestDisplay(props)  {
         }
         {
           (type === "enter" && Number(isExam) === 0) ?
-          (disabled?
+          (!disabled?
             <Button test disabled onPress={onCancel}>취소</Button>:
             <Button test onPress={onCancel}>취소</Button>
           ): ""

@@ -54,7 +54,7 @@ export default function ReportErrorContent({user_id, test_id}) {
                         </Text>
                     </Spacing>
                     
-                    <InlineList align='center'>
+                    <InlineList align='center' distribution>
                         <Textarea onChange={OnTextChange} light/> 
                     </InlineList>
                     

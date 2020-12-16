@@ -120,7 +120,7 @@ function TestPage(props) {
 
   }
 
-  const  OnSearchInput = (name, value) => {
+  const OnSearchInput = (name, value) => {
 
     setSearchValue(value);
     TotalUpdate(vaildButton,value, typeValue);

@@ -4,13 +4,12 @@ import { ControlledEditor } from "@monaco-editor/react";
 import SampleCode from '../../../../constansts/SampleCode';
 import { useDispatch, useSelector } from 'react-redux';
 import queryString from 'query-string'
-import { getProblemData } from '../../../../_actions/problemAction';
-import projectsAPI from '../../../../apis/projects';
 import testsAPI from '../../../../apis/tests';
-import problemsBank from '../../../../apis/problemsBank';
 import WrapperLoading from '../../../../components/WrapperLoading';
 import Loading from '../../../../components/Loading/Loading';
 import DetailProblemLayout from '../../../../layouts/DetailProblemLayout';
+import {Consumer as ModalConsumer} from '../../../../components/Modal/createModalProvider';
+import {REPORT_ERROR_MODAL} from '../../../../components/Modal/ModalProviderWithKey';
 
 import Timer from '../../../../assets/images/timer.png';
 import Button from '../../../../components/DesignComponent/Button';
@@ -177,9 +176,7 @@ function DoTest(props) {
 
     const TestButton =  () => {
         try{
-            setSubmit(true);
-            console.log(sourceCodes);
-            setSubmit(false);
+            console.log(problems);
         } catch (error) {
             alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
             console.log(error)
@@ -373,13 +370,18 @@ function DoTest(props) {
                                 
                             /> 
                     </div>
+                    <ModalConsumer>
+                    {({openModal})=>(
                     <div className="tab__footer">
-                        <Button distance>오류 보고</Button>
+                        <Button distance onPress={()=> openModal(REPORT_ERROR_MODAL, {user_id:user.id, test_id:test_id  })}>오류 보고</Button>
                         <Button distance onPress={()=>resetEditor()}>초기화</Button>
                         <Button distance onPress={() => onTest()}>실행</Button>
                         <Button distance test onPress={() => onSubmit()}>제출</Button>
                         <Button test onPress={()=>TestButton()}>실험용</Button>
                     </div>
+                    )}
+                    </ModalConsumer>
+                    
                 </div>
             </div>
             {showToast && 

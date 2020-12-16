@@ -8,11 +8,11 @@ function ProgressSidebar(props) {
 	const location = useLocation();
 
     function handleFeedbackClick() {
-		history.push("/admintestprogress")
+		history.push("/adminprogress")
 	}
 
 	function handleProblemEditClick() {
-    	history.push("/admintestprogress/problemedit")
+    	history.push("/adminprogress/problemedit")
 	}
 
 	console.log(location)
@@ -21,12 +21,12 @@ function ProgressSidebar(props) {
 	    <ul className="Sidebar-list">
 	        <li>
 	            <div id="Sidebar1">
-	                <button className={`accordion ${location.pathname === '/admintestprogress' && 'active'}`} onClick={handleFeedbackClick}>피드백 목록</button>
+	                <button className={`accordion ${location.pathname === '/adminprogress' && 'active'}`} onClick={handleFeedbackClick}>피드백 목록</button>
 	            </div>
 	        </li>
 	        <li>
 	            <div id="Sidebar2">
-	                <button className={`accordion ${location.pathname === '/admintestprogress/problemedit' && 'active'}`} onClick={handleProblemEditClick}>문제 수정</button>
+	                <button className={`accordion ${location.pathname === '/adminprogress/problemedit' && 'active'}`} onClick={handleProblemEditClick}>문제 수정</button>
 	            </div>
 	        </li>
 	    </ul>

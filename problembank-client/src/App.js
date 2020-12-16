@@ -101,8 +101,7 @@ function App() {
                 <Route path = "/totalproblems"  component = {TotalProblems}/>
                 <Route path = "/problemsbank"  component = {ProblemsByCategories}/>
                 <Route path = "/problem"  component = {Problem}/>
-                <Route path="/admintestprogress" component={AdminTestProgress} />
-
+                <Route path="/adminprogress" component={AdminTestProgress} />
 
                 <Route component = {NotFound} />
             </Switch>

@@ -33,8 +33,6 @@ function TestPage(props) {
 
   const setTestList = async () => {
     try{
-      
-      
       if(user.is_admin==0){
         const params = {
           user_id: user.id,
@@ -173,7 +171,7 @@ function TestPage(props) {
                           if(value.content)
                             openModal(NOTICE_MODAL, {title:value.name ,auth:value.admin_name, content: value.content})
                         }}
-                        onButton={() => props.history.push(`/test/student/view?index=0&test_id=${value.id}`)}
+                        onButton={() => props.history.push(`/test/view?index=0&test_id=${value.id}`)}
                         test_name={value.name} timestamp={totalString} auth={value.admin_name}
                         disabled={invalid} type="enter" isExam={value.is_exam} 
                         onCancel={()=>{cancelReg(value.id);}}/>;
@@ -224,8 +222,9 @@ function TestPage(props) {
                           openModal(NOTICE_MODAL, {title:value.name ,auth:user.name, content: value.content})
                       }}
                       // 이동하고 싶은 페이지 주소 적기
-                      // onButton={() => props.history.push(`/test/student/view?index=0&test_id=${value.id}`)}
-                      onButton={() => {}}
+                      // onButton={() => props.history.push(`/test/view?index=0&test_id=${value.id}`)}
+                      
+                      onButton={() => props.history.push(`/adminprogress?test_id=${value.id}`)}
                       test_name={value.name} timestamp={totalString} auth={value.admin_name}
                       disabled={invalid} type="admin" isExam={value.is_exam} 
                       />;

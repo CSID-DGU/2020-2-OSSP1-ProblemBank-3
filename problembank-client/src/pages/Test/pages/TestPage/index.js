@@ -8,7 +8,7 @@ import Spacing from "../../../../components/DesignComponent/Spacing";
 import Select, { Option } from "../../../../components/DesignComponent/Select";
 import Heading from "../../../../components/DesignComponent/Heading";
 import Button from "../../../../components/DesignComponent/Button";
-
+import WrapperLoading from '../../../../components/WrapperLoading';
 
 import TestDisplay from '../../components/TestDisplay';
 import Loading from '../../../../components/Loading/Loading';
@@ -21,11 +21,16 @@ import userAPI from '../../../../apis/users';
 
 function TestPage(props) {
   const [loading, setLoading] = useState(true);
+  const [constList, setConstList] = useState([]); // 한번 가져오면 변하지 않는 리스트
   const [totalList, setTotalList] = useState([]);
+  const [first, setFirst] = useState(false);
+  const [vaildButton, setVaildButton] = useState(false);
+  const [searchValue, setSearchValue]= useState("");
+  const [typeValue, setTypeValue] = useState("all");
   const {user} = props;
   
   useEffect(()=>{
-    if(loading){
+    if(!first){
       setTestList();
     }
     console.log("updated");
@@ -41,14 +46,16 @@ function TestPage(props) {
         const response = await testsAPI.getAllTestData(params);
         const entry = response.data.filter((value)=> {
           return (Number(value.in_entry)===1);
-        })
+        });
         const entry2 = response.data.filter((value)=> {
           return (Number(value.in_entry)===0 && Number(value.is_exam)===0);
-        })
+        });
   
         // 두 배열을 합치기
         const result = entry.concat(entry2);
+        setFirst(true);
         setTotalList(result);
+        setConstList(result);
         setLoading(false);
       } else {
         const params = {
@@ -56,7 +63,9 @@ function TestPage(props) {
         };
         const response = await testsAPI.getAdminTestList(params);
         const result = response.data;
+        setFirst(true);
         setTotalList(result);
+        setConstList(result);
         setLoading(false);
       } 
     } catch (error) {
@@ -95,17 +104,95 @@ function TestPage(props) {
     }
   }
 
+  const OnVaildButton = (name, value) => {
+    if(value) {
+      setVaildButton(true);
+      TotalUpdate(true,searchValue, typeValue);
+    } else{
+      setVaildButton(false);
+      TotalUpdate(false,searchValue, typeValue);
+    }
+
+  }
+
+  const  OnSearchInput = (name, value) => {
+
+    setSearchValue(value);
+    TotalUpdate(vaildButton,value, typeValue);
+  }
+
+  const OnTypeToggle = (name, value) => {
+    setTypeValue(value); //typeValue
+    console.log(value);
+    if(value=="test"){
+      TotalUpdate(vaildButton,searchValue, "test");
+    } else if(value=="contest") {
+      TotalUpdate(vaildButton,searchValue, "contest");
+    } else {
+      TotalUpdate(vaildButton,searchValue, "all");
+    }
+  }
+  const TotalUpdate = (valid, serchVal, type) => {
+    setLoading(true);
+    if(valid) {
+      const entry = constList.filter((value)=> {
+        var start = new Date(value.start);
+        var end = new Date(value.end);
+        var now = new Date();
+        var invalid = false; 
+        if(now>end || now<start) invalid = true;
+        return !invalid;
+      });
+      const entry2 = entry.filter((value)=>{
+        return value.name.match(new RegExp(serchVal, "i"));
+      });
+      
+      if(type=="test"){
+        const result = entry2.filter((value)=>{
+          return Number(value.is_exam) == 1;
+        });
+        setTotalList(result);
+      } else if (type=="contest") {
+        const result = entry2.filter((value)=>{
+          return Number(value.is_exam) == 0;
+        });
+        setTotalList(result);
+      } else {
+        setTotalList(entry2);
+      }
+
+    } else{
+
+      const entry = constList.filter((value)=>{
+        console.log(value.is_exam);
+        return value.name.match(new RegExp(serchVal, "i"));
+      });
+
+      if(type=="test"){
+        const result = entry.filter((value)=>{
+          return Number(value.is_exam) == 1;
+        });
+        setTotalList(result);
+      } else if (type=="contest") {
+        const result = entry.filter((value)=>{
+          return Number(value.is_exam) == 0;
+        });
+        setTotalList(result);
+      } else {
+        setTotalList(entry);
+      }
+
+
+    }
+    setInterval(function(){ setLoading(false)}, 500);
+  }
+
   const TestButton = async () => {
     try{
       // const params = {
-      //   user_id: 1,
-      //   user_pass: "pass"
+      //   admin_id: 1,
       // };
-      // const response = await userAPI.getUserInfo(params);
-      const params = {
-        admin_id: 1,
-      };
-      const response = await testsAPI.getAdminTestList(params);
+      // const response = await testsAPI.getAdminTestList(params);
       console.log(totalList);
     } catch (error) {
         alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
@@ -114,15 +201,13 @@ function TestPage(props) {
     
   }
 
-  if(loading){
-    return <Loading  type={'bars'} color={'black'}  />
-  } 
   return (
     <TestLayout>
       <Spacing vertical={3} />
       <InlineList align="center">
-        <Select name="type">
-          <Option label="시험" value="text" />
+        <Select name="type" value={typeValue} onChange={OnTypeToggle}>
+          <Option label="모두" value="all" />
+          <Option label="시험" value="test" />
           <Option label="대회" value="contest" />
         </Select>
         <Input
@@ -130,8 +215,10 @@ function TestPage(props) {
           type="text"
           placeholder="내용을 입력해주세요"
           width={100}
+          onChange= {OnSearchInput}
+          value={searchValue}
         />
-        <Input type="checkbox" name="vaildTest"/>
+        <Input type="checkbox" name="vaildTest" onChange={OnVaildButton} checked={vaildButton}/>
         <Text>입장/신청 가능만 보기</Text>
       </InlineList>
       <Spacing vertical={10} />
@@ -140,7 +227,10 @@ function TestPage(props) {
           <ModalConsumer>
           {({openModal})=>(
           <div>
-        { (user.is_admin == 0)?
+        { loading ? 
+          <WrapperLoading type={'bars'} color={'black'} />
+          :
+          (user.is_admin == 0)?
           totalList.length !=0 &&
           totalList.map((value, index, itself)=>{
             var prac;
@@ -162,7 +252,7 @@ function TestPage(props) {
                       var end = new Date(value.end);
                       var now = new Date();
                       var invalid = false; 
-                      if(now>end) invalid = true;
+                      if(now>end || now<start) invalid = true;
                       var startString = start.getFullYear() +"-"+(start.getMonth()+1)+"-"+start.getDate()+" "+start.getHours()+":"+ (start.getMinutes()<10?'0':'') + start.getMinutes();
                       var endString = end.getFullYear() +"-"+(end.getMonth()+1)+"-"+end.getDate()+" "+end.getHours()+":"+ (end.getMinutes()<10?'0':'') + end.getMinutes();
                       var totalString = startString + " ~ " + endString;

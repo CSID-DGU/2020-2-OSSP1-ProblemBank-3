@@ -9,23 +9,23 @@ function ProgressSidebar(props) {
 	const test_id = props.test_id;
 
     function handleFeedbackClick() {
-		history.push(`/adminprogress?test_id=${test_id}`)
+		history.push(`/test/adminprogress?test_id=${test_id}`)
 	}
 
 	function handleProblemEditClick() {
-    	history.push(`/adminprogress/problemedit?test_id=${test_id}`)
+    	history.push(`/test/adminprogress/problemedit?test_id=${test_id}`)
 	}
     return (
 	<div className="Sidebar">
 	    <ul className="Sidebar-list">
 	        <li>
 	            <div id="Sidebar1">
-	                <button className={`accordion ${location.pathname === '/adminprogress' && 'active'}`} onClick={handleFeedbackClick}>피드백 목록</button>
+	                <button className={`accordion ${location.pathname === '/test/adminprogress' && 'active'}`} onClick={handleFeedbackClick}>피드백 목록</button>
 	            </div>
 	        </li>
 	        <li>
 	            <div id="Sidebar2">
-	                <button className={`accordion ${location.pathname === '/adminprogress/problemedit' && 'active'}`} onClick={handleProblemEditClick}>문제 수정</button>
+	                <button className={`accordion ${location.pathname === '/test/adminprogress/problemedit' && 'active'}`} onClick={handleProblemEditClick}>문제 수정</button>
 	            </div>
 	        </li>
 	    </ul>

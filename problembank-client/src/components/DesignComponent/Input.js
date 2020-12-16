@@ -9,9 +9,17 @@ class Input extends PureComponent {
     this.handleChange = this.handleChange.bind(this);
   }
   handleChange(e) {
-    const { name, onChange } = this.props;
+    const { name, onChange, type } = this.props;
     if (onChange) {
-      onChange(name, e.target.value)
+      switch(type){
+        case 'checkbox':
+          onChange(name, e.target.checked);
+          break;
+        default:
+          onChange(name, e.target.value);
+          break;
+      }
+     
     }
   }
   componentDidMount() {
@@ -36,6 +44,7 @@ class Input extends PureComponent {
       height,
       width,
       placeholder,
+      checked,
     } = this.props;
     const { unit, color, size, lineHeight } = Theme;
     const styles = {
@@ -117,6 +126,7 @@ class Input extends PureComponent {
           type={type}
           onChange={this.handleChange}
           value={value}
+          checked={checked}
           placeholder={placeholder}
         />
       </fieldset>

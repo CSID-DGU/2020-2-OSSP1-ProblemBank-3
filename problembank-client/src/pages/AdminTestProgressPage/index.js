@@ -38,6 +38,7 @@ function AdminTestProgressPage(props) {
 		}
     }, [data]);
 
+
     if(data && remainingTime) {
         const timeout = setInterval(() => setRemainingTime(moment.duration(moment(data.end).diff(moment()))), 1000);
     }
@@ -45,7 +46,7 @@ function AdminTestProgressPage(props) {
     if(error) return error.message;
     if(data && remainingTime) return (
         <div className="admin-test-progress-page">
-            <p className="test-title">{data.name}가 진행중입니다.</p>
+            <p className="test-title">{data.name} 진행중입니다.</p>
             <div>
                 <img className="img-timer" width="15" src={timer_img} />
                 <text className="test-timer">{remainingTime.days()*24 + remainingTime.hours()}:{remainingTime.minutes()}:{remainingTime.seconds()}</text>

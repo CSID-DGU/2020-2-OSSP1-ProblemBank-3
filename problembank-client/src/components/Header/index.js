@@ -36,7 +36,7 @@ function Header(props) {
                         </li>
                         {/*마이페이지*/}
                         <li>
-                            <NavLink to="/mypage" activeClassName='active_class'>마이페이지</NavLink>
+                            <NavLink to="/mypage/mytest" activeClassName='active_class'>마이페이지</NavLink>
                         </li>
 
                         <li>

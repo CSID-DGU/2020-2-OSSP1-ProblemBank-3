@@ -22,7 +22,7 @@ class StudentResultTable extends Component{
                 </thead>
                 <tbody>
                     {
-                        this.props.getResults().map((item,index) => {
+                        this.props.filteredResults.map((item,index) => {
                             let date = item.date.substring(0,item.date.indexOf('T'))
                             return (
 

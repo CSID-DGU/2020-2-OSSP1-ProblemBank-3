@@ -1,7 +1,7 @@
 import React, {Component, useState} from 'react'
 import {Link, withRouter} from 'react-router-dom';
 import './style.scss'
-import testAPI from '../../../../../apis/tests';
+import testAPI from '../../../../../../apis/tests';
 
 
 class MyTestsTable extends Component{

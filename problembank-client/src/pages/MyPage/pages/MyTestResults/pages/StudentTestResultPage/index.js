@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./style.scss";
-import MyPageLayout from "../../../../../layouts/MyPageLayout";
+import MyPageLayout from "../../../../../../layouts/MyPageLayout";
 import StudentResultTable from "../../components/StudentResultTable";
 import {useDispatch} from "react-redux";
-import {getUserResult} from "../../../../../_actions/testAction";
+import {getUserResult} from "../../../../../../_actions/testAction";
 
 function StudentTestResultPage(props) {
 	const {user} = props
@@ -44,12 +44,8 @@ function StudentTestResultPage(props) {
 		))
 		setFilteredResults(filteredResults)
 	}
-	const getFilteredResults = () =>{
-		return filteredResults
-	}
 
 	return(
-		<MyPageLayout user = {user}>
 			<div id="content">
 				<div id="content-header">
 					<div id="testDate">
@@ -65,10 +61,9 @@ function StudentTestResultPage(props) {
 					<button onClick={handleFilter}>조회</button>
 				</div>
 				<div id="content-table">
-					<StudentResultTable getResults={getFilteredResults} {...props} ></StudentResultTable>
+					<StudentResultTable filteredResults={filteredResults} {...props} ></StudentResultTable>
 				</div>
 			</div>
-		</MyPageLayout>
 	);
 }
 

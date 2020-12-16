@@ -32,6 +32,7 @@ function App() {
     // const [user, setUser] = useState(null);
     // 로그인 하기가 귀찮을 때 테스트 할 아이디를 선택해서 주석 해제. 할 때 위에꺼 주석하는거 잊지 말기
     // const [user, setUser] = useState({id: 1, user_id: "admin", pw: "pass", user_name: "홍길동", is_admin: 1}); //admin 용
+
     const [user, setUser] = useState({id: 3, user_id: "user2", pw: "pass", user_name: "전우치", is_admin: 0}); // student 용
     const login = async ({id, password}) => {
         try{
@@ -73,10 +74,10 @@ function App() {
                 />
                 <Authorized
                     auth={auth}
-                    path="/mypage"
+                    path="/mypage/mytest"
                     render={props => <MyPage user={user} {...props} />}
                 />
-                <Authorized
+                {/* <Authorized
                     auth={auth}
                     path="/mytests"
                     render={props => <MyTests user={user} {...props} />}
@@ -90,7 +91,7 @@ function App() {
                     auth={auth}
                     path="/admintestresult"
                     render={props => <AdminTestResult user={user} {...props} />}
-                />
+                /> */}
                 <Authorized
                     auth={auth}
                     path="/createtest"

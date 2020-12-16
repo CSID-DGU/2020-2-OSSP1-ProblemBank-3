@@ -6,7 +6,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 function Sidebar(props) {
 	const location = useLocation();
 
-	const [isShown, setIsShown] = useState(false);
+	// const [isShown, setIsShown] = useState(false);
 
 	function handleInfoEditClick() {
 		alert("준비중입니다.");
@@ -18,7 +18,7 @@ function Sidebar(props) {
 	    <ul className="Sidebar-list">
 	        <li>
 	            <div id="Sidebar1">
-	                <button class="buttonStyle accordion" onMouseEnter={() => setIsShown(false)} onClick={handleInfoEditClick}>회원 정보 수정</button>
+	                <button class="buttonStyle accordion" onClick={handleInfoEditClick}>회원 정보 수정</button>
 	                <div class="panel">
 	                </div>
 	            </div>
@@ -26,17 +26,16 @@ function Sidebar(props) {
 	        <li>
 	            <div id="Sidebar2">
 					<button className={`buttonStyle accordion ${location.pathname.includes('/mypage/mytest') && 'active'}`} 
-						onMouseEnter={() => setIsShown(true)}>내 시험/대회</button>
-	                {	isShown ?
+						>내 시험/대회</button>
 						<div class="panel">
 	                    <ul>
 							{props.user.is_admin ? (
 								<li>
-									<NavLink to="/admintestresult" className="navLink">시험 결과 조회</NavLink>
+									<NavLink to="/mypage/mytest/adminresults" className="navLink">시험 결과 조회</NavLink>
 								</li>
 							) : (
 								<li>
-									<NavLink to="/studenttestresult" className="navLink">시험 결과 조회</NavLink>
+									<NavLink to="/mypage/mytest" className="navLink">시험 결과 조회</NavLink>
 								</li>
 							)}
 
@@ -46,7 +45,7 @@ function Sidebar(props) {
 								</li>
 							) : (
 								<li>
-									<NavLink to="/mytests" className="navLink">신청 시험 조회</NavLink>
+									<NavLink to="/mypage/mytest/apply" className="navLink">신청 시험 조회</NavLink>
 								</li>
 							)}
 
@@ -59,7 +58,7 @@ function Sidebar(props) {
 							)}
 
 	                    </ul>
-	                </div> : null}
+	                </div>
 	            </div>
 	        </li>
 	    </ul>

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./style.scss";
 import MyTestsTable from "../../components/MyTestsTable";
-import MyPageLayout from "../../../../../layouts/MyPageLayout";
-import {getUserTest} from "../../../../../_actions/testAction";
+import MyPageLayout from "../../../../../../layouts/MyPageLayout";
+import {getUserTest} from "../../../../../../_actions/testAction";
 import {useDispatch} from "react-redux";
-import testAPI from "../../../../../apis/tests";
+import testAPI from "../../../../../../apis/tests";
 
 function MyTestsPage(props) {
 	const {user} = props
@@ -78,7 +78,7 @@ function MyTestsPage(props) {
 	}
 
     return(
-    	<MyPageLayout user = {user}>
+
 	    <div id="content">
 	        <div id="content-header">
 	            <div id="testDate">
@@ -97,7 +97,7 @@ function MyTestsPage(props) {
 	            <MyTestsTable handleClick={handleClick} testLists={filteredTests} {...props} ></MyTestsTable>
 	        </div>
 	    </div>
-		</MyPageLayout>
+
     );
 }
 

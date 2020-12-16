@@ -64,7 +64,7 @@ export default function ReportErrorContent({user_id, test_id}) {
                             TestButton();
                             closeModal();
                         }}>테스트</Button> */}
-                        <Button distance test testonPress={()=>{
+                        <Button distance test onPress={()=>{
                             ErrorReportButton();
                             closeModal();
                         }}>보고</Button>

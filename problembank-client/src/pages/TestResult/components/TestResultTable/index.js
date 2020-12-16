@@ -1,44 +1,54 @@
 import React, {Component} from 'react'
-import { withRouter } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import './style.scss'
 
 const moment = require('moment');
 
-class TestResultTable extends Component{
+class TestResultTable extends Component {
+
+    handleClick = (test_id) => {
+        console.log("click!")
+        this.props.history.push("/")
+    }
 
     render() {
-        return(
-	    <div className="tableContent">
-            <table className="table table-contribution">
-                <thead>
+        return (
+            <div className="tableContent">
+                <table className="table table-contribution">
+                    <thead>
                     <tr>
-                        <th width = "5%">번호</th>
-                        <th width = "35%">문제</th>
-                        <th width = "15%">정오답</th>
-		                <th width = "10%">답안 확인</th>
+                        <th width="5%">번호</th>
+                        <th width="35%">문제</th>
+                        <th width="15%">정오답</th>
+                        <th width="10%">답안 확인</th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     {
-                        this.props.results.map((item,index) => {
+                        this.props.results.map((item, index) => {
                             return (
 
-                                <tr key = {index}>
-                                    <td style={{textAlign: "center"}}>{index+1}</td>
+                                <tr key={index}>
+                                    <td style={{textAlign: "center"}}>{index + 1}</td>
                                     <td style={{textAlign: "center"}}>{item.problem_name}</td>
-                                    <td style={{textAlign: "center"}}>{item.is_correct}</td>
                                     <td style={{textAlign: "center"}}>
-                                            <button>열람</button>
+                                        {
+                                            item.is_correct ? 'O' : 'X'
+                                        }
+                                    </td>
+                                    <td style={{textAlign: "center"}}>
+                                        <button onClick={() => this.handleClick(item.test_id)}>열람</button>
                                     </td>
                                 </tr>
                             )
                         })
                     }
-                </tbody>
-            </table>
-        </div>
+                    </tbody>
+                </table>
+            </div>
         )
     }
 }
+
 export default withRouter(TestResultTable)
 

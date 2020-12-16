@@ -438,9 +438,10 @@ router.post('/testrun', async function (req, res) {
                 });
             });
         })
-
+        
         await Promise.all(promises)
         if (errormsg) errormsg = "컴파일 에러"
+        if (result[0].input_example != testCases[0].input_example) [result[0], result[1]] = [result[1], result[0]]
 
         res.status(200).send({
             result: true,

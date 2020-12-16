@@ -19,7 +19,7 @@ module.exports = {
     selectTestUserByIds: "SELECT * FROM problems.pb_test_users WHERE test_id = ? AND user_id = ?",
     selectTestsByUserId: "SELECT test_id FROM problems.pb_test_users WHERE user_id = ?",
     selectUserNameById: "SELECT user_name FROM problems.pb_users WHERE id = ?",
-    selectUserAnswerByIds: "SELECT content FROM problems.pb_test_answers WHERE test_id = ? AND problem_id = ? AND user_id = ? ORDER BY id DESC LIMIT 1",
+    selectUserAnswerByIds: "SELECT content, is_correct FROM problems.pb_test_answers WHERE test_id = ? AND problem_id = ? AND user_id = ? ORDER BY id DESC LIMIT 1",
     selectProblemScoreByIds: "SELECT score FROM problems.pb_test_problems WHERE test_id = ? AND problem_id = ?",
     selectInsertedId: "SELECT @@IDENTITY AS id",
     
@@ -31,7 +31,7 @@ module.exports = {
     insertTestCases: "INSERT INTO problems.pb_test_testcases (input_example, output_example, problem_id) VALUES (?, ?, ?)",
     insertTestIdForTestCases: "INSERT INTO problems.pb_test_testcases (problem_id) VALUES (?)",
     insertTestUser: "INSERT INTO pb_test_users (user_id, test_id) VALUES (?, ?)",
-    insertUserAnswers: "INSERT INTO pb_test_answers (test_id, problem_id, user_id, content) VALUES (?, ?, ?, ?)",
+    insertUserAnswers: "INSERT INTO pb_test_answers (test_id, problem_id, user_id, content, is_correct) VALUES (?, ?, ?, ?, ?)",
     insertFeedback: "INSERT INTO pb_test_feedback (test_id, author_id, content) VALUES (?, ?, ?)",
 
     // UPDATE

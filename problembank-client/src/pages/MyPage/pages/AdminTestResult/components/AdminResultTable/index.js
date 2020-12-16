@@ -1,34 +1,26 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
+import React, { useState, useCallback, useEffect } from "react";
+import { useAsync } from 'react-async';
 import { withRouter } from 'react-router-dom';
 import './style.scss'
 import testAPI from '../../../../../../apis/tests';
 
-const moment = require('moment');
+async function getResultAdmin({test_id}) {
+	const response = await testAPI.getResultAdmin({test_id});
+	if(response.result === true) {
+		console.log(response);
+		return response.data;
+	}
+	throw new Error(response.data);
+}
 
-class AdminResultTable extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            code: false,
-            result: []
-        }
-    }
-
-    getResultAdmin = async()  => {
-        const response = await testAPI.getResultAdmin({test_id: 1});
-        this.setState({
-            code: response.result,
-            result: response.data
-        })
-    }
-
-    componentDidMount() {
-        this.getResultAdmin()
-    }
-
-    render() {
-        return(
+function AdminResultTable({test_id}){
+    const { data, error } = useAsync({
+		promiseFn: getResultAdmin,
+		test_id: test_id,
+		watch: test_id
+	});
+    if(error) return error.message;
+    if(data) return(
 	<div className="tableContent">
             <table className="table table-contribution">
                 <thead>
@@ -42,9 +34,8 @@ class AdminResultTable extends Component{
                 </thead>
                 <tbody>
                     {
-                        this.state.result.map((item,index) => {
+                        data.map((item,index) => {
                             return (
-
                                 <tr key = {index}>
                                     <td style={{textAlign: "center"}}>{index+1}</td>
                                     <td style={{textAlign: "center"}}>{item.user_name}</td>
@@ -58,8 +49,9 @@ class AdminResultTable extends Component{
                 </tbody>
             </table>
         </div>
-        )
-    }
+    )
+    return "로딩중...";
 }
+
 export default withRouter(AdminResultTable)
 

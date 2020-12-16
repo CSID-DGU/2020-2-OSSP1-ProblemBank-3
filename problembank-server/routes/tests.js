@@ -48,6 +48,21 @@ router.get('/admintestlist', async function (req, res) {
     }
 })
 
+//시험 정보
+router.get('/testinfo', async function(req, res) {
+    const { test_id } = req.query
+    try {
+        let [rows] = await db.query(sql.tests.selectTestByTestId, [test_id])
+        res.status(200).send({
+            result: true,
+            data: rows,
+            message: 'test info'
+        })
+    } catch (error) {
+        console.log(error);
+    }
+})
+
 // 시험 문제 목록
 router.get('/testproblems', async function (req, res) {
     const { test_id } = req.query

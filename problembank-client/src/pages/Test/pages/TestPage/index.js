@@ -144,9 +144,12 @@ function TestPage(props) {
         var start = new Date(value.start);
         var end = new Date(value.end);
         var now = new Date();
-        var invalid = false; 
-        if(now>end || now<start) invalid = true;
-        return !invalid;
+        var validEntry = false; 
+        var validApply = false;
+        if((now<end && now>start)&&(Number(value.in_entry)===1)) validEntry = true;
+        if((now<start) && (Number(value.in_entry)===0)) validApply= true;
+
+        return (validEntry||validApply) ;
       });
       const entry2 = entry.filter((value)=>{
         return value.name.match(new RegExp(serchVal, "i"));

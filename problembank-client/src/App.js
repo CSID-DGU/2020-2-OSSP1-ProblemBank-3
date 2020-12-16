@@ -26,6 +26,7 @@ const AdminTestResult = React.lazy(() => import('./pages/AdminTestResult'))
 const MyPage = React.lazy(() => import('./pages/MyPage'))
 const MyTests = React.lazy(() => import('./pages/StudentUserPages/MyTests'))
 const MyTestResults = React.lazy(() => import('./pages/StudentUserPages/MyTestResults'))
+const DetailedResult = React.lazy(() => import('./pages/TestResult'))
 
 
 function App() {
@@ -95,6 +96,11 @@ function App() {
                     auth={auth}
                     path="/createtest"
                     render={props => <CreateTest user={user} {...props} />}
+                />
+                <Authorized
+                    auth={auth}
+                    path="/detailedresult"
+                    render={props => <DetailedResult user={user} {...props} />}
                 />
 
                 <Route exact path = "/"  component = {MainPage}/>

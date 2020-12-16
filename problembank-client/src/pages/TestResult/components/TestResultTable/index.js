@@ -4,11 +4,7 @@ import './style.scss'
 
 const moment = require('moment');
 
-class StudentResultTable extends Component{
-
-    handleClick = () => {
-
-    }
+class TestResultTable extends Component{
 
     render() {
         return(
@@ -39,7 +35,7 @@ class StudentResultTable extends Component{
                                         {Date.parse(item.date) < Date.now() ? (
                                             <button>열람</button>
                                         ) : (
-                                            <button2 link="/">열람</button2>
+                                            <button2>열람</button2>
                                         )}
                                     </td>
 
@@ -54,5 +50,5 @@ class StudentResultTable extends Component{
         )
     }
 }
-export default withRouter(StudentResultTable)
+export default withRouter(TestResultTable)
 

@@ -99,7 +99,7 @@ function App() {
                 />
                 <Authorized
                     auth={auth}
-                    path="/detailedresult"
+                    path="/detailedresult/"
                     render={props => <DetailedResult user={user} {...props} />}
                 />
 

@@ -30,18 +30,18 @@ class ModifyListModal extends Component {
 		this.setState({ resultProblem : filterProblems });
 	};
 
-	addProblem = () => {/*
-		const insertProblemId = Document.getElementById("added-problem").value;
-		var obj = new Object();
-		obj.problem_id = insertProblemId;
-
-		const index = this.state.problems.find(element => element.id == insertProblemId);
-		obj.problem_name = this.state.problems[index].name;
-
-		var tempArray = this.props.DB_problem;
-		tempArray.push(obj)
-
-		this.props.editProblemArray(tempArray);*/
+	addProblem = () => {
+		// const insertProblemId = Document.getElementById("added-problem").value;
+		// var obj = new Object();
+		// obj.problem_id = insertProblemId;
+		//
+		// const index = this.state.problems.find(element => element.id == insertProblemId);
+		// obj.problem_name = this.state.problems[index].name;
+		//
+		// var tempArray = this.props.DB_problem;
+		// tempArray.push(obj)
+		//
+		// this.props.editProblemArray(tempArray);
 		alert("asdf");
 	};
 
@@ -61,7 +61,7 @@ class ModifyListModal extends Component {
 							<span id="close" onClick={close}>
 								&times;
 							</span>
-							<div id="modifyList" onClick={isOpen}>
+							<div id="modifyList">
 								<div id="problem-list-block">
 									<div id="problem-search-box">
 										<div id="search-bar">

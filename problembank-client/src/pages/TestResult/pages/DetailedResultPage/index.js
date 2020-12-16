@@ -1,38 +1,41 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import "./style.scss";
 import MyPageLayout from "../../../../layouts/MyPageLayout";
 import TestResultTable from "../../components/TestResultTable";
 import {useDispatch} from "react-redux";
-import {getUserResult} from "../../../../_actions/testAction";
+import {getUserAnswer, getUserResult} from "../../../../_actions/testAction";
+import queryString from "query-string";
 
 function DetailedResultPage(props) {
-	const {user} = props
-	console.log(user)
+    const {test_id} = queryString.parse(props.location.search);
+    const {user} = props
 
-	const [results, setResults] = useState([]);
+    console.log(test_id)
 
-	const dispatch = useDispatch();
+    const [results, setResults] = useState([]);
 
-	React.useEffect(() => {
-		dispatch(getUserResult(user.id))
-			.then(response => {
-				const { data } = response.payload;
-				console.log(data)
-				setResults(data)
-			})
-	}, [])
+    const dispatch = useDispatch();
 
-	return(
-		<MyPageLayout user = {user}>
-			<div id="content">
-				<div id="content-header">
-				</div>
-				<div id="content-table">
-					<TestResultTable results={results} {...props} ></TestResultTable>
-				</div>
-			</div>
-		</MyPageLayout>
-	);
+    React.useEffect(() => {
+        dispatch(getUserAnswer(test_id, user.id))
+            .then(response => {
+                const {data} = response.payload;
+                console.log(data)
+                setResults(data)
+            })
+    }, [])
+
+    return (
+        <MyPageLayout user={user}>
+            <div id="content">
+                <div id="content-header">
+                </div>
+                <div id="content-table">
+                    <TestResultTable results={results} {...props} ></TestResultTable>
+                </div>
+            </div>
+        </MyPageLayout>
+    );
 }
 
 export default DetailedResultPage;

@@ -8,7 +8,7 @@ function ManageTest({user}) {
     if(user.is_admin) return (
         <Route exact path = {`${match.url}`} render={(props) => <ManageTestPage user={user} {...props}/>} />
     )
-    else return <Redirect to="/test/student" />
+    else return <Redirect to="/" />
 }
 
 export default ManageTest;

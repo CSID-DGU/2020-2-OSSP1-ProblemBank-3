@@ -1,10 +1,11 @@
 import React, {useState} from "react";
-import "./style.scss";
 import MyPageLayout from "../../../../layouts/MyPageLayout";
 import TestResultTable from "../../components/TestResultTable";
 import {useDispatch} from "react-redux";
 import {getUserAnswer, getUserResult} from "../../../../_actions/testAction";
 import queryString from "query-string";
+import MyTestsTable from "../../../MyPage/pages/MyTests/components/MyTestsTable";
+import "./style.scss";
 
 function DetailedResultPage(props) {
     const {test_id} = queryString.parse(props.location.search);
@@ -26,15 +27,12 @@ function DetailedResultPage(props) {
     }, [])
 
     return (
-        <MyPageLayout user={user}>
-            <div id="content">
-                <div id="content-header">
-                </div>
-                <div id="content-table">
-                    <TestResultTable results={results} {...props} ></TestResultTable>
-                </div>
+
+        <div id="content">
+            <div id="content-table">
+                <TestResultTable results={results} {...props} ></TestResultTable>
             </div>
-        </MyPageLayout>
+        </div>
     );
 }
 

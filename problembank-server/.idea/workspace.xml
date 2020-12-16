@@ -20,8 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a2f59a0d-f558-407b-bbba-4b4bb6fb3971" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/MyTestResults/components/StudentResultTable/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/MyTestResults/components/StudentResultTable/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../problembank-client/src/pages/TestResult/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/TestResult/components/TestResultTable/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/TestResult/components/TestResultTable/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/TestResult/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/TestResult/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/TestResult/pages/DetailedResultPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/TestResult/pages/DetailedResultPage/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -87,7 +89,7 @@
       <workItem from="1608011605804" duration="3133000" />
       <workItem from="1608049201222" duration="106000" />
       <workItem from="1608096968903" duration="573000" />
-      <workItem from="1608124521765" duration="3353000" />
+      <workItem from="1608124521765" duration="3934000" />
     </task>
     <servers />
   </component>

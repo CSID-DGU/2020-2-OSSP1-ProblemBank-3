@@ -7,7 +7,7 @@ const moment = require('moment');
 class StudentResultTable extends Component {
 
     handleClick = (test_id) => {
-        this.props.history.push(`/detailedresult?test_id=${test_id}`)
+        this.props.history.push(`/detailedresult?test_id=${test_id}&user_id=${this.props.user.id}`)
     }
 
     render() {

@@ -252,7 +252,7 @@ router.post('/createtest', async function (req, res) {
         problems
     } = req.body
     try {
-        await db.query(sql.tests.insertTest, [testName, testContent, is_exam, start, end, admin_id, subject_id])
+        await db.query(sql.tests.insertTest, [testName, testContent, is_exam, start, end, admin_id, subject_id*is_exam])
         const [test_id] = await db.query(sql.tests.selectInsertedId)
         if (is_exam != 0) {
             const [subjectUsers] = await db.query(sql.tests.selectSubjectUsersBySubjectId, [subject_id])
@@ -273,12 +273,12 @@ router.post('/createtest', async function (req, res) {
                 for (let j = 0; j < testcases.length; j++) {
                     const { input, output } = testcases[j]
 
-                    await db.query(sql.tests.insertTestCases, [input, output, inserted[0].id])
+                    temp = await db.query(sql.tests.insertTestCases, [input, output, inserted[0].id])
                 }
             }
             else { // 존재하지 않는 문제
                 const { problemName, problemContent, input, output } = problems[i]
-                const { testcases } = problems[i]
+                const { testcase:testcases } = problems[i]
 
                 await db.query(sql.tests.insertProblem, [problemName, problemContent, input, output])
                 const [inserted] = await db.query(sql.tests.selectInsertedId)

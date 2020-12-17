@@ -6,9 +6,9 @@ const moment = require('moment');
 
 class TestResultTable extends Component {
 
-    handleClick = (test_id) => {
+    handleClick = (problem_id) => {
         console.log("click!")
-        this.props.history.push("/")
+        this.props.history.push(`/answercheck?test_id=${this.props.test_id}&problem_id=${problem_id}`)
     }
 
     render() {
@@ -37,7 +37,7 @@ class TestResultTable extends Component {
                                         }
                                     </td>
                                     <td style={{textAlign: "center"}}>
-                                        <button onClick={() => this.handleClick(item.test_id)}>열람</button>
+                                        <button onClick={() => this.handleClick(item.problem_id)}>열람</button>
                                     </td>
                                 </tr>
                             )

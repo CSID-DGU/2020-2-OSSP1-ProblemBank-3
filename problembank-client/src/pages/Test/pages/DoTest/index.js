@@ -16,11 +16,12 @@ import Button from '../../../../components/DesignComponent/Button';
 import Dropup from '../../../../components/DesignComponent/Dropup';
 import Toast from '../../../../components/DesignComponent/Toast';
 import {debounce} from '../../components/Debounce'
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 
 var moment = require('moment'); //?
 const debounceRunner = debounce(action=> action(), 4000);
 function DoTest(props) {
+    const history = useHistory();
     const [problems, setProblems] = useState();
     const [problem, setProblem] = useState({testcases:[]});
     // const [index, setIndex] = useState(0);
@@ -239,6 +240,7 @@ function DoTest(props) {
             const response = await testsAPI.submit(params);
             // console.log(response);
             setSubmit(false);
+            history.push(`/mypage/mytest`)
         } catch (error) {
             setSubmit(false);
             alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");

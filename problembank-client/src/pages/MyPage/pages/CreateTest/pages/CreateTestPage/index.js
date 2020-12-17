@@ -82,6 +82,7 @@ class CreateTestPage extends Component {
 			
 			// console.log(params);
 			const response = await testAPI.createTest(params);
+			alert("시험을 생성하였습니다.");
 			/* for debug
 			alert(params.testName);
 			alert(params.testContent);

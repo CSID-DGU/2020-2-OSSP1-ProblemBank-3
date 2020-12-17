@@ -2,7 +2,6 @@
 
 
 ![React](https://img.shields.io/badge/Frontend-React-blue?logo=react)
-
 ![React](https://img.shields.io/badge/Backend-Node.js_Express-green?logo=Node.js)
 
 ## About

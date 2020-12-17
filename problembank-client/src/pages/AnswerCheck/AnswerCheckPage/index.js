@@ -33,7 +33,7 @@ function AnswerCheckPage(props) {
 
     const getAnswer = async () => {
         const response = await testsAPI.getUserAnswers({test_id: test_id, user_id: user.id})
-        setContentEditor(response.data.answer)
+        setContentEditor(response.data[0].answer)
         console.log(response.data)
     }
 

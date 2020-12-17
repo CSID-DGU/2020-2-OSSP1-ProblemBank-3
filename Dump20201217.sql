@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
 --
--- Host: localhost    Database: problems
+-- Host: problembankdb.synology.me    Database: problems
 -- ------------------------------------------------------
--- Server version	8.0.22
+-- Server version	5.5.62-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,11 +23,11 @@ DROP TABLE IF EXISTS `pb_subject_users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pb_subject_users` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `subject_id` int DEFAULT NULL,
-  `user_id` int DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `subject_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +36,7 @@ CREATE TABLE `pb_subject_users` (
 
 LOCK TABLES `pb_subject_users` WRITE;
 /*!40000 ALTER TABLE `pb_subject_users` DISABLE KEYS */;
-INSERT INTO `pb_subject_users` VALUES (1,1,2),(2,1,3);
+INSERT INTO `pb_subject_users` VALUES (1,1,3),(2,1,6),(3,1,2),(4,2,8),(5,2,5),(6,2,7),(7,3,2),(8,3,7);
 /*!40000 ALTER TABLE `pb_subject_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -48,11 +48,11 @@ DROP TABLE IF EXISTS `pb_subjects`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pb_subjects` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` text,
-  `admin_id` int DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` text COLLATE utf8mb4_bin,
+  `admin_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -61,8 +61,36 @@ CREATE TABLE `pb_subjects` (
 
 LOCK TABLES `pb_subjects` WRITE;
 /*!40000 ALTER TABLE `pb_subjects` DISABLE KEYS */;
-INSERT INTO `pb_subjects` VALUES (1,'기초프로그래밍',1);
+INSERT INTO `pb_subjects` VALUES (1,'자료구조와실습',9),(2,'기초프로그래밍',1),(3,'심화프로그래밍',10);
 /*!40000 ALTER TABLE `pb_subjects` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pb_test_answers`
+--
+
+DROP TABLE IF EXISTS `pb_test_answers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `pb_test_answers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `test_id` int(11) DEFAULT NULL,
+  `problem_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `content` longtext COLLATE utf8mb4_bin,
+  `is_correct` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pb_test_answers`
+--
+
+LOCK TABLES `pb_test_answers` WRITE;
+/*!40000 ALTER TABLE `pb_test_answers` DISABLE KEYS */;
+INSERT INTO `pb_test_answers` VALUES (1,6,1,3,'#include<stdio.h>\nint main(void) {\n    int a, b;\n    scanf(\"%d %d\", &a, &b);\n    printf(\"%d\", a*b);\n    return 0;\n}',1),(2,6,1,3,'#include<stdio.h>\nint main(void) {\n    /*\n    *	write your codes!\n    */	\n    return 0;\n}',0),(3,6,1,3,'#include<stdio.h>\nint main(void) {\n    /*\n    *	write your codes!\n    */	\n    return 0;\n}',0),(4,6,1,3,'#include<stdio.h>\nint main(void) {\n    /*\n    *	write your codes!\n    */	\n    int a, b;\n    scanf(\"%d %d\", &a, &b);\n    printf(\"%d\\n\", a*b);\n    return 0;\n}',1),(26,5,4,2,'#include<stdio.h>\nint main(void) {\n    /*\n    *	모르겠어요.....\n    */	\n    return 0;\n}',0),(27,5,14,2,'#include <stdio.h>\n\nint main(void) {\n printf(\"\\\\    /\\\\\\n\");\n printf(\" )  ( \')\\n\");\n printf(\"(  /  )\\n\");\n printf(\" \\\\(__)|\\n\");\n return 0;\n}',1),(28,5,13,2,'#include <stdio.h>\n \nint main() {\n    printf(\"|\\\\_/|\\n\");\n    printf(\"|q p|   /}\\n\");\n    printf(\"( 0 )\\\"\\\"\\\"\\\\\\n\");\n    printf(\"|\\\"^\\\"`    |\\n\");\n    printf(\"||_/=\\\\\\\\__|\\n\");\n    return 0;\n}',1);
+/*!40000 ALTER TABLE `pb_test_answers` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -73,13 +101,13 @@ DROP TABLE IF EXISTS `pb_test_feedback`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pb_test_feedback` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `test_id` int DEFAULT NULL,
-  `content` text,
-  `author_id` int DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `test_id` int(11) DEFAULT NULL,
+  `content` text COLLATE utf8mb4_bin,
+  `author_id` int(11) DEFAULT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -88,8 +116,35 @@ CREATE TABLE `pb_test_feedback` (
 
 LOCK TABLES `pb_test_feedback` WRITE;
 /*!40000 ALTER TABLE `pb_test_feedback` DISABLE KEYS */;
-INSERT INTO `pb_test_feedback` VALUES (1,1,'1번 문제 테스트케이스에 오류가 있는 것 같은데 확인 부탁드립니다.',2,'2020-11-12 07:20:46');
+INSERT INTO `pb_test_feedback` VALUES (1,1,'3번 문제 테스트케이스에 오류가 있는 것 같습니다.',6,'2020-12-20 08:28:17'),(2,5,'왜 개 문제가 고양이 문제보다 먼저인가요?',6,'2020-12-17 05:32:20'),(3,6,'테스트',6,'2020-12-16 13:41:19'),(8,5,'3번 테스트케이스에 문제가 있는 것 같습니다...',2,'2020-12-17 04:56:43');
 /*!40000 ALTER TABLE `pb_test_feedback` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pb_test_problem_contents`
+--
+
+DROP TABLE IF EXISTS `pb_test_problem_contents`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `pb_test_problem_contents` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` text CHARACTER SET utf8 COLLATE utf8_bin,
+  `content` text CHARACTER SET utf8 COLLATE utf8_bin,
+  `input` text CHARACTER SET utf8 COLLATE utf8_bin,
+  `output` text CHARACTER SET utf8 COLLATE utf8_bin,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pb_test_problem_contents`
+--
+
+LOCK TABLES `pb_test_problem_contents` WRITE;
+/*!40000 ALTER TABLE `pb_test_problem_contents` DISABLE KEYS */;
+INSERT INTO `pb_test_problem_contents` VALUES (1,'A×B','두 정수 A와 B를 입력받은 다음, A×B를 출력하는 프로그램을 작성하시오.','첫째 줄에 A와 B가 주어진다. (0 < A, B < 10)','첫째 줄에 A×B를 출력한다.'),(2,'A+B','두 정수 A와 B를 입력받은 다음, A+B를 출력하는 프로그램을 작성하시오. asdfasdf','첫째 줄에 A와 B가 주어진다. (0 < A, B < 10) ','첫째 줄에 A+B를 출력한다.'),(3,'수열의 합','N과 L이 주어질 때, 합이 N이면서, 길이가 적어도 L인 가장 짧은 연속된 음이 아닌 정수 리스트를 구하는 프로그램을 작성하시오.','첫째 줄에 N과 L이 주어진다. N은 1,000,000,000보다 작거나 같은 자연수이고, L은 2보다 크거나 같고, 100보다 작거나 같은 자연수이다.','만약 리스트의 길이가 100보다 작거나 같으면, 연속된 수를 첫째 줄에 공백으로 구분하여 출력한다. 만약 길이가 100보다 크거나 그러한 수열이 없을 때는 -1을 출력한다.'),(4,'시험 성적','시험 점수를 입력받아 90 ~ 100점은 A, 80 ~ 89점은 B, 70 ~ 79점은 C, 60 ~ 69점은 D, 나머지 점수는 F를 출력하는 프로그램을 작성하시오.','첫째 줄에 시험 점수가 주어진다. 시험 점수는 0보다 크거나 같고, 100보다 작거나 같은 정수이다.','시험 성적을 출력한다.'),(5,'팩토리얼 ','0보다 크거나 같은 정수 N이 주어진다. 이때, N!을 출력하는 프로그램을 작성하시오.','첫째 줄에 정수 N(0 ≤ N ≤ 12)가 주어진다.','첫째 줄에 N!을 출력한다.'),(6,'Hello World','Hello World!를 출력하시오.','없음.','Hello World!를 출력하시오.'),(7,'한수','어떤 양의 정수 X의 각 자리가 등차수열을 이룬다면, 그 수를 한수라고 한다. 등차수열은 연속된 두 개의 수의 차이가 일정한 수열을 말한다. N이 주어졌을 때, 1보다 크거나 같고, N보다 작거나 같은 한수의 개수를 출력하는 프로그램을 작성하시오. ','첫째 줄에 1,000보다 작거나 같은 자연수 N이 주어진다.','첫째 줄에 1보다 크거나 같고, N보다 작거나 같은 한수의 개수를 출력한다.'),(8,'문자열의 반복','문자열을 입력받아 5번 반복하여 반환하는 프로그램을 작성해 봅시다.','길이 10 이하의 문자열','5번 반복된 문자열'),(9,'주민번호에서 생년 구하기','주민등록번호를 입력받아 생년 부분만 잘라서 반환하는 프로그램을 작성해 봅시다.','길이 14의 주민등록번호 문자열(-포함)','생년 부분'),(10,'잃어버린 괄호','세준이는 양수와 +, -, 그리고 괄호를 가지고 식을 만들었다. 그리고 나서 세준이는 괄호를 모두 지웠다. 그리고 나서 세준이는 괄호를 적절히 쳐서 이 식의 값을 최소로 만들려고 한다. 괄호를 적절히 쳐서 이 식의 값을 최소로 만드는 프로그램을 작성하시오.','첫째 줄에 식이 주어진다. 식은 ‘0’~‘9’, ‘+’, 그리고 ‘-’만으로 이루어져 있고, 가장 처음과 마지막 문자는 숫자이다. 그리고 연속해서 두 개 이상의 연산자가 나타나지 않고, 5자리보다 많이 연속되는 숫자는 없다. 수는 0으로 시작할 수 있다. 입력으로 주어지는 식의 길이는 50보다 작거나 같다.','첫째 줄에 정답을 출력한다.'),(11,'두 수 비교하기','두 정수 A와 B가 주어졌을 때, A와 B를 비교하는 프로그램을 작성하시오.','첫째 줄에 A와 B가 주어진다. A와 B는 공백 한 칸으로 구분되어져 있다.','첫째 줄에 다음 세 가지 중 하나를 출력한다. A가 B보다 큰 경우에는 \'>\'를 출력한다. A가 B보다 작은 경우에는 \'<\'를 출력한다. A와 B가 같은 경우에는 \'==\'를 출력한다.'),(12,'리스트 원소 추가','리스트의 원소를 공백을 이용해 입력받아 해당 리스트의 마지막 값에 1을 더한 값을 추가하여 반환하는 프로그램을 작성해 봅시다.','길이 10 이하의 정수 리스트','값이 추가된 리스트'),(13,'개','아래 예제와 같이 개를 출력하시오.','없음.','개를 출력한다.'),(14,'고양이','아래 예제와 같이 고양이를 출력하시오.','없음.','고양이를 출력한다.'),(37,'리스트 원소 추가','리스트의 원소를 공백을 이용해 입력받아 해당 리스트의 마지막 값에 1을 더한 값을 추가하여 반환하는 프로그램을 작성해 봅시다.','길이 10 이하의 정수 리스트','값이 추가된 리스트'),(38,'문자열 공백 제거 및 대체','문자열을 입력받아 해당 문자열의 앞 뒤 공백을 제거하고 문자열의 a를 z로 대체하여 반환하는 프로그램을 작성해 봅시다.','길이 10 이하의 문자열','결과 문자열'),(39,'A+B','A+B를 출력하세요.','정수형 A, B','A+B'),(40,'몫과 나머지','두 수 a, b를 입력받아 a를 b로 나눈 몫과 나머지를 반환하는 프로그램을 작성해 봅시다.','10000이하의 두 자연수','몫과 나머지 '),(41,'리스트의 정렬','리스트의 원소를 공백을 이용해 입력받아 해당 리스트를 정렬하여 반환하는 프로그램을 작성해 봅시다.','길이 10 이하의 정수 리스트','정렬된 리스트'),(42,'문자열 공백 제거 및 대체','문자열을 입력받아 해당 문자열의 앞 뒤 공백을 제거하고 문자열의 a를 z로 대체하여 반환하는 프로그램을 작성해 봅시다.','길이 10 이하의 문자열','결과 문자열');
+/*!40000 ALTER TABLE `pb_test_problem_contents` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -100,11 +155,11 @@ DROP TABLE IF EXISTS `pb_test_problems`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pb_test_problems` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `test_id` int DEFAULT NULL,
-  `problem_id` int DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `test_id` int(11) DEFAULT NULL,
+  `problem_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -113,8 +168,34 @@ CREATE TABLE `pb_test_problems` (
 
 LOCK TABLES `pb_test_problems` WRITE;
 /*!40000 ALTER TABLE `pb_test_problems` DISABLE KEYS */;
-INSERT INTO `pb_test_problems` VALUES (1,1,1),(2,1,22),(3,1,23),(4,1,24),(5,1,13),(6,1,14),(7,1,12),(8,1,7),(9,1,5),(10,1,12),(11,2,1),(12,2,2),(13,2,3),(14,2,4),(15,2,5),(16,2,6),(17,2,7),(18,2,8);
+INSERT INTO `pb_test_problems` VALUES (1,1,1),(2,1,2),(3,1,3),(4,2,4),(5,2,5),(6,2,6),(7,3,7),(8,3,8),(9,3,9),(10,4,10),(11,4,11),(12,4,12),(13,5,4),(14,5,13),(15,5,14),(41,35,39),(42,35,40),(43,35,41),(44,35,42);
 /*!40000 ALTER TABLE `pb_test_problems` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pb_test_testcases`
+--
+
+DROP TABLE IF EXISTS `pb_test_testcases`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `pb_test_testcases` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `input_example` varchar(300) CHARACTER SET latin1 COLLATE latin1_bin DEFAULT NULL,
+  `output_example` varchar(300) CHARACTER SET latin1 COLLATE latin1_bin DEFAULT NULL,
+  `problem_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=148 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pb_test_testcases`
+--
+
+LOCK TABLES `pb_test_testcases` WRITE;
+/*!40000 ALTER TABLE `pb_test_testcases` DISABLE KEYS */;
+INSERT INTO `pb_test_testcases` VALUES (11,'18 2','5 6 7',3),(12,'6 3','1 2 3',3),(13,'7 2','3 4',3),(14,'12 2','3 4 5',3),(15,'26 4','5 6 7 8',3),(16,'100','A',4),(17,'84','B',4),(18,'71','C',4),(19,'68','D',4),(20,'42','F',4),(21,'10','3628800',5),(22,'3','6',5),(23,'2','2',5),(24,'1','1',5),(25,'4','24',5),(26,NULL,'Hello World!',6),(27,'110','99',7),(28,'1','1',7),(29,'210','105',7),(30,'1000','144',7),(31,'abc','abcabcabcabcabc',8),(32,'1','11111',8),(33,'aD','aDaDaDaDaD',8),(34,'931111-1234567','28',9),(35,'881212-1154754','33',9),(36,'911211-2014454','26',9),(37,'55-50+40','-35',10),(38,'1+2-3','0',10),(39,'3*2/2','3',10),(40,'1 2','<',11),(41,'10 2','>',11),(42,'5 5','==',11),(43,'10 15 5 4 7 3','10 15 5 4 7 3 20 30 10 8 14  6',12),(44,'1 99 -1 3 0','1 99 -1 3  0  2 198 -2 6 0',12),(45,'0','0 0',12),(46,NULL,'|\\_/|\n|q p|   /}\n( 0 )\"\"\"\\\n|\"^\"`    |\n||_/=\\\\__|',13),(47,NULL,'\\    /\\\n )  ( \')\n(  /  )\n \\(__)|',14),(122,'1 2','2',1),(123,'3 4','12',1),(130,'1 2','3',2),(131,'2 5','7',2),(132,'1 2','3',194),(133,'3 4','7',194),(134,'3 5','8',194),(135,'4 6','10',194),(136,'3 3','6',194),(137,'5 4','1 1',135),(138,'100 50','2 0',135),(139,'2 100','0 2',135),(140,'3 33','0 3',135),(141,'10 1','10 0',135),(142,'10 15 5 4 7 3','5 7',140),(143,'1 99 -1 3 0','1',140),(144,'1 1 2 2 0','1',140),(145,'abc','abc',143),(146,'.bc','bc',143),(147,'^a..','a.',143);
+/*!40000 ALTER TABLE `pb_test_testcases` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -125,15 +206,14 @@ DROP TABLE IF EXISTS `pb_test_users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pb_test_users` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int DEFAULT NULL,
-  `test_id` int DEFAULT NULL,
-  `score` int DEFAULT '0',
-  `correct` int DEFAULT '0',
-  `wrong` int DEFAULT '0',
-  `applied` int DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `test_id` int(11) DEFAULT NULL,
+  `correct` int(11) DEFAULT '0',
+  `wrong` int(11) DEFAULT '0',
+  `applied` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=196 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -142,7 +222,7 @@ CREATE TABLE `pb_test_users` (
 
 LOCK TABLES `pb_test_users` WRITE;
 /*!40000 ALTER TABLE `pb_test_users` DISABLE KEYS */;
-INSERT INTO `pb_test_users` VALUES (1,2,1,80,8,2,1),(2,3,1,0,0,0,0),(4,2,2,50,4,4,1),(5,3,2,0,0,0,0);
+INSERT INTO `pb_test_users` VALUES (1,3,1,0,0,0),(2,6,1,0,0,0),(3,2,1,0,0,0),(7,2,3,0,0,0),(8,7,3,0,0,0),(147,2,5,2,1,1),(181,8,2,0,0,0),(182,5,2,0,0,0),(183,7,2,0,0,0),(184,3,5,0,0,0),(190,8,4,0,0,0),(191,5,4,0,0,0),(192,7,4,0,0,0),(193,8,35,0,0,0),(194,5,35,0,0,0),(195,7,35,0,0,0);
 /*!40000 ALTER TABLE `pb_test_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -154,17 +234,17 @@ DROP TABLE IF EXISTS `pb_tests`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pb_tests` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` text,
-  `content` longtext,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` text COLLATE utf8mb4_bin,
+  `content` longtext COLLATE utf8mb4_bin,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `is_exam` int DEFAULT NULL,
-  `start` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `end` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `admin_id` int DEFAULT NULL,
-  `subject_id` int DEFAULT NULL,
+  `is_exam` int(11) DEFAULT NULL,
+  `start` timestamp NULL DEFAULT NULL,
+  `end` timestamp NULL DEFAULT NULL,
+  `admin_id` int(11) DEFAULT NULL,
+  `subject_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -173,7 +253,7 @@ CREATE TABLE `pb_tests` (
 
 LOCK TABLES `pb_tests` WRITE;
 /*!40000 ALTER TABLE `pb_tests` DISABLE KEYS */;
-INSERT INTO `pb_tests` VALUES (1,'2020 동국대학교 프로그래밍 경진대회','청춘! 이는 듣기만 하여도 가슴이 설레는 말이다.\n\n청춘! 너의 두 손을 대고 물방아 같은 심장의 고동을 들어 보라.\n\n청춘의 피는 끓는다.\n\n끓는 피에 뛰노는 심장은 거선(巨船)의 기관같이 힘 있다.\n\n이것이다.\n\n인류의 역사를 꾸며 내려온 동력은 꼭 이것이다.\n\n이성은 투명하되 얼음과 같으며,\n\n지혜는 날카로우나 갑 속에 든 칼이다.\n\n청춘의 끓는 피가 아니더면 인간이 얼마나 쓸쓸하랴?\n\n얼음에 싸인 만물은 죽음이 있을 뿐이다.','2020-11-12 07:07:03',0,'2020-11-12 05:00:00','2020-11-12 07:00:00',1,NULL),(2,'중간고사','단풍잎처럼 곱게 물들었구나\n\n연두빛 새잎보다\n\n진한 초록잎보다\n\n더욱 보기 좋아\n\n잠시 찬바람도 곁에 머물게 해주렴','2020-11-12 07:07:03',1,'2020-11-12 09:00:00','2020-11-12 11:00:00',1,1);
+INSERT INTO `pb_tests` VALUES (1,'자료구조와실습 중간고사','자료구조와실습 중간고사입니다.','2020-12-15 18:56:22',1,'2020-12-20 08:00:00','2020-12-20 09:00:00',9,1),(2,'기초프로그래밍 중간고사','기초프로그래밍 중간고사입니다.','2020-12-15 18:56:22',1,'2020-12-16 19:16:00','2020-12-16 19:16:00',1,2),(3,'심화프로그래밍 중간고사','심화프로그래밍 중간고사입니다.','2020-12-15 18:56:22',1,'2020-12-22 06:00:00','2020-12-22 08:00:00',10,3),(4,'2020 동국대학교 프로그래밍 경진대회','2020 동국대학교 프로그래밍 경진대회 입니다.','2020-12-15 18:56:22',1,'2020-12-22 19:00:00','2020-12-22 21:00:00',1,2),(5,'2020 연말맞이 코딩 부수기','심심한 연말! 코드와 함께 보람차게 보내봅시다!!','2020-12-15 18:56:22',0,'2020-12-17 03:00:00','2020-12-22 09:00:00',1,NULL),(35,'기초프로그래밍 기말고사','기초프로그래밍 기말고사입니다.','2020-12-17 05:01:48',1,'2020-12-18 07:00:00','2020-12-18 12:00:00',1,2);
 /*!40000 ALTER TABLE `pb_tests` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,15 +265,15 @@ DROP TABLE IF EXISTS `pb_users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pb_users` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` varchar(20) NOT NULL,
-  `pw` varchar(20) NOT NULL,
-  `user_name` text,
-  `is_admin` int NOT NULL DEFAULT '0',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(20) COLLATE utf8mb4_bin NOT NULL,
+  `pw` varchar(20) COLLATE utf8mb4_bin NOT NULL,
+  `user_name` text COLLATE utf8mb4_bin,
+  `is_admin` int(11) NOT NULL DEFAULT '0',
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -202,7 +282,7 @@ CREATE TABLE `pb_users` (
 
 LOCK TABLES `pb_users` WRITE;
 /*!40000 ALTER TABLE `pb_users` DISABLE KEYS */;
-INSERT INTO `pb_users` VALUES (1,'admin','pass','홍길동',1,'2020-11-12 06:55:19'),(2,'user1','pass','옥동자',0,'2020-11-12 06:55:19'),(3,'user2','pass','전우치',0,'2020-11-12 06:58:40');
+INSERT INTO `pb_users` VALUES (1,'admin1','pass','손윤식',1,'2020-12-15 15:30:31'),(2,'user1','pass','서준원',0,'2020-12-15 15:30:31'),(3,'user2','pass','강태원',0,'2020-12-15 15:30:31'),(4,'user3','pass','누비아',0,'2020-12-15 15:30:31'),(5,'user4','pass','주성항',0,'2020-12-15 15:30:31'),(6,'user5','pass','송혜민',0,'2020-12-15 15:30:31'),(7,'user6','pass','최주혁',0,'2020-12-15 15:30:31'),(8,'user7','pass','안지훈',0,'2020-12-15 15:30:31'),(9,'admin2','pass','최은만',1,'2020-12-15 18:46:08'),(10,'admin3','pass','김가영',1,'2020-12-15 18:46:08');
 /*!40000 ALTER TABLE `pb_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -214,9 +294,9 @@ DROP TABLE IF EXISTS `plass_mylist_problem`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `plass_mylist_problem` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int DEFAULT NULL,
-  `problem_id` int DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `problem_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -239,11 +319,11 @@ DROP TABLE IF EXISTS `plass_problem_category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `plass_problem_category` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `problem_id` int DEFAULT NULL,
-  `category_id` int DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `problem_id` int(11) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -264,11 +344,11 @@ DROP TABLE IF EXISTS `plass_problem_category_ver2`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `plass_problem_category_ver2` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `problem_id` int DEFAULT NULL,
-  `category_id` int DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `problem_id` int(11) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -289,18 +369,18 @@ DROP TABLE IF EXISTS `plass_problems`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `plass_problems` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` text CHARACTER SET utf8 COLLATE utf8_bin,
-  `content` text CHARACTER SET utf8 COLLATE utf8_bin,
-  `rank` int DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` text COLLATE utf8_bin,
+  `content` text COLLATE utf8_bin,
+  `rank` int(11) DEFAULT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `language` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `input` text CHARACTER SET utf8 COLLATE utf8_bin,
-  `output` text CHARACTER SET utf8 COLLATE utf8_bin,
-  `remarks` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `level` varchar(10) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `language` varchar(45) COLLATE utf8_bin DEFAULT NULL,
+  `input` text COLLATE utf8_bin,
+  `output` text COLLATE utf8_bin,
+  `remarks` varchar(45) COLLATE utf8_bin DEFAULT NULL,
+  `level` varchar(10) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -321,12 +401,12 @@ DROP TABLE IF EXISTS `plass_testcases`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `plass_testcases` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `input_example` varchar(300) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `output_example` varchar(300) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `problem_id` int DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `input_example` varchar(300) CHARACTER SET utf8 DEFAULT NULL,
+  `output_example` varchar(300) CHARACTER SET utf8 DEFAULT NULL,
+  `problem_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=203 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -347,11 +427,11 @@ DROP TABLE IF EXISTS `plass_total_categories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `plass_total_categories` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `level` int DEFAULT NULL,
-  `parent_id` int DEFAULT NULL,
-  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `level` int(11) DEFAULT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `description` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -375,4 +455,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-11-12 16:58:25
+-- Dump completed on 2020-12-17 14:18:17

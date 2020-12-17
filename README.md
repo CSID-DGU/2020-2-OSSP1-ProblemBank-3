@@ -3,7 +3,10 @@
 기존의 문제은행 시스템에 온라인 시스템 기능을 추가하였습니다.
 
 ## Preview
-image
+![화면 캡처 2020-12-17 161822](https://user-images.githubusercontent.com/57932352/102455912-bd8d9c80-4083-11eb-8bbe-a6bf458ab817.png)
+![화면 캡처 2020-12-17 161851](https://user-images.githubusercontent.com/57932352/102455915-bebec980-4083-11eb-838a-9884994a3651.png)
+![화면 캡처 2020-12-17 161912](https://user-images.githubusercontent.com/57932352/102455919-bf576000-4083-11eb-8da0-af25447f5b7b.png)
+![화면 캡처 2020-12-17 161945](https://user-images.githubusercontent.com/57932352/102455920-bf576000-4083-11eb-9c0c-ee929b3335bf.png)
 
 ## Getting Started
 #### 혹시 Windows 유저신가요?

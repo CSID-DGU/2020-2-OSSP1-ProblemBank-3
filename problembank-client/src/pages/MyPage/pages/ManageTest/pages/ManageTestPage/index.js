@@ -112,8 +112,10 @@ class ManageTestPage extends Component {
 				params.is_exam = 0;
 			
 			const response = await testAPI.updateTest(params);
-			console.log(response);
-			alert("시험을 생성하였습니다.");
+			if(response.result == true){
+				alert("시험을 수정하였습니다.");
+			}
+			
 			/* for debug
 			alert(params.testName);
 			alert(params.testContent);

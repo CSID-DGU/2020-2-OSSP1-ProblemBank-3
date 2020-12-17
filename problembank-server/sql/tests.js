@@ -21,7 +21,7 @@ module.exports = {
     selectUserNameById: "SELECT user_name FROM problems.pb_users WHERE id = ?",
     selectUserAnswerByIds: "SELECT content, is_correct FROM problems.pb_test_answers WHERE test_id = ? AND problem_id = ? AND user_id = ? ORDER BY id DESC LIMIT 1",
     selectProblemScoreByIds: "SELECT score FROM problems.pb_test_problems WHERE test_id = ? AND problem_id = ?",
-    selectInsertedId: "SELECT @@IDENTITY AS id",
+    selectInsertedId: "SELECT LAST_INSERT_ID() AS id",
     
     // INSERT
     insertTest: "INSERT INTO problems.pb_tests (name, content, is_exam, start, end, admin_id, subject_id) VALUES (?, ?, ?, ?, ?, ?, ?)",

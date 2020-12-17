@@ -325,14 +325,14 @@ router.post('/updatetest', async function (req, res) {
 
         for (let i = 0; i < problems.length; i++) {
             const { problem_id, problemName, problemContent, input, output } = problems[i]
-            const { testcases } = problems[i]
+            // const { testcases } = problems[i]
             await db.query(sql.tests.updateProblem, [problemName, problemContent, input, output, problem_id])
             await db.query(sql.tests.deleteAllTestCases, [problem_id])
 
-            for (let j = 0; j < testcases.length; j++) {
-                const { input_exp, output_exp } = testcases[j]
-                await db.query(sql.tests.insertTestCases, [input_exp, output_exp, problem_id])
-            }
+            // for (let j = 0; j < testcases.length; j++) {
+            //     const { input_exp, output_exp } = testcases[j]
+            //     await db.query(sql.tests.insertTestCases, [input_exp, output_exp, problem_id])
+            // }
         }
         res.status(200).send({
             result: true,
@@ -523,6 +523,7 @@ router.post('/submit', async function (req, res) {
                 correct++
                 is_correct = 1;
             }
+            else is_correct = 0;
             await db.query(sql.tests.insertUserAnswers, [test_id, problem_id, user_id, sourceCode, is_correct])
             return Promise.resolve()
         })

@@ -156,11 +156,6 @@ class ManageTestPage extends Component {
 	        <input type="text" id="name-text"/>
 	    </div>
 
-	    <div class="termExam">
-	        <input type="checkbox" id="checkbox"/>
-	        <Text>과목 중간/기말고사</Text>
-	    </div>
-
 	    <div class="className">
 	        <Text>과목명</Text>
 	        <select class="select">

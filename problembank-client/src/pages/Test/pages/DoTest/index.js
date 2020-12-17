@@ -289,14 +289,14 @@ function DoTest(props) {
                                     <p>입력 예제</p>
                                     {
                                         problem.testcases.length !== 0 &&
-                                            problem.testcases.map(testcase => <span>{testcase.input_exp}</span>)
+                                            problem.testcases.map(testcase => <span className="exp">{testcase.input_exp}</span>)
                                     }
                                 </div>
                                 <div className="problem__infor--outputexp">
                                     <p>출력 예제</p>
                                     {
                                         problem.testcases.length !== 0 &&
-                                            problem.testcases.map(testcase => <span>{testcase.output_exp}</span>)
+                                            problem.testcases.map(testcase => <span className="exp">{testcase.output_exp}</span>)
                                     }
                                 </div>
                             </div>

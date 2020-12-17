@@ -15,5 +15,4 @@ export async function signin({id, password}) {
         });
 
     return user
-
 }

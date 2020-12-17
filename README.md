@@ -15,6 +15,12 @@ npm install 명령어로 node modules를 모두 설치해주세요.
 #### 반복
 problembank-server로 경로를 이동한 다음 **npm을 이용한 세팅**을 한번 더 반복해주세요.
 
+#### mysql db 설정
+problems 데이터베이스를 생성해주세요.
+<br>problembank-server의 .env파일에 db 설정을 해주세요.
+<br>`mysql -u root -p problems < Dump20201217.sql`을 실행하여 db 테이블을 생성해주세요.
+
+
 #### Docker 설치
 [Docker](https://www.docker.com/get-started) 홈페이지에서 안내에 따라 Docker를 다운받아주세요.
 <br>Docker를 한번 실행시켜 초기 설정을 해주세요.

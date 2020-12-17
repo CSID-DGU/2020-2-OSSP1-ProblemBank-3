@@ -31,8 +31,8 @@ function AnswerCheckPage(props) {
 
     const getAnswer = async () => {
         const response = await testsAPI.getUserAnswers({test_id: test_id, user_id: user_id})
-        setContentEditor(response.data[0].answer)
-        // console.log(response.data)
+        const filter = response.data.filter(element => (element.problem_id == problem_id))
+        setContentEditor(filter[0].answer)
     }
 
 

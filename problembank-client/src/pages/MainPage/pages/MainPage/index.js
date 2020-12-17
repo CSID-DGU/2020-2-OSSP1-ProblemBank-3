@@ -3,11 +3,6 @@ import './style.scss'
 import Footer from '../../components/FooterMainPage'
 import MainPageLayout from '../../../../layouts/MainPageLayout'
 
-// Modal test
-import Button from '../../../../components/DesignComponent/Button';
-import {CONFIRM_DELETE_MODAL} from '../../../../components/Modal/ModalProviderWithKey';
-import {Consumer as ModalConsumer} from '../../../../components/Modal/createModalProvider';
-
 function MainPage(props) {
     return (
         <MainPageLayout>
@@ -24,11 +19,6 @@ function MainPage(props) {
                     </div>
                 </div>
             </div>
-            <ModalConsumer>
-                {({openModal})=>(
-                    <Button onPress={()=>openModal(CONFIRM_DELETE_MODAL, {id:1, name:'test'})}>test Modal</Button>
-                )}
-            </ModalConsumer>
         </MainPageLayout>
     )
 }

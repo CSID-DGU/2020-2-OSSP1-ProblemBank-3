@@ -37,7 +37,7 @@ function TotalProblemsPage(props) {
         setLoading(true)
         let searchValue = e.target.value;
         const filterProblems = problems.filter(element => element.id === Number(searchValue) || element.name.match(new RegExp(searchValue, "i")))
-        console.log(filterProblems)
+        // console.log(filterProblems)
         setKeyword(searchValue);    
         setResultProblem(filterProblems)
 

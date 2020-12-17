@@ -39,8 +39,8 @@ class CreateTestPage extends Component {
     async componentDidMount(){
 		const _subject = await testAPI.getSubjectList({ user_id : this.props.user.id });
 		let { data } = _subject
-		console.log(_subject);
-		console.log(this.props.user.id);
+		// console.log(_subject);
+		// console.log(this.props.user.id);
 		this.setState({
 			subject : data
 		})
@@ -80,7 +80,7 @@ class CreateTestPage extends Component {
 			else
 				params.is_exam = 0;
 			
-			console.log(params);
+			// console.log(params);
 			const response = await testAPI.createTest(params);
 			/* for debug
 			alert(params.testName);

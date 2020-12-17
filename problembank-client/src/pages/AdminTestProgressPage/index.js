@@ -13,7 +13,7 @@ import moment from 'moment';
 async function getTestInfo({test_id}) {
     const response = await testAPI.getTestInfo({test_id});
 	if(response.result === true) {
-        console.log(response.data[0]);
+        // console.log(response.data[0]);
 		return response.data[0];
 	}
 	throw new Error(response.data);
@@ -34,7 +34,7 @@ function AdminTestProgressPage(props) {
             const currentDate = moment();
             const endDate = moment(data.end);
             setRemainingTime(moment.duration(endDate.diff(currentDate)));
-            console.log(remainingTime);
+            // console.log(remainingTime);
 		}
     }, [data]);
 

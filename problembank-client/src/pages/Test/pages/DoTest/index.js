@@ -54,7 +54,7 @@ function DoTest(props) {
             setTestProblem(problems[index].problem_id)
             
         }
-        console.log("updated");
+        // console.log("updated");
         if((!timer && !startTimer )&& timeData.end){
             CheckStartTime();
         }
@@ -112,7 +112,7 @@ function DoTest(props) {
             const response = await testsAPI.testRun(params); 
             
             const { data } = response;
-            console.log(response);
+            // console.log(response);
             
             var timeOutSubmit = function(){
                 // alert(`채점 결과 ${data.correctCount} / ${data.count}`);
@@ -174,15 +174,15 @@ function DoTest(props) {
         setTimer(x);
     }
 
-    const TestButton =  () => {
-        try{
-            console.log(problems);
-        } catch (error) {
-            alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
-            console.log(error)
-            setSubmit(false);
-        }
-    }
+    // const TestButton =  () => {
+    //     try{
+    //         // console.log(problems);
+    //     } catch (error) {
+    //         alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
+    //         console.log(error)
+    //         setSubmit(false);
+    //     }
+    // }
 
     // 추가적으로 시간 데이터까지 가져오기
     const setTestList = async () => {
@@ -237,7 +237,7 @@ function DoTest(props) {
                 problems: sourceCodes,
             };
             const response = await testsAPI.submit(params);
-            console.log(response);
+            // console.log(response);
             setSubmit(false);
         } catch (error) {
             setSubmit(false);
@@ -377,7 +377,7 @@ function DoTest(props) {
                         <Button distance onPress={()=>resetEditor()}>초기화</Button>
                         <Button distance onPress={() => onTest()}>실행</Button>
                         <Button distance test onPress={() => onSubmit()}>제출</Button>
-                        <Button test onPress={()=>TestButton()}>실험용</Button>
+                        {/* <Button test onPress={()=>TestButton()}>실험용</Button> */}
                     </div>
                     )}
                     </ModalConsumer>

@@ -8,7 +8,7 @@ import testAPI from '../../../../../../apis/tests';
 async function getAdminTestList({admin_id}) {
 	const response = await testAPI.getAdminTestList({admin_id});
 	if(response.result === true) {
-		console.log(response);
+		// console.log(response);
 		return response.data;
 	}
 	throw new Error(response.data);
@@ -21,7 +21,6 @@ function AdminTestResultPage(props) {
 
 	const handleChangeSelect = useCallback(
 		(event) => {
-			console.log("select!!!");
 			setSelectedTestId(event.target.value);
 		},
 		[selectedTestId],
@@ -29,7 +28,6 @@ function AdminTestResultPage(props) {
 
 	useEffect(() => {
 		if(data) {
-			console.log("select!!!");
 			setSelectedTestId(data[0].id);
 		}
 	}, [data])

@@ -4,7 +4,7 @@ import AnswerCheckPage from './AnswerCheckPage'
 
 function AnswerCheck({user}) {
     const match = useRouteMatch();
-    console.log(match.url);
+    // console.log(match.url);
 
     return (
     <Switch>

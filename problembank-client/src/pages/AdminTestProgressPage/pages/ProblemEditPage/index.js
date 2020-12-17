@@ -28,8 +28,7 @@ async function updateProblem({problemId, editData }) {
 		output: editData.output,
 		testcases : editData.testcases
 	}
-	
-	console.log(data);
+
 	const response = await testAPI.updateProblem(data);
 	if(response.result === true) {
 		alert("문제 수정이 완료되었습니다.");

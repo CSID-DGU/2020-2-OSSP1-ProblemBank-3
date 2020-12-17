@@ -20,7 +20,6 @@ function AnswerCheckPage(props) {
     const {user} = props;
 
     useEffect(() => {
-        console.log("updated");
         getProblem();
         getAnswer();
     }, [])
@@ -28,13 +27,13 @@ function AnswerCheckPage(props) {
     const getProblem = async () => {
         const response = await testsAPI.getTestProblemData({problem_id: problem_id})
         setProblem(response.data[0])
-        console.log(response.data)
+        // console.log(response.data)
     }
 
     const getAnswer = async () => {
         const response = await testsAPI.getUserAnswers({test_id: test_id, user_id: user.id})
         setContentEditor(response.data[0].answer)
-        console.log(response.data)
+        // console.log(response.data)
     }
 
 

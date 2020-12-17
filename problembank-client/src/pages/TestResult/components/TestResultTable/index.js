@@ -7,7 +7,6 @@ const moment = require('moment');
 class TestResultTable extends Component {
 
     handleClick = (problem_id) => {
-        console.log("click!")
         this.props.history.push(`/answercheck?test_id=${this.props.test_id}&problem_id=${problem_id}`)
     }
 

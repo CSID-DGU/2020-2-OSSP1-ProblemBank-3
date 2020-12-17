@@ -4,7 +4,7 @@ import TotalProblemsPage from './pages/TotalProblemsPage';
 
 function TotalProblems(props) {
     const match = useRouteMatch();
-    console.log(match.url);
+    // console.log(match.url);
     return (
         <Switch>
             <Route exact path = {`${match.url}`} component = {TotalProblemsPage} />        

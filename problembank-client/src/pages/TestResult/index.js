@@ -8,7 +8,7 @@ import './style.scss';
 function DetailedResult(props) {
     const {user} = props
     const match = useRouteMatch();
-    console.log(match.url);
+    // console.log(match.url);
     return (
         <div className="container-mypage">
             <Route exact path = {`${match.url}`} render={(props) => <DetailedResultPage user={user} {...props}/>} />

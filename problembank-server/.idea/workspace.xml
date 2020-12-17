@@ -20,29 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a2f59a0d-f558-407b-bbba-4b4bb6fb3971" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/components/Authentication/Auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/components/Authentication/Auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/components/Modal/ModalContent/ReportErrorContent.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/components/Modal/ModalContent/ReportErrorContent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/AdminTestProgressPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/AdminTestProgressPage/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/AdminTestProgressPage/pages/ProblemEditPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/AdminTestProgressPage/pages/ProblemEditPage/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/AnswerCheck/AnswerCheckPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/AnswerCheck/AnswerCheckPage/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/AnswerCheck/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/AnswerCheck/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MainPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MainPage/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/component/ModifyListModal/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/component/ModifyListModal/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/AdminTestResult/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/AdminTestResult/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/AdminTestResult/pages/AdminTestResultPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/AdminTestResult/pages/AdminTestResultPage/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/CreateTest/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/CreateTest/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/CreateTest/pages/CreateTestPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/CreateTest/pages/CreateTestPage/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/ManageTest/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/ManageTest/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/Problem/pages/DetailProblem/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/Problem/pages/DetailProblem/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/Test/pages/DoTest/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/Test/pages/DoTest/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/Test/pages/TestPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/Test/pages/TestPage/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/TestResult/components/TestResultTable/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/TestResult/components/TestResultTable/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/TestResult/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/TestResult/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/TestResult/pages/DetailedResultPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/TestResult/pages/DetailedResultPage/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/TotalProblems/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/TotalProblems/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/TotalProblems/pages/TotalProblemsPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/TotalProblems/pages/TotalProblemsPage/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/tests.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/tests.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +86,8 @@
       <workItem from="1608011605804" duration="3133000" />
       <workItem from="1608049201222" duration="106000" />
       <workItem from="1608096968903" duration="573000" />
-      <workItem from="1608124521765" duration="11309000" />
+      <workItem from="1608124521765" duration="11318000" />
+      <workItem from="1608177798779" duration="425000" />
     </task>
     <servers />
   </component>
@@ -135,25 +115,25 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="578" y="279" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1605156491503" />
-    <state width="1659" height="121" key="GridCell.Tab.0.bottom" timestamp="1608168960823">
+    <state width="1659" height="121" key="GridCell.Tab.0.bottom" timestamp="1608176968670">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="1659" height="244" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1608098329428" />
-    <state width="1659" height="121" key="GridCell.Tab.0.bottom/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1608168960823" />
-    <state width="1659" height="121" key="GridCell.Tab.0.center" timestamp="1608168960821">
+    <state width="1659" height="121" key="GridCell.Tab.0.bottom/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1608176968670" />
+    <state width="1659" height="121" key="GridCell.Tab.0.center" timestamp="1608176968669">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="1659" height="244" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1608098329424" />
-    <state width="1659" height="121" key="GridCell.Tab.0.center/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1608168960821" />
-    <state width="1659" height="121" key="GridCell.Tab.0.left" timestamp="1608168960819">
+    <state width="1659" height="121" key="GridCell.Tab.0.center/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1608176968669" />
+    <state width="1659" height="121" key="GridCell.Tab.0.left" timestamp="1608176968668">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="1659" height="244" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1608098329424" />
-    <state width="1659" height="121" key="GridCell.Tab.0.left/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1608168960819" />
-    <state width="1659" height="121" key="GridCell.Tab.0.right" timestamp="1608168960822">
+    <state width="1659" height="121" key="GridCell.Tab.0.left/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1608176968668" />
+    <state width="1659" height="121" key="GridCell.Tab.0.right" timestamp="1608176968670">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="1659" height="244" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1608098329425" />
-    <state width="1659" height="121" key="GridCell.Tab.0.right/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1608168960822" />
+    <state width="1659" height="121" key="GridCell.Tab.0.right/1680.0.1366.1024/0.0.1680.1050@0.0.1680.1050" timestamp="1608176968670" />
   </component>
 </project>

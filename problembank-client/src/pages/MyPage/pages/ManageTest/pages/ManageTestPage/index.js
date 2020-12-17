@@ -45,7 +45,6 @@ class ManageTestPage extends Component {
 				var test = this.state.testArray[i];
 				document.getElementsByClassName("data-calander")[0].value = test.start.slice(0, -1);;
 				document.getElementsByClassName("data-calander")[1].value = test.end.slice(0, -1);;
-				alert(test.start);
 				document.getElementById("name-text").value = test.name;
 				document.getElementById("textarea").value = test.content;
 

@@ -37,8 +37,8 @@ async function updateProblem({problemId, editData }) {
 	throw new Error(response.message);
 }
 
-function ProblemEditPage({ id }) {
-	const { data, error } = useAsync({ promiseFn: getTestProblemsList, test_id: 1});
+function ProblemEditPage({ test_id }) {
+	const { data, error } = useAsync({ promiseFn: getTestProblemsList, test_id});
 	const [selectedProblemId, setSelectedProblemId] = useState(undefined);
 
 	useEffect(() => {

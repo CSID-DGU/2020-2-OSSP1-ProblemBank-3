@@ -130,8 +130,7 @@ class ManageTestPage extends Component {
     render(){
 
     return (
-	<>
-	<ManageTestLayout user = {this.props.user}>
+	<div class="ManageTestPage__Container">
 	<div class="ManageTestPage">
 	    <div class="testName1">
             <Text id="name-label">시험명</Text>
@@ -204,8 +203,7 @@ class ManageTestPage extends Component {
 	        <button class="button" onClick={this.saveTest}>저장</button>
 		</div>
 	</div>
-	</ManageTestLayout>
-	</>
+	</div>
     );
     }
 }

@@ -273,12 +273,12 @@ router.post('/createtest', async function (req, res) {
                 for (let j = 0; j < testcases.length; j++) {
                     const { input, output } = testcases[j]
 
-                    await db.query(sql.tests.insertTestCases, [input, output, inserted[0].id])
+                    temp = await db.query(sql.tests.insertTestCases, [input, output, inserted[0].id])
                 }
             }
             else { // 존재하지 않는 문제
                 const { problemName, problemContent, input, output } = problems[i]
-                const { testcases } = problems[i]
+                const { testcase:testcases } = problems[i]
 
                 await db.query(sql.tests.insertProblem, [problemName, problemContent, input, output])
                 const [inserted] = await db.query(sql.tests.selectInsertedId)
@@ -325,7 +325,7 @@ router.post('/updatetest', async function (req, res) {
 
         for (let i = 0; i < problems.length; i++) {
             const { problem_id, problemName, problemContent, input, output } = problems[i]
-            const { testcases } = problems[i]
+            const { testcase:testcases } = problems[i]
             await db.query(sql.tests.updateProblem, [problemName, problemContent, input, output, problem_id])
             await db.query(sql.tests.deleteAllTestCases, [problem_id])
 

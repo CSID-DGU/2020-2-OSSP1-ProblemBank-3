@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import "./style.scss";
-import CreateTestLayout from "../../../../layouts/CreateTestLayout";
-import testAPI from "../../../../apis/tests";
-import Text from "../../../../components/DesignComponent/Text";
-import problemsBank from "../../../../apis/problemsBank";
-import ModifyListModal from "../../component/ModifyListModal";
+import CreateTestLayout from "../../../../../../layouts/CreateTestLayout";
+import testAPI from "../../../../../../apis/tests";
+import Text from "../../../../../../components/DesignComponent/Text";
+import ModifyListModal from "../../../../component/ModifyListModal";
 
 class CreateTestPage extends Component {
 

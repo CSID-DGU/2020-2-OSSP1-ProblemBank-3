@@ -20,7 +20,6 @@ const TotalProblems = React.lazy(() => import('./pages/TotalProblems'))
 const Problem = React.lazy(() => import('./pages/Problem'))
 const Test = React.lazy(() => import('./pages/Test'))
 const ManageTest = React.lazy(() => import('./pages/MyPage/pages/ManageTest'))
-const CreateTest = React.lazy(() => import('./pages/CreateTest'))
 const MyPage = React.lazy(() => import('./pages/MyPage'))
 const MyTests = React.lazy(() => import('./pages/MyPage/pages/MyTests'))
 const MyTestResults = React.lazy(() => import('./pages/MyPage/pages/MyTestResults'))
@@ -92,11 +91,11 @@ function App() {
                     path="/admintestresult"
                     render={props => <AdminTestResult user={user} {...props} />}
                 /> */}
-                <Authorized
+                {/* <Authorized
                     auth={auth}
                     path="/createtest"
                     render={props => <CreateTest user={user} {...props} />}
-                />
+                /> */}
                 <Authorized
                     auth={auth}
                     path="/detailedresult"

@@ -27,7 +27,7 @@ class MyTestsTable extends Component{
                                     <td style={{textAlign: "center"}}>{index+1}</td>
                                     <td style={{textAlign: "center"}}>{item.test_name}</td>
                                     <td style={{textAlign: "center"}}>
-                                        {item.is_exam ? (
+                                        {item.is_exam || item.is_applied ? (
                                             <buttonGrey>불가</buttonGrey>
                                         ) : (
                                             <buttonRed onClick={() => this.props.handleClick(item.test_id)}>취소</buttonRed>

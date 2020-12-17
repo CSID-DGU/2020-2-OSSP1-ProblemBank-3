@@ -1,17 +1,16 @@
 import React, { Component } from "react";
 import "./style.scss";
-import CreateTestLayout from "../../../../layouts/CreateTestLayout";
-import testAPI from "../../../../apis/tests";
-import Text from "../../../../components/DesignComponent/Text";
-import problemsBank from "../../../../apis/problemsBank";
-import ModifyListModal from "../../component/ModifyListModal";
+import CreateTestLayout from "../../../../../../layouts/CreateTestLayout";
+import testAPI from "../../../../../../apis/tests";
+import Text from "../../../../../../components/DesignComponent/Text";
+import ModifyListModal from "../../../../component/ModifyListModal";
 
 class CreateTestPage extends Component {
 
     constructor(props){
 		super(props);
 		this.state={
-			isModalOpen : true,
+			isModalOpen : false,
 			subject : [],
 			DB_problem : [],  // added problem in database (problem_id and problem_name)
 			new_problem : []  // new problem
@@ -37,9 +36,11 @@ class CreateTestPage extends Component {
 		}
 	};
 
-    async componentDidMount(){  
-		const _subject = await problemsBank.getCategory();  // subject name select input
-		let { data } = _subject;
+    async componentDidMount(){
+		const _subject = await testAPI.getSubjectList({ user_id : this.props.user.id });
+		let { data } = _subject
+		console.log(_subject);
+		console.log(this.props.user.id);
 		this.setState({
 			subject : data
 		})
@@ -53,7 +54,7 @@ class CreateTestPage extends Component {
 		};
 	};
 
-    saveTest = (props) => {
+    saveTest = async () => {
 		if(document.getElementById("name-text").value === "")
 			alert("시험명을 입력해주세요");
 		else{
@@ -69,7 +70,7 @@ class CreateTestPage extends Component {
 				'testContent' : document.getElementById("textarea").value,
 				'start' : document.getElementsByClassName("data-calander")[0].value,
 				'end' : document.getElementsByClassName("data-calander")[1].value,
-				'admin_id' : props.user,
+				'admin_id' : this.props.user.id,
 				'subject_id' : document.getElementsByClassName("select")[0].value,
 				'problems' : problemArray
 			};
@@ -80,7 +81,7 @@ class CreateTestPage extends Component {
 				params.is_exam = 0;
 			
 			console.log(params);
-			//const response = testAPI.createTest(params);
+			const response = await testAPI.createTest(params);
 			/* for debug
 			alert(params.testName);
 			alert(params.testContent);
@@ -122,7 +123,7 @@ class CreateTestPage extends Component {
 	        <select class="select">
 				{
 					this.state.subject.map(subject =>
-						( <option label={subject.name}/> )
+						( <option value={subject.id} label={subject.name}/> )
 					)
 				}
 	        </select>

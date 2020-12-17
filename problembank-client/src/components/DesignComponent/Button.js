@@ -18,6 +18,7 @@ class Button extends PureComponent {
       test,
       contest,
       distance,
+      cancel,
     } = this.props;
     const { color, size, unit, depth, fontWeight } = Theme;
     const styles = {
@@ -87,6 +88,10 @@ class Button extends PureComponent {
         backgroundColor: color.contest,
         color: color.white,
       },
+      cancel: {
+        backgroundColor: color.grayLight,
+        color: color.grayDark,
+      }, 
       disabled: {
         color: color.white,
         cursor: "default",
@@ -109,6 +114,7 @@ class Button extends PureComponent {
       ...(test && styles.test),
       ...(contest && styles.contest),
       ...(distance && styles.distance),
+      ...(cancel && styles.cancel),
     };
     return (
       <button

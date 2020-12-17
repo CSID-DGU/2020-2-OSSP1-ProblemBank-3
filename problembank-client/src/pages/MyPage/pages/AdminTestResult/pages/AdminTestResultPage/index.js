@@ -1,11 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
+import { useAsync } from 'react-async'
 import "./style.scss";
-import AdminTestResultLayout from "../../../../../../layouts/AdminTestResultLayout";
 import AdminResultTable from "../../components/AdminResultTable";
+import testAPI from '../../../../../../apis/tests';
+
+// getResultAdmin
+async function getAdminTestList({admin_id}) {
+	const response = await testAPI.getAdminTestList({admin_id});
+	if(response.result === true) {
+		console.log(response);
+		return response.data;
+	}
+	throw new Error(response.data);
+}
 
 function AdminTestResultPage(props) {
-	const {user} = props
-    return(
+	const {user} = props;
+	const [selectedTestId, setSelectedTestId] = useState(undefined);
+	const { data, error } = useAsync({ promiseFn: getAdminTestList, admin_id: user.id});
+
+	const handleChangeSelect = useCallback(
+		(event) => {
+			console.log("select!!!");
+			setSelectedTestId(event.target.value);
+		},
+		[selectedTestId],
+	);
+
+	useEffect(() => {
+		if(data) {
+			console.log("select!!!");
+			setSelectedTestId(data[0].id);
+		}
+	}, [data])
+
+	if(error) return error.message;
+    if(data) return(
 	    <div id="content">
 	        <div id="content-header">
 	            <div id="testDate">
@@ -16,19 +46,23 @@ function AdminTestResultPage(props) {
 	            </div>
 	            <div id="testName">
 	                <text>시험명</text>
-	                <select id="select">
-	                    <option label="2020 동국대학교 프로그래밍 경진대회"/>
-	                    <option label="2021 동국대학교 프로그래밍 경진대회"/>
+	                <select id="select" onChange={handleChangeSelect}>
+						{
+							data.map((item,index) => (
+								<option key={index} label={item.name} value={item.id}/>
+							))
+						}
 	                </select>
 	            </div>
 	            <button>조회</button>
 	        </div>
 	        <div id="content-table">
-	            <AdminResultTable></AdminResultTable>
+	            {selectedTestId && <AdminResultTable test_id={selectedTestId}></AdminResultTable>}
 	        </div>
 	    </div>
 
-    );
+	);
+	return "로딩중";
 }
 
 export default AdminTestResultPage;

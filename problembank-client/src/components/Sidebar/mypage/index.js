@@ -51,7 +51,7 @@ function Sidebar(props) {
 
 							{props.user.is_admin ? (
 								<li>
-									<NavLink to="/createtest" className="navLink">시험 생성</NavLink>
+									<NavLink to="/mypage/mytest/create" className="navLink">시험 생성</NavLink>
 								</li>
 							) : (
 								<li/>

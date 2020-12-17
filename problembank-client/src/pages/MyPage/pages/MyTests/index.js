@@ -4,7 +4,7 @@ import MyTestsPage from './pages/MyTestsPage';
 
 function MyTests({user}) {
     const match = useRouteMatch();
-    console.log(match.url);
+    // console.log(match.url);
     return (
         <Route exact path = {`${match.url}`} render={(props) => <MyTestsPage user={user} {...props}/>} />
     )

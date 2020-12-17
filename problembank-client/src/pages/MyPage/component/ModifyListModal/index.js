@@ -61,7 +61,7 @@ class ModifyListModal extends Component {
 			tempArray.push(obj);
 		}
 
-		console.log(tempArray);
+		// console.log(tempArray);
 		this.props.editProblemArray(0, tempArray);
 	};
 
@@ -104,7 +104,7 @@ class ModifyListModal extends Component {
 			var tempArray = this.props.new_problem;
 			tempArray.push(obj);
 
-			console.log(tempArray);
+			// console.log(tempArray);
 			this.props.editProblemArray(1, tempArray);
 		}
 	};
@@ -137,7 +137,7 @@ class ModifyListModal extends Component {
 			}
 		}
 
-		console.log(tempDBArray);
+		// console.log(tempDBArray);
 		this.props.editProblemArray(0, tempDBArray);
 
 		var newvalueArray = new Array();
@@ -161,7 +161,7 @@ class ModifyListModal extends Component {
 			}
 		}
 
-		console.log(tempNewArray);
+		// console.log(tempNewArray);
 		this.props.editProblemArray(1, tempNewArray);
 	};
 

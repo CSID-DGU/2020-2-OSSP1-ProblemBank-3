@@ -41,7 +41,7 @@ function DetailProblem(props) {
                 const { data } = response.payload
                 const [ problem ] = data.filter(element =>Number(element.id) === Number(id))
                 
-                console.log(problem)
+                // console.log(problem)
                 setProblem(problem)
                 setProblems(data)
                 setLoading(false)

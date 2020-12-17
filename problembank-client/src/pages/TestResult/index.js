@@ -10,7 +10,7 @@ function DetailedResult(props) {
     const {user_id} = queryString.parse(props.location.search);
 
     const match = useRouteMatch();
-    console.log(match.url);
+    // console.log(match.url);
     return (
         <div className="container-mypage">
             <Route exact path = {`${match.url}`} render={(props) => <DetailedResultPage user_id={user_id} {...props}/>} />

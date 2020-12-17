@@ -21,15 +21,28 @@
   <component name="ChangeListManager">
     <list default="true" id="a2f59a0d-f558-407b-bbba-4b4bb6fb3971" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../problembank-client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/components/Authentication/Auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/components/Authentication/Auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/components/Modal/ModalContent/ReportErrorContent.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/components/Modal/ModalContent/ReportErrorContent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/AdminTestProgressPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/AdminTestProgressPage/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/AdminTestProgressPage/pages/ProblemEditPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/AdminTestProgressPage/pages/ProblemEditPage/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/AnswerCheck/AnswerCheckPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/AnswerCheck/AnswerCheckPage/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/AdminTestResult/components/AdminResultTable/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/AdminTestResult/components/AdminResultTable/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/AnswerCheck/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/AnswerCheck/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MainPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MainPage/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/component/ModifyListModal/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/component/ModifyListModal/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/AdminTestResult/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/AdminTestResult/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/AdminTestResult/pages/AdminTestResultPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/AdminTestResult/pages/AdminTestResultPage/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/MyTestResults/components/StudentResultTable/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/MyTestResults/components/StudentResultTable/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/CreateTest/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/CreateTest/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/CreateTest/pages/CreateTestPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/CreateTest/pages/CreateTestPage/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/ManageTest/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/MyPage/pages/ManageTest/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/Problem/pages/DetailProblem/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/Problem/pages/DetailProblem/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/Test/pages/DoTest/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/Test/pages/DoTest/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/Test/pages/TestPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/Test/pages/TestPage/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/TestResult/components/TestResultTable/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/TestResult/components/TestResultTable/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/TestResult/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/TestResult/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/TestResult/pages/DetailedResultPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/TestResult/pages/DetailedResultPage/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/TotalProblems/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/TotalProblems/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../problembank-client/src/pages/TotalProblems/pages/TotalProblemsPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../problembank-client/src/pages/TotalProblems/pages/TotalProblemsPage/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/tests.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/tests.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -34,7 +34,6 @@ function TestPage(props) {
     if(!first){
       setTestList();
     } 
-    console.log("updated");
   },[ totalList, first])
 
   const setTestList = async () => {
@@ -73,7 +72,7 @@ function TestPage(props) {
       setAllLoading(false);
     } catch (error) {
         alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
-        console.log(error)
+        // console.log(error);
     }  
   }
 
@@ -85,11 +84,11 @@ function TestPage(props) {
         test_id:value,
       };
       const response = await testsAPI.regTest(params);
-      console.log(response);
+      // console.log(response);
       setFirst(false);
     } catch (error) {
         alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
-        console.log(error)
+        // console.log(error)
     }
   }
 
@@ -101,11 +100,11 @@ function TestPage(props) {
         test_id:value,
       };
       const response = await testsAPI.cancelReg(params);
-      console.log(response);
+      // console.log(response);
       setFirst(false);
     } catch (error) {
         alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
-        console.log(error)
+        // console.log(error)
     }
   }
 
@@ -128,7 +127,7 @@ function TestPage(props) {
 
   const OnTypeToggle = (name, value) => {
     setTypeValue(value); //typeValue
-    console.log(value);
+    // console.log(value);
     if(value=="test"){
       TotalUpdate(vaildButton,searchValue, "test");
     } else if(value=="contest") {
@@ -172,7 +171,7 @@ function TestPage(props) {
     } else{
 
       const entry = constList.filter((value)=>{
-        console.log(value.is_exam);
+        // console.log(value.is_exam);
         return value.name.match(new RegExp(serchVal, "i"));
       });
 
@@ -195,19 +194,19 @@ function TestPage(props) {
     setInterval(function(){ setLoading(false)}, 500);
   }
 
-  const TestButton = async () => {
-    try{
-      // const params = {
-      //   admin_id: 1,
-      // };
-      // const response = await testsAPI.getAdminTestList(params);
-      console.log(totalList);
-    } catch (error) {
-        alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
-        console.log(error)
-    }
+  // const TestButton = async () => {
+  //   try{
+  //     // const params = {
+  //     //   admin_id: 1,
+  //     // };
+  //     // const response = await testsAPI.getAdminTestList(params);
+  //     // console.log(totalList);
+  //   } catch (error) {
+  //       alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
+  //       console.log(error)
+  //   }
     
-  }
+  // }
 
   if(allLoading){
     return <Loading  type={'bars'} color={'black'}  />

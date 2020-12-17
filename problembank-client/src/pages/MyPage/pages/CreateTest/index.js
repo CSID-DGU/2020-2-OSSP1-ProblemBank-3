@@ -4,8 +4,8 @@ import CreateTestPage from './pages/CreateTestPage';
 
 function CreateTest( {user}) {
     const match = useRouteMatch();
-    console.log(match.url);
-    console.log(user);
+    // console.log(match.url);
+    // console.log(user);
 
     return (
         <Switch>

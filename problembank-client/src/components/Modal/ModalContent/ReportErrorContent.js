@@ -15,15 +15,15 @@ export default function ReportErrorContent({user_id, test_id}) {
     const OnTextChange = (name, value) => {
         setText(value);
     }
-    const TestButton = async () => {
-        try{
-          console.log(user_id + " : "+test_id );
-        } catch (error) {
-            alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
-            console.log(error)
-        }
+    // const TestButton = async () => {
+    //     try{
+    //       console.log(user_id + " : "+test_id );
+    //     } catch (error) {
+    //         alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
+    //         console.log(error)
+    //     }
         
-    }
+    // }
 
     const ErrorReportButton = async ()=> {
         try{
@@ -33,7 +33,7 @@ export default function ReportErrorContent({user_id, test_id}) {
             content: text,
           };
           const response = await testsAPI.reportError(params);
-          console.log(response);
+        //   console.log(response);
         } catch (error) {
             alert("서버 오류입니다. 잠시 후 다시 시도해주세요.");
             console.log(error)

@@ -38,7 +38,7 @@ function App() {
         try{
             let res = await signin({id, password})
             if (res.length == 0) throw new Error();
-            console.log(res[0].is_admin)
+            // console.log(res[0].is_admin)
             setUser(res[0]);
         }
         catch(e){

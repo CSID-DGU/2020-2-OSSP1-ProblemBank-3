@@ -5,6 +5,11 @@ var sql = require('../sql');
 var compiler = require('../modules/compile-run');
 var { PROBLEM_START_DELEMETER: startDelem, PROBLEM_END_DELEMETER: endDelem } = process.env;
 
+function sleep (delay) {
+    var start = new Date().getTime();
+    while (new Date().getTime() < start + delay);
+ }
+
 // 전체 시험 출력
 router.get('/alltestdata', async function (req, res) {
     const { user_id } = req.query
@@ -253,6 +258,7 @@ router.post('/createtest', async function (req, res) {
     } = req.body
     try {
         await db.query(sql.tests.insertTest, [testName, testContent, is_exam, start, end, admin_id, subject_id])
+        sleep(50)
         const [test_id] = await db.query(sql.tests.selectInsertedId)
         if (is_exam != 0) {
             const [subjectUsers] = await db.query(sql.tests.selectSubjectUsersBySubjectId, [subject_id])
@@ -266,6 +272,7 @@ router.post('/createtest', async function (req, res) {
             const { problem_id } = problems[i]
             if (problem_id) { // 문제은행 db에 존재하는 문제
                 await db.query(sql.tests.insertProblemFromProblemBank, [problem_id])
+                sleep(50)
                 const [inserted] = await db.query(sql.tests.selectInsertedId)
                 await db.query(sql.tests.insertProblemIntoTest, [test_id[0].id, inserted[0].id])
                 const [testcases] = await db.query(sql.problems.selectTestCaseByProblemId, [problem_id])
@@ -273,14 +280,15 @@ router.post('/createtest', async function (req, res) {
                 for (let j = 0; j < testcases.length; j++) {
                     const { input, output } = testcases[j]
 
-                    await db.query(sql.tests.insertTestCases, [input, output, inserted[0].id])
+                    temp = await db.query(sql.tests.insertTestCases, [input, output, inserted[0].id])
                 }
             }
             else { // 존재하지 않는 문제
                 const { problemName, problemContent, input, output } = problems[i]
-                const { testcases } = problems[i]
+                const { testcase:testcases } = problems[i]
 
                 await db.query(sql.tests.insertProblem, [problemName, problemContent, input, output])
+                sleep(50)
                 const [inserted] = await db.query(sql.tests.selectInsertedId)
                 await db.query(sql.tests.insertProblemIntoTest, [test_id[0].id, inserted[0].id])
 
@@ -325,7 +333,7 @@ router.post('/updatetest', async function (req, res) {
 
         for (let i = 0; i < problems.length; i++) {
             const { problem_id, problemName, problemContent, input, output } = problems[i]
-            const { testcases } = problems[i]
+            const { testcase:testcases } = problems[i]
             await db.query(sql.tests.updateProblem, [problemName, problemContent, input, output, problem_id])
             await db.query(sql.tests.deleteAllTestCases, [problem_id])
 

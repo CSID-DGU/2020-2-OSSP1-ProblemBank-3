@@ -11,7 +11,7 @@ function DetailedResultPage(props) {
     const {test_id, user_id} = queryString.parse(props.location.search);
     const {user} = props
 
-    console.log(test_id)
+    // console.log(test_id)
 
     const [results, setResults] = useState([]);
 
@@ -21,7 +21,7 @@ function DetailedResultPage(props) {
         dispatch(getUserAnswer(test_id, user_id))
             .then(response => {
                 const {data} = response.payload;
-                console.log(data)
+                // console.log(data)
                 setResults(data)
             })
     }, [])

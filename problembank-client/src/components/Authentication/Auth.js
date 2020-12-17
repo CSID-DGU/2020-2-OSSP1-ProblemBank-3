@@ -7,7 +7,7 @@ export async function signin({id, password}) {
             user_pass: password
         })
         .then(function (response) {
-            console.log(response.data)
+            // console.log(response.data)
             user = response.data
         })
         .catch(function (error) {

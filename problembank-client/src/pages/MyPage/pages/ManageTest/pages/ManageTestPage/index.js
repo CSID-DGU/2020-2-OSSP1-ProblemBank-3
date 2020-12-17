@@ -57,7 +57,6 @@ class ManageTestPage extends Component {
 					obj.problem_name = _problemArray.data[i].name;
 					problemArray.push(obj);
 				}
-				console.log(problemArray);
 				this.setState({
 					DB_problem : problemArray
 				})
@@ -81,8 +80,8 @@ class ManageTestPage extends Component {
 		for(var i = 0; i < 2; i++)  // input calander setting
 			document.getElementsByClassName("data-calander")[i].value = new Date().toISOString().slice(0, 16);
 		
-		document.getElementsByClassName("data-calander")[1].min = document.getElementsByClassName("data-calander")[0].value
-		document.getElementsByClassName("data-calander")[0].onchange = function() {
+			document.getElementsByClassName("data-calander")[1].min = document.getElementsByClassName("data-calander")[0].value
+			document.getElementsByClassName("data-calander")[0].onchange = function() {
 			document.getElementsByClassName("data-calander")[1].min = document.getElementsByClassName("data-calander")[0].value
 		};
 	};
@@ -113,7 +112,6 @@ class ManageTestPage extends Component {
 			else
 				params.is_exam = 0;
 			
-			console.log(params);
 			const response = await testAPI.updateTest(params);
 			/* for debug
 			alert(params.testName);
@@ -131,8 +129,7 @@ class ManageTestPage extends Component {
     render(){
 
     return (
-	<>
-	<ManageTestLayout user = {this.props.user}>
+	<div class="ManageTestPage__Container">
 	<div class="ManageTestPage">
 	    <div class="testName1">
             <Text id="name-label">시험명</Text>
@@ -205,8 +202,7 @@ class ManageTestPage extends Component {
 	        <button class="button" onClick={this.saveTest}>저장</button>
 		</div>
 	</div>
-	</ManageTestLayout>
-	</>
+	</div>
     );
     }
 }

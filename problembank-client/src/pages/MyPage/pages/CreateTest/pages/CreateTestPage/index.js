@@ -98,8 +98,7 @@ class CreateTestPage extends Component {
     render(){
 
     return (
-	<>
-	<CreateTestLayout user = {this.props.user}>
+	<div className="CreateTestPage__Container">
 	<div id="CreateTestLayoutBody">
 	    <div class="testDate">
 	        <Text id="data-label">시험 일자</Text>
@@ -162,8 +161,7 @@ class CreateTestPage extends Component {
 	        <button class="button" onClick={this.saveTest}>저장</button>
 	    </div>
 	</div>
-	</CreateTestLayout>
-	</>
+	</div>
     );
     }
 }

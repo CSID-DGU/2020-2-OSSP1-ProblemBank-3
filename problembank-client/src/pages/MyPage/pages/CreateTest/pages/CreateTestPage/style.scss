@@ -1,6 +1,13 @@
 .CreateTestLayoutBody{
     display : block; 
 }
+.CreateTestPage__Container {
+    display: flex;
+    flex-flow: nowrap row;
+    justify-content: center;
+    flex-basis: calc(100% - 165px);
+}
+
 .button{
     border : 1px none #333333;
     border-radius : 4px;
@@ -16,7 +23,7 @@
 	font-weight : bold;
     }
     .data-calander{
-        height : 26px;
+    height : 26px;
 	width : 200px;
 	margin-left : 10px;
 	margin-right : 10px;
@@ -24,7 +31,7 @@
 }
 .testName2{
     position : relative;
-    left : 16px;
+    // left : 16px;
     margin-top : 20px;
     margin-bottom : 20px;
     padding-left : 16px;
@@ -46,7 +53,7 @@
 }
 .className{
     position : relative;
-    left : 16px;
+    // left : 16px;
     margin-top : 20px;
     margin-bottom : 20px;
     padding-left : 16px;

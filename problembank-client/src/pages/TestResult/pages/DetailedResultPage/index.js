@@ -30,7 +30,7 @@ function DetailedResultPage(props) {
 
         <div id="content">
             <div id="content-table">
-                <TestResultTable results={results} {...props} ></TestResultTable>
+                <TestResultTable results={results} test_id={test_id} {...props} ></TestResultTable>
             </div>
         </div>
     );

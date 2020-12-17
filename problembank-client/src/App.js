@@ -24,6 +24,7 @@ const MyPage = React.lazy(() => import('./pages/MyPage'))
 const MyTests = React.lazy(() => import('./pages/MyPage/pages/MyTests'))
 const MyTestResults = React.lazy(() => import('./pages/MyPage/pages/MyTestResults'))
 const DetailedResult = React.lazy(() => import('./pages/TestResult'))
+const AnswerCheck = React.lazy(() => import('./pages/AnswerCheck'))
 
 
 function App() {
@@ -97,8 +98,13 @@ function App() {
                 /> */}
                 <Authorized
                     auth={auth}
-                    path="/detailedresult/"
+                    path="/detailedresult"
                     render={props => <DetailedResult user={user} {...props} />}
+                />
+                <Authorized
+                    auth={auth}
+                    path="/answercheck"
+                    render={props => <AnswerCheck user={user} {...props} />}
                 />
 
                 <Route exact path = "/"  component = {MainPage}/>

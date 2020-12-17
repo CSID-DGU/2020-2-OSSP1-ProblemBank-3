@@ -57,7 +57,7 @@ function AdminTestResultPage(props) {
 	            <button>조회</button>
 	        </div>
 	        <div id="content-table">
-	            {selectedTestId && <AdminResultTable test_id={selectedTestId}></AdminResultTable>}
+	            {selectedTestId && <AdminResultTable test_id={selectedTestId} ></AdminResultTable>}
 	        </div>
 	    </div>
 

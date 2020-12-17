@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {withRouter} from 'react-router-dom';
 import './style.scss'
+import queryString from "query-string";
 
 const moment = require('moment');
 
@@ -8,7 +9,7 @@ class TestResultTable extends Component {
 
     handleClick = (problem_id) => {
         console.log("click!")
-        this.props.history.push(`/answercheck?test_id=${this.props.test_id}&problem_id=${problem_id}`)
+        this.props.history.push(`/answercheck?test_id=${this.props.test_id}&problem_id=${problem_id}&user_id=${this.props.user_id}`)
     }
 
     render() {

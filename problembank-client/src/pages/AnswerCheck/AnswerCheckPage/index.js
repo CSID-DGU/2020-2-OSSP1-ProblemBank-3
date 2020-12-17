@@ -16,8 +16,7 @@ function AnswerCheckPage(props) {
     const [contentEditor, setContentEditor] = useState();
     const [theme, setTheme] = useState("white")
 
-    const {test_id, problem_id} = queryString.parse(props.location.search);
-    const {user} = props;
+    const {test_id, problem_id, user_id} = queryString.parse(props.location.search);
 
     useEffect(() => {
         console.log("updated");
@@ -32,7 +31,7 @@ function AnswerCheckPage(props) {
     }
 
     const getAnswer = async () => {
-        const response = await testsAPI.getUserAnswers({test_id: test_id, user_id: user.id})
+        const response = await testsAPI.getUserAnswers({test_id: test_id, user_id: user_id})
         setContentEditor(response.data[0].answer)
         console.log(response.data)
     }

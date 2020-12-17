@@ -8,7 +8,7 @@ import MyTestsTable from "../../../MyPage/pages/MyTests/components/MyTestsTable"
 import "./style.scss";
 
 function DetailedResultPage(props) {
-    const {test_id} = queryString.parse(props.location.search);
+    const {test_id, user_id} = queryString.parse(props.location.search);
     const {user} = props
 
     console.log(test_id)
@@ -18,7 +18,7 @@ function DetailedResultPage(props) {
     const dispatch = useDispatch();
 
     React.useEffect(() => {
-        dispatch(getUserAnswer(test_id, user.id))
+        dispatch(getUserAnswer(test_id, user_id))
             .then(response => {
                 const {data} = response.payload;
                 console.log(data)

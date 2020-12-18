@@ -1,14 +1,33 @@
 # 2020-2-OSSP1-ProblemBank-3
+
+
+![React](https://img.shields.io/badge/Frontend-React-blue?logo=react)
+![React](https://img.shields.io/badge/Backend-Node.js_Express-green?logo=Node.js)
+
 ## About
+
 기존의 문제은행 시스템에 온라인 시스템 기능을 추가하였습니다.
 
+## Team Members
+
+```
+2015112127 서준원
+2019112030 강태원
+2018112092 누비아
+2017113236 주성항
+2018112054 송혜민
+2018112050 최주혁
+2018112138 안지훈
+```
+
 ## Preview
+
 ![화면 캡처 2020-12-17 161822](https://user-images.githubusercontent.com/57932352/102455912-bd8d9c80-4083-11eb-8bbe-a6bf458ab817.png)
 ![화면 캡처 2020-12-17 161851](https://user-images.githubusercontent.com/57932352/102455915-bebec980-4083-11eb-838a-9884994a3651.png)
 ![화면 캡처 2020-12-17 161912](https://user-images.githubusercontent.com/57932352/102455919-bf576000-4083-11eb-8da0-af25447f5b7b.png)
 ![화면 캡처 2020-12-17 161945](https://user-images.githubusercontent.com/57932352/102455920-bf576000-4083-11eb-9c0c-ee929b3335bf.png)
 
-## Getting Started
+## How to Run
 #### 혹시 Windows 유저신가요?
 problembank-client의 package.json 파일을 열어주세요.
 30번째 줄의 `export PORT=5112`를 `set PORT=5112`로 바꿔주세요.
